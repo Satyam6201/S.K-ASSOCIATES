@@ -8,7 +8,7 @@ import anilImg from '/src/assets/anil.jpg';
 const Team = () => {
   const partners = [
     {
-      name: "Sunil Chaudhary",
+      name: "Sunil Choudhary",
       role: "Managing Partner",
       exp: "15+ Years",
       image: sunilImg,
@@ -17,7 +17,7 @@ const Team = () => {
       color: "from-blue-600 to-cyan-500"
     },
     {
-      name: "Anil Chaudhary",
+      name: "Anil Choudhary",
       role: "Managing Partner",
       exp: "15+ Years",
       image: anilImg,
