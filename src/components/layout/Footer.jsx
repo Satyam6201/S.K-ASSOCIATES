@@ -1,153 +1,178 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, Phone, Mail, Clock, 
   Linkedin, Twitter, Facebook, 
-  ArrowRight, ShieldCheck, Send, ExternalLink,
-  Globe, Instagram
+  ArrowRight, ShieldCheck, Send, 
+  Globe, Instagram, ChevronUp, Sparkles
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '/src/assets/logo.jpeg'; // Ensure path is correct
+import logo from '/src/assets/logo.jpeg'; 
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [isHovered, setIsHovered] = useState(null);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <footer className="relative bg-[#020617] text-white pt-24 pb-10 overflow-hidden border-t border-slate-800">
-      {/* Dynamic Background Accents */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-600/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-600/5 rounded-full blur-[100px] pointer-events-none" />
+    <footer className="relative bg-[#020617] text-white pt-32 pb-12 overflow-hidden">
+      {/* --- 1. AVANT-GARDE BACKGROUND --- */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Animated Aurora */}
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.15, 0.3, 0.15],
+            rotate: [0, 45, 0]
+          }}
+          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute -top-[20%] -left-[10%] w-[800px] h-[800px] bg-blue-600/20 rounded-full blur-[140px]" 
+        />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-700 to-transparent" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* --- 1. Newsletter Section (Floating Card Style) --- */}
+        {/* --- 2. FLOATING ACTION CARD --- */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid lg:grid-cols-3 gap-8 mb-20 p-8 md:p-12 rounded-[3rem] bg-gradient-to-br from-[#007bb6] via-blue-700 to-indigo-900 shadow-2xl relative overflow-hidden"
+          className="relative mb-24 p-1 group"
         >
-          <div className="absolute top-0 right-0 p-8 opacity-10">
-            <Globe size={120} />
-          </div>
-          <div className="lg:col-span-2 relative z-10">
-            <h3 className="text-3xl md:text-4xl font-black mb-3 tracking-tighter">Stay Ahead of Tax Changes</h3>
-            <p className="text-blue-100/80 text-lg max-w-xl font-medium">Get curated GST updates and Income Tax notifications delivered directly to your inbox.</p>
-          </div>
-          <div className="flex items-center relative z-10">
-            <div className="relative w-full">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[3.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
+          <div className="relative grid lg:grid-cols-3 gap-12 p-10 md:p-16 rounded-[3.2rem] bg-slate-900/80 backdrop-blur-2xl border border-white/10 items-center overflow-hidden">
+            <div className="lg:col-span-2 space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest">
+                <Sparkles size={14} /> Newsletter
+              </div>
+              <h3 className="text-4xl md:text-5xl font-black tracking-tighter leading-none">
+                Master your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Tax Strategy.</span>
+              </h3>
+              <p className="text-slate-400 text-lg max-w-xl">Join 2,000+ business owners receiving monthly compliance insights.</p>
+            </div>
+            
+            <div className="relative group/input">
               <input 
                 type="email" 
-                placeholder="Professional Email Address" 
-                className="w-full px-7 py-5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder:text-blue-200 outline-none focus:ring-4 focus:ring-white/20 transition-all font-bold"
+                placeholder="Work Email" 
+                className="w-full px-8 py-6 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-blue-500/50 transition-all font-medium"
               />
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="absolute right-2 top-2 bottom-2 px-6 bg-white text-[#007bb6] rounded-xl font-black flex items-center gap-2 shadow-xl hover:bg-blue-50 transition-colors"
+                className="absolute right-3 top-3 bottom-3 px-8 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-blue-900/20 transition-all"
               >
-                JOIN <Send size={18} />
+                Join <Send size={18} />
               </motion.button>
             </div>
           </div>
         </motion.div>
 
-        {/* --- 2. Main Footer Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-20">
+        {/* --- 3. MAIN CONTENT GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
           
-          {/* Brand & Identity (4 Cols) */}
+          {/* Brand Bio */}
           <div className="lg:col-span-4 space-y-8">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-4">
-                <div className="p-2 bg-white rounded-2xl shadow-xl w-16 h-16 flex items-center justify-center overflow-hidden border-2 border-slate-800">
-                  <img src={logo} alt="S.K Associates Logo" className="w-full h-full object-contain" />
+            <div className="space-y-6">
+              <Link to="/" className="flex items-center gap-4 group">
+                <div className="relative">
+                  <div className="absolute -inset-2 bg-blue-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                  <div className="p-2 bg-white rounded-2xl w-14 h-14 flex items-center justify-center relative border border-slate-200 shadow-2xl">
+                    <img src={logo} alt="Logo" className="w-full h-full object-contain" />
+                  </div>
                 </div>
                 <div>
                   <h4 className="text-2xl font-black tracking-tighter leading-none">S.K ASSOCIATES</h4>
-                  <span className="text-[10px] tracking-[0.3em] font-bold text-blue-400 uppercase">Consulting Excellence</span>
+                  <p className="text-[10px] font-black tracking-[0.3em] text-blue-500 uppercase mt-1">Founding 2017</p>
                 </div>
-              </div>
-              <p className="text-slate-400 text-base leading-relaxed max-w-sm">
-                A premier multi-disciplinary financial advisory firm. We specialize in transforming complex tax challenges into strategic business advantages through precision and integrity.
+              </Link>
+              <p className="text-slate-400 text-lg leading-relaxed font-medium">
+                Pioneering financial clarity in an era of complex regulation. Your growth is our precision.
               </p>
             </div>
             <div className="flex gap-4">
               <SocialIcon icon={<Linkedin />} href="#" />
-              <SocialIcon icon={<Twitter />} href="#" />
               <SocialIcon icon={<Instagram />} href="#" />
+              <SocialIcon icon={<Twitter />} href="#" />
               <SocialIcon icon={<Facebook />} href="#" />
             </div>
           </div>
 
-          {/* Quick Links (2 Cols) */}
+          {/* Links Sections */}
           <div className="lg:col-span-2">
-            <h4 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 mb-8">Solutions</h4>
-            <ul className="space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-[0.3em] text-slate-500 mb-10">Solutions</h4>
+            <ul className="space-y-5">
               <FooterLink to="/income-tax">Income Tax</FooterLink>
-              <FooterLink to="/service-tax">GST Returns</FooterLink>
-              <FooterLink to="/audit">Statutory Audit</FooterLink>
-              <FooterLink to="/corporate-services">ROC Compliance</FooterLink>
-              <FooterLink to="/calculators">Tax Tools</FooterLink>
+              <FooterLink to="/gst">GST Returns</FooterLink>
+              <FooterLink to="/audit">Audit & Assurance</FooterLink>
+              <FooterLink to="/roc">ROC Filings</FooterLink>
             </ul>
           </div>
 
-          {/* Location & Map Feature (6 Cols) */}
+          {/* Contact & Map Card */}
           <div className="lg:col-span-6">
-            <h4 className="text-sm font-black uppercase tracking-[0.2em] text-slate-500 mb-8 px-2">Global Headquarters</h4>
-            <div className="grid md:grid-cols-2 gap-6 bg-slate-900/50 p-6 rounded-[2.5rem] border border-slate-800/50 backdrop-blur-sm">
-              <div className="space-y-6">
-                <ContactInfo 
-                  icon={<MapPin />} 
-                  label="Visit Us" 
-                  value="10th Floor, Office 1063, Gaur City Mall, Noida West, UP-201318"
-                  link="https://maps.google.com"
-                />
-                <ContactInfo 
-                  icon={<Phone />} 
-                  label="Direct Line" 
-                  value="+91 80102 57124"
-                  link="tel:+918010257124"
-                />
-                <ContactInfo 
-                  icon={<Mail />} 
-                  label="Official Inquiry" 
-                  value="officeska2000@gmail.com"
-                  link="mailto:officeska2000@gmail.com"
-                />
-              </div>
-              
-              {/* Interactive Map Placeholder/Iframe */}
-              <div className="h-full min-h-[150px] rounded-3xl overflow-hidden grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-700 border border-slate-700">
-                <iframe 
-                  title="office-location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4682006394595!2d77.4243623!3d28.6001099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee22c66810a5%3A0x63359d99596395!2sGaur%20City%20Mall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen="" 
-                  loading="lazy"
-                ></iframe>
-              </div>
-            </div>
+             <div className="bg-slate-900/40 border border-white/5 rounded-[2.5rem] p-8 backdrop-blur-md">
+                <div className="grid md:grid-cols-2 gap-10">
+                  <div className="space-y-8">
+                    <h4 className="text-xs font-black uppercase tracking-[0.3em] text-blue-500">Reach Us</h4>
+                    <ContactItem 
+                      icon={<MapPin />} 
+                      text="Gaur City Mall, Noida West, UP" 
+                      sub="10th Floor, Suite 1063" 
+                    />
+                    <ContactItem 
+                      icon={<Phone />} 
+                      text="+91 80102 57124" 
+                      sub="Mon-Sat, 10am - 7pm" 
+                    />
+                    <ContactItem 
+                      icon={<Mail />} 
+                      text="officeska2000@gmail.com" 
+                      sub="Instant Response" 
+                    />
+                  </div>
+                  <div className="h-full min-h-[200px] rounded-3xl overflow-hidden relative group/map border border-white/10 shadow-2xl">
+                    <div className="absolute inset-0 bg-blue-600/10 z-10 pointer-events-none group-hover/map:opacity-0 transition-opacity duration-700" />
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.57124!2d77.424!3d28.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzAwLjAiTiA3N8KwMjUnMjYuNCJF!5e0!3m2!1sen!2sin!4v1620000000000"
+                      className="w-full h-full grayscale-[1] invert-[0.9] contrast-[1.2] group-hover/map:grayscale-0 group-hover/map:invert-0 transition-all duration-1000 scale-110 group-hover/map:scale-100"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+             </div>
           </div>
         </div>
 
-        {/* --- 3. Footer Bottom Bar --- */}
-        <div className="pt-10 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-slate-500">
-            <p>© {currentYear} S.K Associates. Member of ICAI.</p>
-            <span className="hidden md:block w-1.5 h-1.5 bg-slate-800 rounded-full"></span>
-            <div className="flex gap-6">
-              <a href="#" className="hover:text-blue-400 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Terms</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Sitemap</a>
+        {/* --- 4. BOTTOM BAR --- */}
+        <div className="pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col md:flex-row items-center gap-6 text-sm font-medium text-slate-500">
+            <p className="flex items-center gap-2 italic">
+              © <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 3, repeat: Infinity }}>{currentYear}</motion.span> S.K Associates
+            </p>
+            <div className="flex gap-8">
+              <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
             </div>
           </div>
-          <div className="flex items-center gap-4">
-             <div className="flex items-center gap-2 px-4 py-2 bg-slate-900 rounded-full border border-slate-800 shadow-inner">
-               <ShieldCheck size={16} className="text-emerald-500" />
-               <span className="text-[10px] font-black tracking-widest text-slate-400 uppercase">ISO 9001 Certified Practice</span>
-             </div>
+
+          <motion.button 
+            onClick={scrollToTop}
+            whileHover={{ scale: 1.1, y: -5 }}
+            whileTap={{ scale: 0.9 }}
+            className="w-14 h-14 rounded-full bg-slate-900 border border-white/10 flex items-center justify-center text-blue-400 shadow-2xl hover:bg-blue-600 hover:text-white transition-all"
+          >
+            <ChevronUp size={24} />
+          </motion.button>
+
+          <div className="flex items-center gap-3 px-6 py-2 bg-blue-500/5 border border-blue-500/10 rounded-full">
+            <ShieldCheck size={16} className="text-emerald-500" />
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Certified ICAI Member</span>
           </div>
         </div>
       </div>
@@ -155,33 +180,35 @@ const Footer = () => {
   );
 };
 
-// Helper Components
+// --- ENHANCED HELPER COMPONENTS ---
+
 const FooterLink = ({ to, children }) => (
   <li>
-    <Link to={to} className="text-slate-400 font-bold text-sm hover:text-white transition-all flex items-center gap-2 group">
-      <div className="w-0 group-hover:w-4 h-0.5 bg-[#007bb6] transition-all rounded-full" />
-      {children}
+    <Link to={to} className="group flex items-center gap-3 text-slate-400 hover:text-white transition-all duration-300">
+      <div className="w-1.5 h-1.5 rounded-full bg-blue-600 scale-0 group-hover:scale-100 transition-transform duration-300" />
+      <span className="font-bold text-sm tracking-tight group-hover:translate-x-1 transition-transform">{children}</span>
     </Link>
   </li>
 );
 
-const ContactInfo = ({ icon, label, value, link }) => (
-  <a href={link} target="_blank" rel="noreferrer" className="flex gap-4 group cursor-pointer">
-    <div className="p-3 bg-slate-800/50 rounded-2xl group-hover:bg-[#007bb6] transition-all duration-500 group-hover:scale-110">
-      {React.cloneElement(icon, { size: 18, className: "text-blue-400 group-hover:text-white" })}
+const ContactItem = ({ icon, text, sub }) => (
+  <div className="flex gap-5 group cursor-pointer">
+    <div className="w-12 h-12 rounded-2xl bg-slate-800/50 flex items-center justify-center text-blue-400 group-hover:bg-blue-600 group-hover:text-white transition-all duration-500 group-hover:rotate-[10deg]">
+      {React.cloneElement(icon, { size: 20 })}
     </div>
-    <div className="flex flex-col">
-      <span className="text-[10px] font-black text-slate-600 uppercase tracking-widest group-hover:text-blue-500 transition-colors">{label}</span>
-      <span className="text-xs font-bold text-slate-300 leading-snug group-hover:text-white transition-colors">{value}</span>
+    <div>
+      <p className="text-sm font-black text-white group-hover:text-blue-400 transition-colors">{text}</p>
+      <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">{sub}</p>
     </div>
-  </a>
+  </div>
 );
 
 const SocialIcon = ({ icon, href }) => (
   <motion.a 
-    whileHover={{ y: -5, scale: 1.1 }}
-    href={href} 
-    className="w-12 h-12 bg-slate-900 border border-slate-800 rounded-2xl flex items-center justify-center text-slate-400 hover:bg-[#007bb6] hover:text-white transition-all shadow-xl"
+    href={href}
+    whileHover={{ y: -8, rotate: 8, scale: 1.1 }}
+    whileTap={{ scale: 0.9 }}
+    className="w-12 h-12 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 shadow-xl transition-all duration-300"
   >
     {React.cloneElement(icon, { size: 20 })}
   </motion.a>
