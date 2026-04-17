@@ -156,8 +156,8 @@ const Footer = () => {
               © <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 3, repeat: Infinity }}>{currentYear}</motion.span> S.K Associates
             </p>
             <div className="flex gap-8">
-              <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
+              <a href="/privacy-policy" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
+              <a href="/terms-of-service" className="hover:text-blue-400 transition-colors">Terms of Service</a>
             </div>
           </div>
 
@@ -180,7 +180,6 @@ const Footer = () => {
   );
 };
 
-// --- ENHANCED HELPER COMPONENTS ---
 
 const FooterLink = ({ to, children }) => (
   <li>
