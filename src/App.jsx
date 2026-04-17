@@ -26,6 +26,8 @@ import Utilities from './pages/KnowledgeBank/Utilities';
 import Calculators from './pages/KnowledgeBank/Calculators';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
+import GSTPage from './pages/GSTPage';
+import ROCFilings from './pages/ROCFilings';
 
 // --- SMOOTH SCROLL ENGINE ---
 const ScrollManager = () => {
@@ -141,6 +143,8 @@ const App = () => {
               <Route path="/calculators" element={<PageWrapper><Calculators /></PageWrapper>} />
               <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
               <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
+              <Route path="/gst" element={<PageWrapper><GSTPage /></PageWrapper>} />
+              <Route path="/roc" element={<PageWrapper><ROCFilings/></PageWrapper>} />
               <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
