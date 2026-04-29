@@ -1,13 +1,17 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { 
   Linkedin, Mail, Award, ShieldCheck, Briefcase, 
-  ExternalLink, Quote, Sparkles, Target, Zap 
+  ExternalLink, Quote, Sparkles, Target, Zap, 
+  Globe, Scale, Users, GraduationCap, HeartHandshake
 } from 'lucide-react';
 import sunilImg from '/src/assets/sunil.png'; 
 import anilImg from '/src/assets/anil.jpg';
 
 const Team = () => {
+  const { scrollYProgress } = useScroll();
+  const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+
   const partners = [
     {
       name: "Sunil Choudhary",
@@ -15,10 +19,11 @@ const Team = () => {
       exp: "15+ Years",
       image: sunilImg,
       specialty: "Statutory Audit & Direct Taxation",
-      skills: ["Litigation", "Corporate Tax", "Risk Management", "MCA Compliance"],
-      bio: "A visionary leader specializing in complex corporate restructuring and high-stakes tax litigation. Sunil has successfully defended numerous Fortune 500 cases.",
+      skills: ["Litigation", "Corporate Tax", "Risk Management", "MCA Compliance", "Mergers", "International Tax"],
+      bio: "A visionary leader specializing in complex corporate restructuring and high-stakes tax litigation. Sunil has successfully defended numerous high-profile cases across India.",
       color: "from-blue-600 to-cyan-500",
-      accent: "shadow-blue-500/20"
+      accent: "shadow-blue-500/20",
+      education: "CA"
     },
     {
       name: "Anil Choudhary",
@@ -26,183 +31,209 @@ const Team = () => {
       exp: "15+ Years",
       image: anilImg,
       specialty: "GST Compliance & Indirect Tax",
-      skills: ["GST Audit", "Supply Chain Tax", "Export/Import", "Drafting"],
-      bio: "Expert in indirect tax laws and GST implementation strategies. Anil is known for streamlining financial workflows for multi-national conglomerates.",
+      skills: ["GST Audit", "Supply Chain Tax", "Export/Import", "Drafting", "FEMA", "Internal Controls"],
+      bio: "Expert in indirect tax laws and GST implementation strategies. Anil is known for streamlining financial workflows for multi-national conglomerates and SMEs.",
       color: "from-orange-600 to-amber-500",
-      accent: "shadow-orange-500/20"
+      accent: "shadow-orange-500/20",
+      education: "CA"
     }
   ];
 
+  const stats = [
+    { label: "Happy Clients", value: "500+", icon: <Users size={20}/> },
+    { label: "Cases Solved", value: "1200+", icon: <Briefcase size={20}/> },
+    { label: "Tax Saved", value: "₹50Cr+", icon: <Scale size={20}/> },
+    { label: "Expert Team", value: "25+", icon: <HeartHandshake size={20}/> }
+  ];
+
   return (
-    <div className="pt-32 pb-24 bg-slate-50 dark:bg-slate-950 px-6 overflow-hidden relative">
+    <div className="pt-24 pb-20 bg-slate-50 dark:bg-[#020617] px-4 overflow-hidden relative selection:bg-blue-500/30">
       
-      {/* --- 1. THE MESH BACKGROUND (Animated) --- */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 z-[100] origin-left"
+        style={{ scaleX: scaleProgress }}
+      />
+
       <div className="absolute inset-0 pointer-events-none">
         <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-500 rounded-full blur-[150px]" 
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute top-20 right-[10%] w-72 h-72 bg-blue-500/10 rounded-full blur-[100px]" 
         />
         <motion.div 
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.05, 0.15, 0.05] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-orange-500 rounded-full blur-[150px]" 
+          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
+          transition={{ duration: 15, repeat: Infinity }}
+          className="absolute bottom-40 left-[5%] w-96 h-96 bg-orange-500/10 rounded-full blur-[120px]" 
         />
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* --- 2. HEADER SECTION --- */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-32"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-24"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
-            <Sparkles size={16} className="text-blue-500" />
-            <span className="text-blue-500 font-black uppercase tracking-[0.2em] text-[10px]">The Strategic Minds</span>
-          </div>
-          <h2 className="text-6xl md:text-8xl font-black dark:text-white tracking-tighter leading-none mb-8">
-            MEET THE <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-400 to-blue-600 animate-gradient-x">PARTNERS</span>
+          <motion.div 
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 mb-4"
+          >
+            <Sparkles size={14} className="text-blue-500" />
+            <span className="text-blue-500 font-black uppercase tracking-[0.2em] text-[9px]">Leadership Excellence</span>
+          </motion.div>
+          <h2 className="text-4xl md:text-6xl font-black dark:text-white tracking-tighter leading-none mb-6">
+            ARCHITECTS OF <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-400 to-blue-600">FINANCIAL INTEGRITY</span>
           </h2>
-          <p className="text-slate-500 dark:text-slate-400 max-w-3xl mx-auto text-xl font-medium leading-relaxed">
-            Combining decades of field experience with a futuristic approach to tax and law. 
-            We don't just solve problems; we engineer growth.
+          <p className="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto text-base font-medium leading-relaxed">
+            Founded by industry veterans, S.K Associates bridges the gap between traditional auditing and 
+            dynamic modern compliance through precision-engineered solutions.
           </p>
         </motion.div>
 
-        {/* --- 3. THE PARTNERS GRID --- */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-8 mb-40">
+        <div className="grid lg:grid-cols-2 gap-10 mb-24">
           {partners.map((member, i) => (
-            <PartnerCard key={i} member={member} index={i} />
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <PartnerCard member={member} />
+            </motion.div>
           ))}
         </div>
 
-        {/* --- 4. CORE PHILOSOPHY BENTO --- */}
-        <div className="grid md:grid-cols-3 gap-6 mb-32">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-24">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="p-6 bg-white dark:bg-slate-900/50 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-white/5 text-center group"
+            >
+              <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center justify-center mx-auto mb-3 text-blue-500 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                {stat.icon}
+              </div>
+              <h4 className="text-2xl font-black dark:text-white mb-1 tracking-tight">{stat.value}</h4>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-6 mb-24">
           <PhilosophyCard 
-            icon={<Target className="text-blue-500" />} 
-            title="Precision" 
-            desc="Every decimal matters. Our audit process ensures 100% accuracy in financial reporting."
+            icon={<Target className="text-blue-500" size={24} />} 
+            title="Strategic Precision" 
+            desc="Our methodology revolves around granular data analysis to prevent litigation risks before they arise."
           />
           <PhilosophyCard 
-            icon={<Zap className="text-orange-500" />} 
-            title="Agility" 
-            desc="Laws change overnight. We ensure your business is always ahead of the compliance curve."
+            icon={<Zap className="text-orange-500" size={24} />} 
+            title="Digital Agility" 
+            desc="Integration of automated GST and Income Tax bots to handle real-time statutory filing updates."
           />
           <PhilosophyCard 
-            icon={<ShieldCheck className="text-emerald-500" />} 
-            title="Integrity" 
-            desc="Ethical practice is our foundation. We bridge the gap between law and morality."
+            icon={<Globe className="text-emerald-500" size={24} />} 
+            title="Global Standards" 
+            desc="Aligning Indian business practices with global financial reporting frameworks (IFRS/Ind AS)."
           />
         </div>
 
-        {/* --- 5. TRUST MARQUEE --- */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="py-12 border-y border-slate-200 dark:border-slate-800 flex flex-wrap justify-center gap-12 opacity-30 grayscale hover:grayscale-0 transition-all duration-700"
+          className="p-10 rounded-[3rem] bg-gradient-to-br from-slate-900 to-slate-800 text-center text-white relative overflow-hidden"
         >
-          <TrustLogo text="ICAI MEMBER" />
-          <TrustLogo text="GST COMPLIANT" />
-          <TrustLogo text="MSME CERTIFIED" />
-          <TrustLogo text="ISO 9001:2015" />
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <div className="absolute h-px w-full bg-blue-500 top-1/4" />
+            <div className="absolute h-px w-full bg-blue-500 top-2/4" />
+            <div className="absolute h-px w-full bg-blue-500 top-3/4" />
+          </div>
+          <h3 className="text-2xl font-black mb-4 relative z-10">Empowering Businesses Since 2017</h3>
+          <p className="text-slate-400 max-w-xl mx-auto text-sm mb-8 relative z-10">
+            S.K Associates is not just a firm; it's a legacy of trust and technical prowess. 
+            Join over 500 businesses that trust us with their financial compliance.
+          </p>
+          <button className="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full font-black text-[11px] uppercase tracking-widest transition-all relative z-10">
+            Schedule a Consultation
+          </button>
         </motion.div>
       </div>
     </div>
   );
 };
 
-// --- SUB-COMPONENTS ---
-
-const PartnerCard = ({ member, index }) => (
+const PartnerCard = ({ member }) => (
   <motion.div 
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, delay: index * 0.2 }}
-    whileHover={{ y: -10 }}
-    className="group relative"
+    whileHover={{ y: -8 }}
+    className="group relative h-full"
   >
-    <div className={`absolute -inset-1 bg-gradient-to-r ${member.color} rounded-[4rem] blur opacity-20 group-hover:opacity-40 transition duration-1000`}></div>
+    <div className={`absolute -inset-0.5 bg-gradient-to-r ${member.color} rounded-[3rem] blur opacity-10 group-hover:opacity-30 transition duration-700`}></div>
     
-    <div className="relative bg-white dark:bg-slate-900 rounded-[3.5rem] p-8 md:p-12 border border-slate-100 dark:border-slate-800 shadow-2xl overflow-hidden">
-      
-      {/* Floating Quote Icon */}
-      <div className="absolute top-10 right-10 text-slate-100 dark:text-slate-800 group-hover:text-blue-500/20 transition-colors">
-        <Quote size={80} fill="currentColor" />
+    <div className="relative h-full bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 md:p-8 border border-slate-100 dark:border-white/5 shadow-xl overflow-hidden">
+      <div className="absolute -top-4 -right-4 text-slate-100 dark:text-slate-800/40 group-hover:text-blue-500/10 transition-colors">
+        <Quote size={120} fill="currentColor" />
       </div>
 
-      <div className="flex flex-col xl:flex-row gap-10 items-center xl:items-start relative z-10">
-        
-        {/* Profile Image with 3D Effect */}
-        <div className="relative shrink-0 perspective-1000">
+      <div className="flex flex-col md:flex-row gap-6 items-center md:items-start relative z-10">
+        <div className="relative shrink-0">
           <motion.div 
-            whileHover={{ rotateY: 15, rotateX: -5 }}
-            className="relative w-64 h-80 rounded-[2.5rem] overflow-hidden shadow-2xl z-20"
+            whileHover={{ scale: 1.05 }}
+            className="relative w-48 h-56 rounded-3xl overflow-hidden shadow-xl z-20"
           >
             <img 
               src={member.image} 
               alt={member.name} 
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
             />
-            <div className={`absolute inset-0 bg-gradient-to-t ${member.color} opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+            <div className={`absolute inset-0 bg-gradient-to-t ${member.color} opacity-0 group-hover:opacity-30 transition-opacity duration-500`} />
           </motion.div>
-          {/* Decorative Back-Box */}
-          <div className={`absolute top-4 -right-4 w-full h-full border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-[2.5rem] -z-10`} />
+          <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-blue-500 border border-slate-100 dark:border-white/10">
+            <GraduationCap size={20} />
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="flex-1 space-y-6">
+        <div className="flex-1 space-y-4 text-center md:text-left">
           <div>
-            <h3 className="text-4xl font-black dark:text-white mb-2 leading-none">{member.name}</h3>
-            <span className={`inline-block px-4 py-1 rounded-full bg-gradient-to-r ${member.color} text-white text-[10px] font-black uppercase tracking-widest`}>
-              {member.role}
-            </span>
+            <h3 className="text-2xl font-black dark:text-white mb-1 tracking-tight">{member.name}</h3>
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+              <span className={`px-3 py-0.5 rounded-full bg-gradient-to-r ${member.color} text-white text-[9px] font-black uppercase tracking-widest`}>
+                {member.role}
+              </span>
+              <span className="px-3 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[9px] font-black uppercase tracking-widest">
+                {member.education}
+              </span>
+            </div>
           </div>
 
-          <p className="text-slate-500 dark:text-slate-400 text-lg leading-relaxed font-medium italic">
+          <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed font-medium italic">
             "{member.bio}"
           </p>
 
-          {/* Skill Pills */}
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5 justify-center md:justify-start">
             {member.skills.map((skill, sIdx) => (
-              <span key={sIdx} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold rounded-lg border border-slate-200 dark:border-slate-700">
+              <span key={sIdx} className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[8px] font-bold rounded-md border border-slate-200 dark:border-white/5">
                 {skill}
               </span>
             ))}
           </div>
 
-          <div className="h-[1px] bg-slate-100 dark:bg-slate-800 w-full" />
-
-          <div className="grid grid-cols-2 gap-4">
-             <div className="flex items-center gap-3">
-               <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500"><Award size={18}/></div>
-               <div>
-                 <p className="text-[10px] font-black text-slate-400 uppercase">Experience</p>
-                 <p className="text-sm font-bold dark:text-white">{member.exp}</p>
-               </div>
-             </div>
-             <div className="flex items-center gap-3">
-               <div className="p-2 bg-orange-500/10 rounded-lg text-orange-500"><ShieldCheck size={18}/></div>
-               <div>
-                 <p className="text-[10px] font-black text-slate-400 uppercase">Compliance</p>
-                 <p className="text-sm font-bold dark:text-white">Expert</p>
-               </div>
-             </div>
+          <div className="grid grid-cols-2 gap-3 pt-2">
+            <div className="flex items-center gap-2">
+              <Award size={14} className="text-blue-500" />
+              <span className="text-[11px] font-bold dark:text-white">{member.exp} Experience</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={14} className="text-emerald-500" />
+              <span className="text-[11px] font-bold dark:text-white">Expert Advisory</span>
+            </div>
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-4 pt-4">
-            <SocialBtn icon={<Linkedin />} color="hover:bg-blue-600" />
-            <SocialBtn icon={<Mail />} color="hover:bg-orange-500" />
-            <button className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-blue-500 transition-colors ml-auto group/btn">
-              Download CV <ExternalLink size={14} className="group-hover/btn:-translate-y-1 transition-transform" />
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
@@ -211,30 +242,21 @@ const PartnerCard = ({ member, index }) => (
 
 const PhilosophyCard = ({ icon, title, desc }) => (
   <motion.div 
-    whileHover={{ scale: 1.02 }}
-    className="p-10 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[3rem] shadow-xl hover:shadow-2xl transition-all"
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -5 }}
+    className="p-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] shadow-lg transition-all"
   >
-    <div className="mb-6">{icon}</div>
-    <h4 className="text-2xl font-black dark:text-white mb-4">{title}</h4>
-    <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{desc}</p>
+    <motion.div 
+      animate={{ scale: [1, 1.1, 1] }} 
+      transition={{ duration: 3, repeat: Infinity }}
+      className="mb-4"
+    >
+      {icon}
+    </motion.div>
+    <h4 className="text-xl font-black dark:text-white mb-2 tracking-tight">{title}</h4>
+    <p className="text-slate-500 dark:text-slate-400 leading-relaxed text-sm font-medium">{desc}</p>
   </motion.div>
-);
-
-const SocialBtn = ({ icon, color }) => (
-  <motion.button 
-    whileHover={{ scale: 1.1, rotate: 5 }}
-    whileTap={{ scale: 0.9 }}
-    className={`p-3 bg-slate-100 dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-400 ${color} hover:text-white transition-all shadow-lg`}
-  >
-    {React.cloneElement(icon, { size: 20 })}
-  </motion.button>
-);
-
-const TrustLogo = ({ text }) => (
-  <div className="flex items-center gap-2 font-black text-slate-400 tracking-tighter text-2xl">
-    <div className="w-2 h-2 bg-blue-500 rounded-full" />
-    {text}
-  </div>
 );
 
 export default Team;

@@ -194,41 +194,52 @@ const Home = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <ServiceCard 
-              icon={<Scale size={32} />} 
-              title="Tax Litigation" 
-              desc="Expert representation for GST appeals, Income Tax notices, and department hearings."
-              color="border-blue-500"
-            />
-            <ServiceCard 
-              icon={<FileText size={32} />} 
-              title="GST & Indirect Tax" 
-              desc="End-to-end GST management including registration, reconciliation, and refund claims."
-              color="border-sky-500"
-            />
-            <ServiceCard 
-              icon={<Landmark size={32} />} 
-              title="Audit & Assurance" 
-              desc="Statutory, Tax, and Internal audits designed to add value beyond compliance."
-              color="border-indigo-500"
-            />
-            <ServiceCard 
-              icon={<Zap size={32} />} 
-              title="Startup Incorporation" 
-              desc="Fast-track Private Limited, LLP registration and Startup India recognition."
-              color="border-orange-500"
-            />
-            <ServiceCard 
-              icon={<ShieldCheck size={32} />} 
-              title="ROC Compliance" 
-              desc="Maintaining corporate governance with timely filings of AOC-4, MGT-7 and more."
-              color="border-emerald-500"
-            />
-            <ServiceCard 
-              icon={<TrendingUp size={32} />} 
-              title="Wealth Management" 
-              desc="Strategic tax planning and financial modeling for high-net-worth individuals."
-              color="border-rose-500"
-            />
+  icon={<Scale size={32} />} 
+  title="Tax Litigation" 
+  desc="Expert representation for GST appeals, Income Tax notices, and department hearings."
+  color="border-blue-500"
+  link="/income-tax"
+/>
+
+<ServiceCard 
+  icon={<FileText size={32} />} 
+  title="GST & Indirect Tax" 
+  desc="End-to-end GST management including registration, reconciliation, and refund claims."
+  color="border-sky-500"
+  link="/gst"
+/>
+
+<ServiceCard 
+  icon={<Landmark size={32} />} 
+  title="Audit & Assurance" 
+  desc="Statutory, Tax, and Internal audits designed to add value beyond compliance."
+  color="border-indigo-500"
+  link="/audit"
+/>
+
+<ServiceCard 
+  icon={<Zap size={32} />} 
+  title="Startup Incorporation" 
+  desc="Fast-track Private Limited, LLP registration and Startup India recognition."
+  color="border-orange-500"
+  link="/contact"
+/>
+
+<ServiceCard 
+  icon={<ShieldCheck size={32} />} 
+  title="ROC Compliance" 
+  desc="Maintaining corporate governance with timely filings of AOC-4, MGT-7 and more."
+  color="border-emerald-500"
+  link="/roc"
+/>
+
+<ServiceCard 
+  icon={<TrendingUp size={32} />} 
+  title="Wealth Management" 
+  desc="Strategic tax planning and financial modeling for high-net-worth individuals."
+  color="border-rose-500"
+  link="/corporate-services"
+/>
           </div>
         </div>
       </section>
@@ -281,7 +292,7 @@ const FeaturePoint = ({ icon, title, desc }) => (
   </div>
 );
 
-const ServiceCard = ({ icon, title, desc, color }) => (
+const ServiceCard = ({ icon, title, desc, color, link }) => (
   <motion.div
     whileHover={{ y: -10 }}
     className={`bg-white dark:bg-slate-900 p-10 rounded-[2.5rem] border-b-4 ${color} shadow-xl shadow-slate-200/50 dark:shadow-none transition-all group`}
@@ -289,9 +300,19 @@ const ServiceCard = ({ icon, title, desc, color }) => (
     <div className="mb-6 h-16 w-16 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center text-[#007bb6] group-hover:bg-[#007bb6] group-hover:text-white transition-colors">
       {icon}
     </div>
-    <h4 className="text-2xl font-black mb-4 dark:text-white">{title}</h4>
-    <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">{desc}</p>
-    <Link to={`/services/${title.toLowerCase().replace(/\s+/g, '-')}`} className="text-[#007bb6] font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+
+    <h4 className="text-2xl font-black mb-4 dark:text-white">
+      {title}
+    </h4>
+
+    <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
+      {desc}
+    </p>
+
+    <Link
+      to={link}
+      className="text-[#007bb6] font-bold flex items-center gap-2 group-hover:gap-3 transition-all"
+    >
       Learn More <ArrowRight size={16} />
     </Link>
   </motion.div>

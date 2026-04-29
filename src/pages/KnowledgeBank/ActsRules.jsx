@@ -6,11 +6,11 @@ const ActsRules = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const legalData = [
-    { title: "Income Tax Act, 1961", category: "Direct Tax", year: "1961", link: "#" },
-    { title: "Companies Act, 2013", category: "Corporate Law", year: "2013", link: "#" },
-    { title: "CGST Act, 2017", category: "Indirect Tax", year: "2017", link: "#" },
-    { title: "LLP Act, 2008", category: "Corporate Law", year: "2008", link: "#" },
-    { title: "Finance Act, 2024", category: "Budget", year: "2024", link: "#" },
+    { title: "Income Tax Act, 1961", category: "Direct Tax", year: "1961", link: "https://www.indiacode.nic.in/bitstream/123456789/2435/1/a1961-43.pdf" },
+    { title: "Companies Act, 2013", category: "Corporate Law", year: "2013", link: "https://www.indiacode.nic.in/bitstream/123456789/2114/5/A2013-18.pdf" },
+    { title: "CGST Act, 2017", category: "Indirect Tax", year: "2017", link: "https://cbic-gst.gov.in/pdf/CGST-Act-Updated-30092020.pdf" },
+    { title: "LLP Act, 2008", category: "Corporate Law", year: "2008", link: "https://upload.indiacode.nic.in/view-casepdf?type=act&id=AC_CEN_22_29_00007_200906_1517807325904" },
+    { title: "Finance Act, 2024", category: "Budget", year: "2024", link: "https://www.indiabudget.gov.in/budget2024-25/doc/Finance_Bill.pdf" },
   ];
 
   const filtered = legalData.filter(item => 

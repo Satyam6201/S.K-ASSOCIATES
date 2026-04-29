@@ -28,6 +28,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import GSTPage from './pages/GSTPage';
 import ROCFilings from './pages/ROCFilings';
+import Rules from './pages/Rules';
 
 // --- SMOOTH SCROLL ENGINE ---
 const ScrollManager = () => {
@@ -145,6 +146,7 @@ const App = () => {
               <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
               <Route path="/gst" element={<PageWrapper><GSTPage /></PageWrapper>} />
               <Route path="/roc" element={<PageWrapper><ROCFilings/></PageWrapper>} />
+              <Route path="/rules" element={<PageWrapper><Rules/></PageWrapper>} />
               <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
