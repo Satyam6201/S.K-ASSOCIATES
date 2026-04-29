@@ -232,8 +232,6 @@ const PartnerCard = ({ member }) => (
               <span className="text-[11px] font-bold dark:text-white">Expert Advisory</span>
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
