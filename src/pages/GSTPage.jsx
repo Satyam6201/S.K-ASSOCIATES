@@ -28,7 +28,7 @@ const GSTPage = () => {
   return (
     <div className="bg-white dark:bg-slate-950">
       {/* --- HERO SECTION --- */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900">
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#00325b] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] transition-colors duration-500">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')]" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <motion.div 

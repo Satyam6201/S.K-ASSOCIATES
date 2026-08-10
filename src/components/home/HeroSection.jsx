@@ -1,0 +1,116 @@
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { ArrowRight, Calculator, ShieldCheck, Sparkles, Award, Users, Scale, Landmark } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const HeroSection = () => {
+  const heroRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const { scrollYProgress } = useScroll();
+  const smoothY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const scale = useTransform(smoothY, [0, 0.2], [1, 0.95]);
+
+  const handleMouseMove = (e) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    setMousePos({
+      x: (e.clientX - rect.left) / rect.width - 0.5,
+      y: (e.clientY - rect.top) / rect.height - 0.5,
+    });
+  };
+
+  const metrics = [
+    { label: "GST Returns Filed", value: "10k+", icon: <ShieldCheck size={20} className="text-sky-400" /> },
+    { label: "Corporate Clients", value: "500+", icon: <Users size={20} className="text-amber-400" /> },
+    { label: "Success Rate", value: "99.9%", icon: <Award size={20} className="text-emerald-400" /> },
+    { label: "Years of Excellence", value: "08+", icon: <Landmark size={20} className="text-indigo-400" /> }
+  ];
+
+  return (
+    <section
+      ref={heroRef}
+      onMouseMove={handleMouseMove}
+      className="relative min-h-[92vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#002f56] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] pt-24 pb-16 transition-colors duration-500"
+    >
+      {/* Glow Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-sky-400/20 dark:bg-blue-600/20 rounded-full blur-[120px]" 
+        />
+        <div className="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#007bb6]/20 dark:from-[#020617] to-transparent" />
+      </div>
+
+      <motion.div
+        style={{ 
+          rotateY: mousePos.x * 12, 
+          rotateX: -mousePos.y * 12,
+          scale 
+        }}
+        className="relative z-10 text-center px-6 max-w-6xl mx-auto"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 text-sky-200 dark:text-sky-400 text-xs md:text-sm font-bold mb-8 backdrop-blur-md shadow-xl"
+        >
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+          </span>
+          Trusted Tax & Legal Advisory for 500+ Enterprises Across India
+        </motion.div>
+
+        <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black text-white leading-none tracking-tighter drop-shadow-lg">
+          S.K <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-white to-amber-300 dark:from-[#007bb6] dark:to-sky-400">ASSOCIATES</span>
+        </h1>
+
+        <p className="mt-8 text-lg sm:text-2xl text-slate-100 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-medium">
+          Bridging the gap between <span className="text-amber-300 dark:text-white font-bold">Complex Statutory Compliance</span> and <span className="text-sky-300 dark:text-white font-bold">Business Growth</span> with expert CA & Legal counsel since 2017.
+        </p>
+
+        <div className="mt-12 flex flex-col sm:flex-row gap-5 justify-center items-center">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+            <Link
+              to="/query"
+              className="w-full sm:w-auto bg-[#007bb6] hover:bg-sky-600 text-white px-10 py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-[0_20px_40px_rgba(0,123,182,0.4)] transition-all group"
+            >
+              Start Free Consultation <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+            </Link>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full sm:w-auto">
+            <Link
+              to="/calculators"
+              className="w-full sm:w-auto border-2 border-white/30 text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/10 backdrop-blur-md transition-all flex items-center justify-center gap-2"
+            >
+              <Calculator size={20} /> Tax Calculators
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Floating Stats Bar */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto pt-10 border-t border-white/20">
+          {metrics.map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -6, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="p-5 rounded-2xl bg-white/10 dark:bg-slate-900/60 backdrop-blur-xl border border-white/10 dark:border-slate-800 text-left shadow-lg"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                {item.icon}
+                <span className="text-3xl font-black text-white">{item.value}</span>
+              </div>
+              <p className="text-xs font-bold text-slate-200 dark:text-slate-400 uppercase tracking-wider">{item.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+export default HeroSection;

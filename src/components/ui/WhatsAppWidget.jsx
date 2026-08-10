@@ -7,7 +7,7 @@ const WhatsAppWidget = () => {
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-2">
+    <div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[100] flex flex-col items-end gap-2">
       
       {/* --- Interactive Tooltip --- */}
       <motion.div 

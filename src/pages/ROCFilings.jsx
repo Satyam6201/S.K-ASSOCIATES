@@ -33,7 +33,7 @@ const ROCFilings = () => {
     <div className="bg-slate-50 dark:bg-slate-950 pt-20">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative py-24 bg-[#001524] overflow-hidden">
+      <section className="relative py-24 bg-gradient-to-br from-[#00325b] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] transition-colors duration-500 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
         </div>

@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
 
 // Layout Components
 import TopBar from './components/layout/TopBar';
@@ -9,50 +8,31 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import WhatsAppWidget from './components/ui/WhatsAppWidget';
 
-// Instant Load Pages (Removed Lazy for Smoothness)
-import Home from './pages/Home';
-import Team from './pages/Team';
-import Contact from './pages/Contact';
-import Query from './pages/Query';
-import IncomeTax from './pages/Services/IncomeTax';
-import ServiceTax from './pages/Services/ServiceTax';
-import Audit from './pages/Services/Audit';
-import CorporateServices from './pages/Services/CorporateServices';
-import Accounting from './pages/Services/Accounting';
-import ActsRules from './pages/KnowledgeBank/ActsRules';
-import Bulletins from './pages/KnowledgeBank/Bulletins';
-import Forms from './pages/KnowledgeBank/Forms';
-import Utilities from './pages/KnowledgeBank/Utilities';
-import Calculators from './pages/KnowledgeBank/Calculators';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsOfService from './pages/TermsOfService';
-import GSTPage from './pages/GSTPage';
-import ROCFilings from './pages/ROCFilings';
-import Rules from './pages/Rules';
+// Code-Splitting with React.lazy for Performance & Fast Loading
+const Home = lazy(() => import('./pages/Home'));
+const Team = lazy(() => import('./pages/Team'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Query = lazy(() => import('./pages/Query'));
+const IncomeTax = lazy(() => import('./pages/Services/IncomeTax'));
+const ServiceTax = lazy(() => import('./pages/Services/ServiceTax'));
+const Audit = lazy(() => import('./pages/Services/Audit'));
+const CorporateServices = lazy(() => import('./pages/Services/CorporateServices'));
+const Accounting = lazy(() => import('./pages/Services/Accounting'));
+const ActsRules = lazy(() => import('./pages/KnowledgeBank/ActsRules'));
+const Bulletins = lazy(() => import('./pages/KnowledgeBank/Bulletins'));
+const Forms = lazy(() => import('./pages/KnowledgeBank/Forms'));
+const Utilities = lazy(() => import('./pages/KnowledgeBank/Utilities'));
+const Calculators = lazy(() => import('./pages/KnowledgeBank/Calculators'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const GSTPage = lazy(() => import('./pages/GSTPage'));
+const ROCFilings = lazy(() => import('./pages/ROCFilings'));
+const Rules = lazy(() => import('./pages/Rules'));
 
-// --- SMOOTH SCROLL ENGINE ---
+// --- OPTIMIZED SCROLL MANAGER ---
 const ScrollManager = () => {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth inertia
-      direction: 'vertical',
-      smooth: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => lenis.destroy();
-  }, []);
-
-  // Scroll to top instantly on route change
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -60,20 +40,60 @@ const ScrollManager = () => {
   return null;
 };
 
+// --- SUSPENSE FALLBACK LOADING SPINNER ---
+const PageLoader = () => (
+  <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4 bg-slate-50 dark:bg-slate-950">
+    <div className="w-12 h-12 border-4 border-[#007bb6] border-t-transparent rounded-full animate-spin" />
+    <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Loading S.K Associates...</p>
+  </div>
+);
+
 const PageWrapper = ({ children }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 20, scale: 0.98 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, x: -20, scale: 1.02 }}
-      transition={{ 
-        duration: 0.5, 
-        ease: [0.22, 1, 0.36, 1] 
-      }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
       className="w-full"
     >
       {children}
     </motion.div>
+  );
+};
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+        <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
+        <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+        <Route path="/query" element={<PageWrapper><Query /></PageWrapper>} />
+        
+        {/* Services */}
+        <Route path="/income-tax" element={<PageWrapper><IncomeTax /></PageWrapper>} />
+        <Route path="/service-tax" element={<PageWrapper><ServiceTax /></PageWrapper>} />
+        <Route path="/audit" element={<PageWrapper><Audit /></PageWrapper>} />
+        <Route path="/corporate-services" element={<PageWrapper><CorporateServices /></PageWrapper>} />
+        <Route path="/accounting-services" element={<PageWrapper><Accounting /></PageWrapper>} />
+        
+        {/* Knowledge Bank */}
+        <Route path="/acts" element={<PageWrapper><ActsRules /></PageWrapper>} />
+        <Route path="/bulletins" element={<PageWrapper><Bulletins /></PageWrapper>} />
+        <Route path="/forms" element={<PageWrapper><Forms /></PageWrapper>} />
+        <Route path="/utilities" element={<PageWrapper><Utilities /></PageWrapper>} />
+        <Route path="/calculators" element={<PageWrapper><Calculators /></PageWrapper>} />
+        <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+        <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
+        <Route path="/gst" element={<PageWrapper><GSTPage /></PageWrapper>} />
+        <Route path="/roc" element={<PageWrapper><ROCFilings /></PageWrapper>} />
+        <Route path="/rules" element={<PageWrapper><Rules /></PageWrapper>} />
+        <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
+      </Routes>
+    </AnimatePresence>
   );
 };
 
@@ -89,11 +109,16 @@ const App = () => {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    const body = window.document.body;
     if (darkMode) {
       root.classList.add('dark');
+      body.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
       localStorage.setItem('theme', 'dark');
     } else {
       root.classList.remove('dark');
+      body.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
       localStorage.setItem('theme', 'light');
     }
   }, [darkMode]);
@@ -102,19 +127,16 @@ const App = () => {
     <Router>
       <ScrollManager />
       
-      <div className="relative min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-700">
+      <div className="relative min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-500">
         
-        {/* Progress Bar */}
+        {/* Top Reading Progress Bar */}
         <motion.div
-          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-orange-500 z-[1000] origin-left"
+          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-orange-500 z-[1000] origin-left shadow-md"
           style={{ scaleX }}
         />
 
-        {/* Global Animated Background Overlay */}
-        <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full mix-blend-multiply" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full mix-blend-multiply" />
-        </div>
+        {/* Global Adaptive Background Layer */}
+        <div className="fixed inset-0 pointer-events-none z-0 bg-mesh-light dark:bg-mesh-dark transition-colors duration-500" />
 
         <header className="relative z-[150]">
           <TopBar />
@@ -122,34 +144,9 @@ const App = () => {
         </header>
 
         <main className="relative z-10">
-          <AnimatePresence mode="wait">
-            <Routes>
-              <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-              <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
-              <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
-              <Route path="/query" element={<PageWrapper><Query /></PageWrapper>} />
-              
-              {/* Services */}
-              <Route path="/income-tax" element={<PageWrapper><IncomeTax /></PageWrapper>} />
-              <Route path="/service-tax" element={<PageWrapper><ServiceTax /></PageWrapper>} />
-              <Route path="/audit" element={<PageWrapper><Audit /></PageWrapper>} />
-              <Route path="/corporate-services" element={<PageWrapper><CorporateServices /></PageWrapper>} />
-              <Route path="/accounting-services" element={<PageWrapper><Accounting /></PageWrapper>} />
-              
-              {/* Knowledge Bank */}
-              <Route path="/acts" element={<PageWrapper><ActsRules /></PageWrapper>} />
-              <Route path="/bulletins" element={<PageWrapper><Bulletins /></PageWrapper>} />
-              <Route path="/forms" element={<PageWrapper><Forms /></PageWrapper>} />
-              <Route path="/utilities" element={<PageWrapper><Utilities /></PageWrapper>} />
-              <Route path="/calculators" element={<PageWrapper><Calculators /></PageWrapper>} />
-              <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
-              <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
-              <Route path="/gst" element={<PageWrapper><GSTPage /></PageWrapper>} />
-              <Route path="/roc" element={<PageWrapper><ROCFilings/></PageWrapper>} />
-              <Route path="/rules" element={<PageWrapper><Rules/></PageWrapper>} />
-              <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
-            </Routes>
-          </AnimatePresence>
+          <Suspense fallback={<PageLoader />}>
+            <AnimatedRoutes />
+          </Suspense>
         </main>
 
         <Footer />
