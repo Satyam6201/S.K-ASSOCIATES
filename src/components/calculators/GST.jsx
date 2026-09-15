@@ -5,8 +5,8 @@ import { Copy, Check, Info } from 'lucide-react';
 const GST = () => {
   const [amount, setAmount] = useState(100000);
   const [rate, setRate] = useState(18);
-  const [calcMode, setCalcMode] = useState('add'); // 'add' (Exclusive) or 'remove' (Inclusive)
-  const [isInterState, setIsInterState] = useState(false); // false = Intra (CGST+SGST), true = Inter (IGST)
+  const [calcMode, setCalcMode] = useState('add');
+  const [isInterState, setIsInterState] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const numAmount = Math.max(0, Number(amount) || 0);
@@ -39,7 +39,6 @@ const GST = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       
-      {/* Mode & State Switchers */}
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-xs font-black uppercase tracking-wider text-slate-400">Calculation Type</label>
@@ -86,7 +85,6 @@ const GST = () => {
         </div>
       </div>
 
-      {/* Input Slider & Quick Rate Chips */}
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -113,7 +111,6 @@ const GST = () => {
           />
         </div>
 
-        {/* GST Rate Preset Chips */}
         <div className="space-y-2">
           <label className="text-xs font-black uppercase tracking-wider text-slate-400">Select GST Slab Rate (%)</label>
           <div className="grid grid-cols-5 gap-3">
@@ -134,7 +131,6 @@ const GST = () => {
         </div>
       </div>
 
-      {/* Visual Result Breakdown Box */}
       <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-orange-500/10 via-amber-500/5 to-slate-900/5 dark:bg-slate-800/80 border-2 border-orange-500/30 space-y-6 relative overflow-hidden">
         
         <div className="flex justify-between items-center pb-4 border-b border-orange-200 dark:border-slate-700">
@@ -148,7 +144,6 @@ const GST = () => {
           </div>
         </div>
 
-        {/* Tax Component Details */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm font-semibold">
           {!isInterState ? (
             <>
@@ -174,7 +169,6 @@ const GST = () => {
           </div>
         </div>
 
-        {/* Visual Ratio Bar */}
         <div className="space-y-1 pt-2">
           <div className="flex justify-between text-xs font-bold text-slate-500 dark:text-slate-400">
             <span>Base Value: {Math.round((netPrice / grossPrice) * 100 || 0)}%</span>
@@ -186,7 +180,6 @@ const GST = () => {
           </div>
         </div>
 
-        {/* Copy Action */}
         <div className="flex justify-between items-center pt-2">
           <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
             <Info size={14} className="text-orange-500 shrink-0" />

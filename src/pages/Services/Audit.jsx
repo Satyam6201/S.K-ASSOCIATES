@@ -9,12 +9,10 @@ import {
 import ServiceLayout from './ServiceLayout';
 
 const Audit = () => {
-  /* AUDIT APPLICABILITY CHECKER STATE */
-  const [turnover, setTurnover] = useState(150000000); // 15 Crore default
-  const [entityType, setEntityType] = useState('pvt_ltd'); // pvt_ltd, llp, prop
-  const [cashPct, setCashPct] = useState('below_5'); // below_5, above_5
+  const [turnover, setTurnover] = useState(150000000);
+  const [entityType, setEntityType] = useState('pvt_ltd');
+  const [cashPct, setCashPct] = useState('below_5');
 
-  /* AUDIT READINESS CHECKLIST STATE */
   const [checklist, setChecklist] = useState({
     bankRecon: true,
     gstRecon: true,
@@ -31,13 +29,12 @@ const Audit = () => {
   const checkedCount = Object.values(checklist).filter(Boolean).length;
   const readinessPercent = Math.round((checkedCount / 6) * 100);
 
-  /* Audit Applicability Logic */
   const isTaxAuditRequired = () => {
-    if (entityType === 'pvt_ltd') return true; // Statutory audit mandatory for all Pvt Ltd
+    if (entityType === 'pvt_ltd') return true;
     if (cashPct === 'below_5') {
-      return turnover > 100000000; // ₹10 Cr limit if cash <= 5%
+      return turnover > 100000000;
     }
-    return turnover > 10000000; // ₹1 Cr limit if cash > 5%
+    return turnover > 10000000;
   };
 
   const isCaroRequired = entityType === 'pvt_ltd' && turnover > 10000000;
@@ -52,7 +49,6 @@ const Audit = () => {
   return (
     <div className="relative overflow-hidden bg-slate-50 dark:bg-[#020617] transition-colors duration-500 selection:bg-emerald-500/30">
       
-      {/* 1. Core Service Layout Header Wrapper */}
       <ServiceLayout 
         title="Audit & Assurance Services"
         colorClass="emerald"
@@ -67,7 +63,6 @@ const Audit = () => {
         ]}
       />
 
-      {/* 2. Interactive Audit Applicability Checker Tool */}
       <section className="py-20 px-6 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -93,7 +88,6 @@ const Audit = () => {
             >
               <div className="space-y-6">
                 
-                {/* Entity Selector */}
                 <div className="space-y-2">
                   <label className="text-xs font-black uppercase tracking-wider text-slate-400">Entity Type</label>
                   <div className="grid grid-cols-3 gap-3">
@@ -117,7 +111,6 @@ const Audit = () => {
                   </div>
                 </div>
 
-                {/* Turnover Slider */}
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label className="text-sm font-bold dark:text-slate-200">Annual Gross Receipts / Turnover (₹)</label>
@@ -139,7 +132,6 @@ const Audit = () => {
                   </div>
                 </div>
 
-                {/* Cash Receipts % Option */}
                 {entityType !== 'pvt_ltd' && (
                   <div className="space-y-2">
                     <label className="text-xs font-black uppercase tracking-wider text-slate-400">Cash Receipts & Cash Payments Ratio</label>
@@ -165,7 +157,6 @@ const Audit = () => {
                 )}
               </div>
 
-              {/* Status Output Box */}
               <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -204,7 +195,6 @@ const Audit = () => {
         </div>
       </section>
 
-      {/* 3. Interactive Audit Lifecycle Phases */}
       <section className="py-28 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -249,7 +239,6 @@ const Audit = () => {
         </div>
       </section>
 
-      {/* 4. Interactive Audit Readiness Checklist Widget */}
       <section className="py-24 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
@@ -266,7 +255,6 @@ const Audit = () => {
                 Check off your completed financial reconciliations below to evaluate your corporate audit readiness for seamless auditor sign-off.
               </p>
 
-              {/* Scorecard Progress Bar */}
               <div className="p-6 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-black uppercase tracking-wider text-slate-400">Audit Preparedness Score</span>
@@ -318,7 +306,6 @@ const Audit = () => {
         </div>
       </section>
 
-      {/* 5. Bento Grid Regulatory Compliance */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8">

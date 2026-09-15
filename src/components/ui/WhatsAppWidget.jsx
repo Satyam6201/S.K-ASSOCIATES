@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Sparkles, ShieldCheck } from 'lucide-react';
+import { MessageCircle, X, Send, ShieldCheck } from 'lucide-react';
 
 const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,8 +21,6 @@ const WhatsAppWidget = () => {
 
   return (
     <div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[120] flex flex-col items-end gap-3">
-      
-      {/* Interactive Expandable Chat Teaser Dialog */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -30,9 +28,8 @@ const WhatsAppWidget = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 20 }}
             transition={{ type: "spring", stiffness: 350, damping: 25 }}
-            className="w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-2"
+            className="w-80 sm:w-96 bg-white dark:bg-[#0d1730] rounded-[2rem] shadow-2xl border border-slate-200 dark:border-[#1a2c56] overflow-hidden mb-2"
           >
-            {/* Header */}
             <div className="bg-[#007bb6] p-5 text-white flex justify-between items-center relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl pointer-events-none" />
               <div className="flex items-center gap-3 relative z-10">
@@ -58,9 +55,8 @@ const WhatsAppWidget = () => {
               </button>
             </div>
 
-            {/* Chat Body & Quick Prompts */}
-            <div className="p-5 space-y-4 bg-slate-50/50 dark:bg-slate-950/50">
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm text-xs leading-relaxed text-slate-700 dark:text-slate-200">
+            <div className="p-5 space-y-4 bg-slate-50/50 dark:bg-[#070d1e]/50">
+              <div className="p-4 rounded-2xl bg-white dark:bg-[#15244a]/50 border border-slate-100 dark:border-[#1a2c56] shadow-sm text-xs leading-relaxed text-slate-700 dark:text-slate-200">
                 👋 Welcome to S.K Associates! Connect directly with our Senior CA & Legal team on WhatsApp for instant guidance.
               </div>
 
@@ -71,7 +67,7 @@ const WhatsAppWidget = () => {
                     <button
                       key={idx}
                       onClick={() => handleOpenWhatsApp(p.query)}
-                      className="p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-left transition-all group"
+                      className="p-2.5 rounded-xl bg-white dark:bg-[#15244a]/60 hover:bg-emerald-50 dark:hover:bg-[#1c3060] border border-slate-200/80 dark:border-[#1a2c56] text-left transition-all group"
                     >
                       <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 flex items-center justify-between">
                         {p.label}
@@ -83,8 +79,7 @@ const WhatsAppWidget = () => {
               </div>
             </div>
 
-            {/* Footer Action */}
-            <div className="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+            <div className="p-4 bg-white dark:bg-[#0d1730] border-t border-slate-100 dark:border-[#1a2c56]">
               <button
                 onClick={() => handleOpenWhatsApp()}
                 className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition"
@@ -96,15 +91,13 @@ const WhatsAppWidget = () => {
         )}
       </AnimatePresence>
 
-      {/* Floating WhatsApp Trigger Button */}
       <div className="flex items-center gap-2">
-        {/* Tooltip hint when collapsed */}
         {!isOpen && (
           <motion.div 
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1 }}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 text-xs font-bold"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-[#0d1730] text-slate-800 dark:text-slate-200 rounded-full shadow-lg border border-slate-200 dark:border-[#1a2c56] text-xs font-bold"
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
             <span>Priority WhatsApp Desk</span>
@@ -123,9 +116,7 @@ const WhatsAppWidget = () => {
           ) : (
             <>
               <MessageCircle size={30} />
-              {/* Pulse ripple */}
               <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 pointer-events-none" />
-              {/* Unread dot */}
               <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-rose-500 border-2 border-white rounded-full"></span>
             </>
           )}

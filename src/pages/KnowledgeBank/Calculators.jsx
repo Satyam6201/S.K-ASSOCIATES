@@ -80,7 +80,6 @@ const Calculators = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-slate-100 transition-colors duration-500 pb-20 selection:bg-[#007bb6]/30">
       
-      {/* Header Banner */}
       <div className="relative overflow-hidden bg-gradient-to-br from-[#002f56] via-[#005f9e] to-[#007bb6] dark:from-[#070d1e] dark:via-[#0d1730] dark:to-[#070d1e] transition-colors duration-500 pt-28 sm:pt-36 pb-32 sm:pb-40 px-4 sm:px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-400/20 dark:bg-blue-600/10 rounded-full blur-[120px]" />
@@ -107,11 +106,9 @@ const Calculators = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 -mt-16 relative z-10">
         <div className="flex flex-col lg:flex-row gap-8">
           
-          {/* Sidebar Navigation & Search */}
           <aside className="lg:w-72 space-y-6">
             <div className="bg-white/90 dark:bg-[#0d1730] backdrop-blur-xl p-5 sm:p-6 rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-slate-200/80 dark:border-[#1a2c56] sticky top-24 space-y-5">
               
-              {/* Search Bar */}
               <div className="space-y-2">
                 <label className="text-xs font-black uppercase text-slate-400 tracking-wider">Search Tool</label>
                 <div className="relative">
@@ -126,7 +123,6 @@ const Calculators = () => {
                 </div>
               </div>
 
-              {/* Category Filter */}
               <div className="space-y-2">
                 <h4 className="text-xs font-black text-slate-400 uppercase tracking-wider">Categories</h4>
                 <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0 no-scrollbar">
@@ -156,7 +152,6 @@ const Calculators = () => {
             </div>
           </aside>
 
-          {/* Main Calculators Grid */}
           <main className="flex-1">
             <motion.div 
               layout
@@ -209,7 +204,6 @@ const Calculators = () => {
         </div>
       </div>
 
-      {/* Interactive Tool Modal */}
       <AnimatePresence>
         {activeCalc && (
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-6 md:p-10">
@@ -228,7 +222,6 @@ const Calculators = () => {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               className="relative w-full max-w-4xl bg-white dark:bg-[#0d1730] rounded-3xl sm:rounded-[3rem] shadow-2xl flex flex-col max-h-[94vh] overflow-hidden border border-slate-200 dark:border-[#1a2c56] z-10"
             >
-              {/* Modal Top Bar */}
               <div className="flex items-center justify-between p-4 sm:p-6 md:p-8 border-b border-slate-200 dark:border-[#1a2c56] bg-slate-50 dark:bg-[#0a142c]">
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="p-2.5 sm:p-3.5 rounded-2xl bg-[#007bb6] text-white shadow-lg shrink-0">
@@ -250,12 +243,10 @@ const Calculators = () => {
                 </motion.button>
               </div>
 
-              {/* Scrollable Tool Content */}
               <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-10">
                 {activeCalc.component}
               </div>
 
-              {/* Modal Footer */}
               <div className="p-4 sm:p-6 bg-[#070d1e] text-white flex items-center justify-between border-t border-[#1a2c56]">
                 <div className="flex items-center gap-3 text-xs md:text-sm font-medium text-slate-300">
                   <ShieldCheck className="text-emerald-400 shrink-0" size={18} />

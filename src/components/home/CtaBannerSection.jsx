@@ -12,7 +12,6 @@ const CtaBannerSection = () => {
           transition={{ duration: 0.3 }}
           className="bg-gradient-to-br from-[#002f56] via-[#005f9e] to-[#007bb6] dark:from-[#070d1e] dark:via-[#0f1f44] dark:to-[#070d1e] rounded-3xl sm:rounded-[3.5rem] p-8 sm:p-14 md:p-24 text-center relative overflow-hidden shadow-2xl border border-white/15 dark:border-[#1a2c56]"
         >
-          {/* Animated subtle background circles */}
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-sky-400/15 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10">

@@ -17,14 +17,12 @@ const Footer = () => {
   const [istTime, setIstTime] = useState('');
   const [isOfficeOpen, setIsOfficeOpen] = useState(true);
 
-  // Live IST Clock Tracker & Dynamic Office Open/Close calculation
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
       const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
       setIstTime(now.toLocaleTimeString('en-US', options));
 
-      // Calculate IST Day and Hour accurately
       const istFormatter = new Intl.DateTimeFormat('en-US', {
         timeZone: 'Asia/Kolkata',
         hour: 'numeric',
@@ -60,8 +58,6 @@ const Footer = () => {
 
   return (
     <footer className="relative bg-[#070d1e] text-white pt-16 sm:pt-24 pb-12 overflow-hidden border-t border-[#1a2c56]">
-      
-      {/* 1. Animated Ambient Glowing Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <motion.div 
           animate={{ 
@@ -85,8 +81,6 @@ const Footer = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* 2. Avant-Garde Newsletter Card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -141,10 +135,7 @@ const Footer = () => {
           </div>
         </motion.div>
 
-        {/* 3. Main Footer Content Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-          
-          {/* Brand Bio Column */}
           <div className="lg:col-span-4 space-y-6">
             <Link to="/" className="flex items-center gap-3 group">
               <motion.div 
@@ -163,7 +154,6 @@ const Footer = () => {
               Pioneering financial clarity, statutory assurance, and tax litigation defense since 2017. Serving 500+ corporate clients across India.
             </p>
 
-            {/* Live IST Clock Card with True Working Hours */}
             <div className="p-4 bg-slate-900/60 rounded-2xl border border-white/10 flex items-center justify-between shadow-inner">
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-3 w-3">
@@ -180,7 +170,6 @@ const Footer = () => {
               <Clock size={16} className="text-slate-400" />
             </div>
 
-            {/* Social Links */}
             <div className="flex gap-3 pt-2">
               <SocialIcon icon={<Linkedin />} href="https://linkedin.com" />
               <SocialIcon icon={<Instagram />} href="https://instagram.com" />
@@ -189,7 +178,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Solutions Column */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#007bb6] dark:text-sky-400">Services</h4>
             <ul className="space-y-3">
@@ -202,7 +190,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Utilities & Knowledge Bank */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#007bb6] dark:text-sky-400">Knowledge Bank</h4>
             <ul className="space-y-3">
@@ -215,7 +202,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact & Live Map Card */}
           <div className="lg:col-span-4 space-y-4">
             <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#007bb6] dark:text-sky-400">Headquarters</h4>
             
@@ -249,7 +235,6 @@ const Footer = () => {
                 />
               </a>
 
-              {/* Embedded Google Map Preview */}
               <div className="h-32 rounded-2xl overflow-hidden relative border border-white/10 shadow-lg group/map">
                 <iframe 
                   title="S.K Associates Office Location"
@@ -263,7 +248,6 @@ const Footer = () => {
 
         </div>
 
-        {/* 4. Bottom Copyright & Verification Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex flex-col sm:flex-row items-center gap-4 text-xs font-medium text-slate-400 text-center sm:text-left">
             <p>© {currentYear} S.K Associates. All Rights Reserved.</p>

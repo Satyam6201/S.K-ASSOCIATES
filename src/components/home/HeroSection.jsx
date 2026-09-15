@@ -33,7 +33,6 @@ const HeroSection = () => {
       onMouseMove={handleMouseMove}
       className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#00284d] via-[#00558f] to-[#007bb6] dark:from-[#050b18] dark:via-[#09132d] dark:to-[#070e24] pt-20 sm:pt-28 pb-16 transition-colors duration-500"
     >
-      {/* Glow Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <motion.div 
           animate={{ scale: [1, 1.25, 1], opacity: [0.25, 0.45, 0.25] }}
@@ -96,7 +95,6 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Floating Interactive Stats Bar */}
         <div className="mt-14 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto pt-8 sm:pt-10 border-t border-white/20">
           {metrics.map((item, i) => (
             <motion.div

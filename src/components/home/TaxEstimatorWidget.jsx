@@ -7,7 +7,6 @@ const TaxEstimatorWidget = () => {
   const [income, setIncome] = useState(1200000);
   const [showBreakdown, setShowBreakdown] = useState(false);
 
-  // New Tax Regime Calculation (FY 2025-26 u/s 115BAC)
   const calcNewRegime = (inc) => {
     const stdDed = 75000;
     const taxable = Math.max(0, inc - stdDed);
@@ -20,7 +19,6 @@ const TaxEstimatorWidget = () => {
     else if (taxable > 700000) baseTax += (taxable - 700000) * 0.10 + 20000;
     else if (taxable > 300000) baseTax += (taxable - 300000) * 0.05;
 
-    // Marginal relief under Section 87A for New Regime
     const excessOver7L = taxable - 700000;
     if (excessOver7L > 0 && baseTax > excessOver7L) {
       baseTax = excessOver7L;
@@ -30,7 +28,6 @@ const TaxEstimatorWidget = () => {
     return { tax: baseTax + cess, taxable, cess };
   };
 
-  // Old Tax Regime (standard 80C ~1.5L + 50k std)
   const calcOldRegime = (inc) => {
     const stdDed = 50000;
     const ded80C = 150000;
@@ -42,7 +39,6 @@ const TaxEstimatorWidget = () => {
     else if (taxable > 500000) baseTax += (taxable - 500000) * 0.20 + 12500;
     else if (taxable > 250000) baseTax += (taxable - 250000) * 0.05;
 
-    // Marginal relief under Section 87A for Old Regime
     const excessOver5L = taxable - 500000;
     if (excessOver5L > 0 && baseTax > excessOver5L) {
       baseTax = excessOver5L;

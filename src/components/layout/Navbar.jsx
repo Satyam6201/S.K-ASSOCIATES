@@ -58,8 +58,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
       : 'h-16 lg:h-20 bg-gradient-to-r from-[#00355e] via-[#005a96] to-[#007bb6] dark:from-[#081026] dark:via-[#0c183a] dark:to-[#080e1e] text-white border-b border-white/10 dark:border-slate-800/80'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
-        
-        {/* --- Logo Section --- */}
         <Link to="/" onClick={closeMenu} className="flex items-center gap-2.5 sm:gap-3 group">
           <motion.div 
             whileHover={{ scale: 1.05 }}
@@ -87,7 +85,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
           </div>
         </Link>
 
-        {/* --- Desktop Navigation & Day/Night Toggle --- */}
         <div className="hidden lg:flex items-center gap-2 h-full">
           {navLinks.map((link) => (
             <div key={link.name} className="relative h-full flex items-center group">
@@ -144,7 +141,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
             </div>
           ))}
 
-          {/* DAY / NIGHT THEME TOGGLE BUTTON (DESKTOP) */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -170,7 +166,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
           </motion.button>
         </div>
 
-        {/* --- Mobile Actions (Theme Toggle & Menu Toggle) --- */}
         <div className="lg:hidden flex items-center gap-2">
           <button
             onClick={toggleTheme}
@@ -199,7 +194,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
         </div>
       </div>
 
-      {/* --- Mobile Fullscreen Menu Drawer --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div 
@@ -286,7 +280,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
               </div>
             </div>
 
-            {/* Mobile Drawer Bottom Actions */}
             <div className="p-4 sm:p-6 border-t border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-[#0c152d]/90 backdrop-blur-md space-y-3">
               <div className="grid grid-cols-2 gap-2 text-xs font-bold">
                 <a

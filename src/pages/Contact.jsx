@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 
 const Contact = () => {
-  const [formStep, setFormStep] = useState('idle'); // idle, sending, success
+  const [formStep, setFormStep] = useState('idle');
   const [ticketId, setTicketId] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -22,11 +22,10 @@ const Contact = () => {
     summary: ''
   });
 
-  const [activeTab, setActiveTab] = useState('form'); // form, direct, location
+  const [activeTab, setActiveTab] = useState('form');
   const [currentTime, setCurrentTime] = useState('');
   const [isOpenNow, setIsOpenNow] = useState(true);
 
-  // Live IST Time & Office Open/Close status calculation
   useEffect(() => {
     const updateIST = () => {
       const now = new Date();
@@ -34,11 +33,9 @@ const Contact = () => {
       const istTimeString = now.toLocaleTimeString('en-US', options);
       setCurrentTime(istTimeString);
 
-      // Extract real IST hour and day
       const istDate = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
       const hour = istDate.getHours();
       const day = istDate.getDay();
-      // Sunday closed (0), Mon-Sat 10AM to 7PM (10 to 19)
       if (day === 0 || hour < 10 || hour >= 19) {
         setIsOpenNow(false);
       } else {
@@ -97,20 +94,17 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-white transition-colors duration-500 selection:bg-[#007bb6]/30 overflow-hidden">
       
-      {/* Background Decor Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-500/15 dark:bg-sky-500/10 rounded-full blur-[120px]" />
       </div>
 
-      {/* Hero Header */}
       <section className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto"
         >
-          {/* Live Status Badge */}
           <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 dark:bg-[#0d1730] border border-slate-200/80 dark:border-[#1a2c56] text-xs font-black uppercase tracking-wider mb-6 sm:mb-8 shadow-lg">
             <span className="relative flex h-3 w-3">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isOpenNow ? 'bg-emerald-400' : 'bg-amber-400'} opacity-75`}></span>
@@ -135,7 +129,6 @@ const Contact = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pb-24 sm:pb-32">
         
-        {/* Quick Action Contact Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {contactCards.map((info, idx) => (
             <motion.a 
@@ -165,7 +158,6 @@ const Contact = () => {
           ))}
         </div>
 
-        {/* Tab Switcher for Consultation Modes */}
         <div className="flex justify-center mb-8 sm:mb-10 px-2">
           <div className="w-full sm:w-auto flex overflow-x-auto no-scrollbar sm:inline-flex p-1.5 bg-white/90 dark:bg-[#0d1730] rounded-2xl border border-slate-200 dark:border-[#1a2c56] shadow-lg gap-1.5">
             <button
@@ -195,10 +187,8 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Main Interactive Section */}
         <div className="grid lg:grid-cols-12 gap-8">
           
-          {/* Dynamic Main Panel based on activeTab */}
           <motion.div 
             className="lg:col-span-8 bg-white/95 dark:bg-[#0d1730] p-6 sm:p-8 md:p-14 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-2xl relative overflow-hidden"
           >
@@ -494,10 +484,8 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          {/* Sidebar & Quick Action Cards */}
           <div className="lg:col-span-4 space-y-8">
             
-            {/* Direct WhatsApp Callout Card */}
             <motion.div 
               whileHover={{ y: -6 }}
               className="bg-gradient-to-br from-emerald-600 via-teal-700 to-slate-900 p-8 rounded-[3rem] text-white shadow-2xl relative overflow-hidden"
@@ -519,7 +507,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* Interactive Map Card */}
             <div className="bg-white/90 dark:bg-[#0d1730] p-5 sm:p-6 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-xl space-y-4">
               <div className="flex justify-between items-center px-2">
                 <h4 className="text-lg font-black dark:text-white">Headquarters Map</h4>
@@ -549,7 +536,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Social Channels */}
             <div className="bg-white/90 dark:bg-[#0d1730] p-6 sm:p-8 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-xl space-y-4">
               <h4 className="text-xl font-black dark:text-white">Knowledge Updates</h4>
               <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed font-medium">Follow us for real-time circulars on Income Tax, Budget 2026, and GST notifications.</p>

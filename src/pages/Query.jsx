@@ -67,7 +67,6 @@ const Query = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] py-28 sm:py-36 px-4 sm:px-6 relative overflow-hidden transition-colors duration-500 selection:bg-[#007bb6]/30">
       
-      {/* --- Beautiful Animated Ambient Glow Orbs --- */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <motion.div 
           animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.35, 0.15], x: [0, 50, 0] }}
@@ -88,7 +87,6 @@ const Query = () => {
 
       <div className="max-w-6xl mx-auto relative z-10">
         
-        {/* Header Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -107,7 +105,6 @@ const Query = () => {
 
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
-          {/* --- Left Column: Value Cards --- */}
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -126,7 +123,6 @@ const Query = () => {
               </div>
             </div>
 
-            {/* Helpline Box */}
             <motion.div 
               whileHover={{ y: -4 }}
               className="p-6 bg-gradient-to-br from-[#00325b] to-[#007bb6] text-white rounded-3xl sm:rounded-[2rem] shadow-xl border border-white/20 relative overflow-hidden"
@@ -141,14 +137,12 @@ const Query = () => {
             </motion.div>
           </motion.div>
 
-          {/* --- Right Column: Animated Multi-Step Form --- */}
           <motion.div 
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="lg:col-span-8 bg-white/95 dark:bg-[#0d1730] backdrop-blur-2xl rounded-3xl sm:rounded-[3rem] shadow-2xl border border-slate-200/80 dark:border-[#1a2c56] p-6 sm:p-8 md:p-12 relative overflow-hidden"
           >
-            {/* Step Progress Bar Header */}
             <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
               <div>
                 <span className="text-xs font-black uppercase tracking-widest text-[#007bb6] dark:text-sky-400">Step {step} of 2</span>

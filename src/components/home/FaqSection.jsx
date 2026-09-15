@@ -42,7 +42,6 @@ const FaqSection = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mt-2">Frequently Asked Questions</h2>
         </div>
 
-        {/* FAQ Search Input */}
         <div className="relative mb-8 sm:mb-10 max-w-xl mx-auto">
           <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input 

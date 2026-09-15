@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const NotFound = () => {
   return (
     <div className="min-h-screen pt-32 pb-24 px-6 flex items-center justify-center bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white transition-colors duration-500 relative overflow-hidden">
-      {/* Background glowing orbs */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <motion.div 
           animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }}
@@ -21,7 +20,6 @@ const NotFound = () => {
       </div>
 
       <div className="max-w-2xl w-full mx-auto text-center relative z-10 space-y-8">
-        {/* Floating Animated Badge */}
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -42,7 +40,6 @@ const NotFound = () => {
           </p>
         </div>
 
-        {/* Primary Navigation Actions */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <Link
             to="/"
@@ -58,7 +55,6 @@ const NotFound = () => {
           </Link>
         </div>
 
-        {/* Helpful Quick Links Bento */}
         <div className="p-6 bg-white dark:bg-slate-900/80 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-xl text-left space-y-4">
           <p className="text-xs font-black uppercase tracking-wider text-slate-400 text-center">Looking for one of these?</p>
           <div className="grid sm:grid-cols-3 gap-3">

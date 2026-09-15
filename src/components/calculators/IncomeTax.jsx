@@ -13,13 +13,11 @@ const IncomeTax = () => {
   const ded80D = Number(sec80D) || 0;
   const dedOther = Number(otherDeductions) || 0;
 
-  // --- NEW REGIME CALCULATION (FY 2025-26 u/s 115BAC) ---
   const calculateNewRegime = (income) => {
     const stdDeduction = 75000;
     const taxable = Math.max(0, income - stdDeduction);
     if (taxable === 0) return { tax: 0, cess: 0, total: 0, taxable };
 
-    // Slabs: 0-3L (0%), 3-7L (5%), 7-10L (10%), 10-12L (15%), 12-15L (20%), >15L (30%)
     let tax = 0;
     if (taxable > 1500000) {
       tax += (taxable - 1500000) * 0.30 + 140000;
@@ -33,7 +31,6 @@ const IncomeTax = () => {
       tax += (taxable - 300000) * 0.05;
     }
 
-    // Sec 87A rebate & marginal relief under New Regime
     if (taxable <= 700000) {
       tax = 0;
     } else {
@@ -47,7 +44,6 @@ const IncomeTax = () => {
     return { tax, cess, total: tax + cess, taxable };
   };
 
-  // --- OLD REGIME CALCULATION ---
   const calculateOldRegime = (income, totalDeductions) => {
     const stdDeduction = 50000;
     const taxable = Math.max(0, income - stdDeduction - totalDeductions);
@@ -62,7 +58,6 @@ const IncomeTax = () => {
       tax += (taxable - 250000) * 0.05;
     }
 
-    // Sec 87A rebate under Old Regime (Rebate up to taxable income ₹5,00,000)
     if (taxable <= 500000) tax = 0;
 
     const cess = tax * 0.04;
@@ -122,7 +117,6 @@ const IncomeTax = () => {
         </div>
       </div>
 
-      {/* Comparison Grid */}
       <div className="grid md:grid-cols-2 gap-6 pt-2">
         <div className={`p-6 rounded-2xl border-2 transition-all ${recommendedRegime === 'New Tax Regime' ? 'border-emerald-500 bg-emerald-50/60 dark:bg-slate-800/80 shadow-lg' : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900'}`}>
           <div className="flex justify-between items-center mb-4">

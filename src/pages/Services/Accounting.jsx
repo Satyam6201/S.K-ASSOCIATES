@@ -16,7 +16,6 @@ const Accounting = () => {
 
   return (
     <div className="relative">
-      {/* 1. Base Service Layout */}
       <ServiceLayout 
         title="Expert Accounting"
         colorClass="sky"
@@ -31,7 +30,6 @@ const Accounting = () => {
         ]}
       />
 
-      {/* 2. Interactive Process Timeline */}
       <section className="pb-24 bg-slate-50 dark:bg-slate-950 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -69,7 +67,6 @@ const Accounting = () => {
         </div>
       </section>
 
-      {/* 3. Specialized Solutions Bento Grid */}
       <section className="py-24 bg-white dark:bg-slate-900/50 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-6">

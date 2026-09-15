@@ -23,7 +23,6 @@ const Rules = () => {
 
   return (
     <div className="bg-slate-50 dark:bg-[#020617] min-h-screen">
-      {/* TOP PROGRESS BAR */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-[110] origin-left"
         style={{ scaleX }}
@@ -32,7 +31,6 @@ const Rules = () => {
       <div className="pt-32 pb-40 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16">
           
-          {/* --- LEFT: STICKY NAVIGATION --- */}
           <aside className="lg:w-1/4 lg:sticky lg:top-32 h-fit">
             <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 border border-slate-200 dark:border-white/5 shadow-xl shadow-slate-200/50 dark:shadow-none">
               <h4 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 mb-8">Navigation</h4>
@@ -68,10 +66,8 @@ const Rules = () => {
             </div>
           </aside>
 
-          {/* --- RIGHT: CONTENT ENGINE --- */}
           <main className="lg:w-3/4 space-y-32">
             
-            {/* INTRO */}
             <header>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <h1 className="text-6xl md:text-8xl font-black dark:text-white tracking-tighter mb-8 leading-none">
@@ -83,7 +79,6 @@ const Rules = () => {
               </motion.div>
             </header>
 
-            {/* SECTION: GST */}
             <RuleSection id="gst-compliance" title="GST Compliance & Filing Rules">
               <RuleCard 
                 title="Input Tax Credit (ITC) Rules" 
@@ -102,7 +97,6 @@ const Rules = () => {
               />
             </RuleSection>
 
-            {/* SECTION: INCOME TAX */}
             <RuleSection id="income-tax" title="Income Tax Statutory Rules">
               <RuleCard 
                 title="Tax Audit Limits (Sec 44AB)" 
@@ -121,7 +115,6 @@ const Rules = () => {
               />
             </RuleSection>
 
-            {/* SECTION: CORPORATE LAW */}
             <RuleSection id="corporate-law" title="Corporate Governance & MCA Rules">
               <RuleCard 
                 title="Annual ROC Filings (AOC-4 & MGT-7)" 
@@ -140,7 +133,6 @@ const Rules = () => {
               />
             </RuleSection>
 
-            {/* SECTION: DATA PRIVACY */}
             <RuleSection id="data-privacy" title="Information Security & DPDP Act">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-10 bg-slate-900 rounded-[3rem] text-white relative overflow-hidden group">
@@ -160,7 +152,6 @@ const Rules = () => {
               </div>
             </RuleSection>
 
-            {/* SECTION: CLIENT ETHICS */}
             <RuleSection id="client-ethics" title="Professional Ethics & KYC">
               <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[3rem] p-12">
                 <ul className="space-y-8">
@@ -190,7 +181,6 @@ const Rules = () => {
         </div>
       </div>
 
-      {/* --- FOOTER CTA --- */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto bg-blue-600 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden">
           <Globe className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-10 animate-spin-slow" />
@@ -203,8 +193,6 @@ const Rules = () => {
     </div>
   );
 };
-
-// --- SUB-COMPONENTS ---
 
 const RuleSection = ({ id, title, children }) => (
   <section id={id} className="scroll-mt-32">

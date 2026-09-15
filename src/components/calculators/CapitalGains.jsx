@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { TrendingUp, Info, Building2, Coins } from 'lucide-react';
 
 const CapitalGains = () => {
-  const [assetType, setAssetType] = useState('property'); // property, equity, gold
+  const [assetType, setAssetType] = useState('property');
   const [salePrice, setSalePrice] = useState(7500000);
   const [purchasePrice, setPurchasePrice] = useState(4000000);
   const [transferExpenses, setTransferExpenses] = useState(50000);
@@ -18,19 +18,17 @@ const CapitalGains = () => {
   const rawGain = numSale - numPur - numExp;
   const isLTCG = (assetType === 'equity' && holdingMonths >= 12) || (assetType !== 'equity' && holdingMonths >= 24);
 
-  // Tax Rate Determination (Updated Budget Rules)
   let taxRate = 0;
   if (assetType === 'equity') {
-    taxRate = isLTCG ? 12.5 : 20; // 12.5% LTCG above ₹1.25L, 20% STCG
+    taxRate = isLTCG ? 12.5 : 20;
   } else if (assetType === 'property') {
-    taxRate = isLTCG ? 12.5 : 30; // 12.5% rate without indexation
+    taxRate = isLTCG ? 12.5 : 30;
   } else {
     taxRate = isLTCG ? 12.5 : 30;
   }
 
   const taxableGainBeforeExemption = Math.max(0, rawGain);
   const gainAfterReinvestment = Math.max(0, taxableGainBeforeExemption - numReinvest);
-  // Sec 112A statutory exemption for Equity LTCG up to ₹1,25,000
   const equityExemption = (assetType === 'equity' && isLTCG) ? Math.min(gainAfterReinvestment, 125000) : 0;
   const netTaxableGain = Math.max(0, gainAfterReinvestment - equityExemption);
 
@@ -41,7 +39,6 @@ const CapitalGains = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       
-      {/* Asset Selector Chips */}
       <div className="space-y-2">
         <label className="text-xs font-black uppercase tracking-wider text-slate-400">Select Asset Category</label>
         <div className="grid grid-cols-3 gap-3">
@@ -66,7 +63,6 @@ const CapitalGains = () => {
         </div>
       </div>
 
-      {/* Input Sliders */}
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -150,7 +146,6 @@ const CapitalGains = () => {
         </div>
       </div>
 
-      {/* Tax Result Card */}
       <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-slate-900/5 dark:bg-slate-800/80 border-2 border-emerald-500/30 space-y-6">
         
         <div className="flex justify-between items-center pb-4 border-b border-emerald-200 dark:border-slate-700">

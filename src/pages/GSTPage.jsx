@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 
 const GSTPage = () => {
-  // Animation Variants
   const containerVars = {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -23,7 +22,6 @@ const GSTPage = () => {
 
   return (
     <div className="bg-white dark:bg-slate-950">
-      {/* --- HERO SECTION --- */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-br from-[#00325b] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] transition-colors duration-500">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')]" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -53,7 +51,6 @@ const GSTPage = () => {
         </div>
       </section>
 
-      {/* --- SERVICE GRID --- */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-[#007bb6] font-black uppercase tracking-widest mb-4">Our GST Vertical</h2>
@@ -100,7 +97,6 @@ const GSTPage = () => {
         </motion.div>
       </section>
 
-      {/* --- COMPLIANCE TRACKER SECTION --- */}
       <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div 
@@ -131,7 +127,6 @@ const GSTPage = () => {
         </div>
       </section>
 
-      {/* --- FAQ SECTION --- */}
       <section className="py-24 max-w-4xl mx-auto px-6">
         <h2 className="text-3xl font-black text-center mb-16 dark:text-white">GST Frequently Asked Questions</h2>
         <div className="space-y-4">
@@ -141,7 +136,6 @@ const GSTPage = () => {
         </div>
       </section>
 
-      {/* --- FOOTER CTA --- */}
       <section className="py-20 px-6">
         <div className="max-w-5xl mx-auto bg-gradient-to-r from-[#007bb6] to-blue-800 rounded-[2.5rem] p-12 text-center text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')]" />
@@ -157,8 +151,6 @@ const GSTPage = () => {
     </div>
   );
 };
-
-/* --- SUB-COMPONENTS --- */
 
 const GSTServiceCard = ({ icon, title, items }) => (
   <motion.div 

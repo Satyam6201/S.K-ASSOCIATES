@@ -54,7 +54,6 @@ const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue'
   return (
     <div className="relative pt-32 pb-20 bg-slate-50 dark:bg-slate-950 min-h-screen overflow-hidden">
       
-      {/* Ambient Glow */}
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] ${theme.lightBg} blur-[100px] pointer-events-none`} />
       <motion.div 
         style={{ y: yRange }}
@@ -63,7 +62,6 @@ const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue'
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Breadcrumb Header */}
         <motion.div 
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,7 +74,6 @@ const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue'
           <span className={theme.text}>{title}</span>
         </motion.div>
 
-        {/* Hero Section */}
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
@@ -120,7 +117,6 @@ const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue'
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            {/* Scope Card */}
             <div className={`absolute -inset-4 ${theme.lightBg} rounded-[4rem] blur-xl`} />
             <div className="relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl p-10 rounded-[3.5rem] shadow-2xl border border-slate-100 dark:border-slate-800">
               <div className="flex justify-between items-center mb-10">
@@ -151,7 +147,6 @@ const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue'
           </motion.div>
         </div>
 
-        {/* Trust Metrics */}
         <div className="grid md:grid-cols-3 gap-8 pt-16 border-t border-slate-200 dark:border-slate-800">
           <MetricCard 
             number="01" 

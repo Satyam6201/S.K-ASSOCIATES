@@ -12,7 +12,6 @@ const HRACalculator = () => {
   const numHra = Math.max(0, Number(hraReceived) || 0);
   const numRent = Math.max(0, Number(rentPaid) || 0);
 
-  // Income Tax Rule 2A Calculation
   const rule1 = numHra;
   const rule2 = isMetro ? (numBasic * 0.50) : (numBasic * 0.40);
   const rule3 = Math.max(0, numRent - (numBasic * 0.10));
@@ -23,7 +22,6 @@ const HRACalculator = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       
-      {/* Metro / Non-Metro Toggle Switch */}
       <div className="flex justify-between items-center p-4 bg-slate-100 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
         <div>
           <h4 className="font-black text-sm dark:text-white flex items-center gap-2">
@@ -52,7 +50,6 @@ const HRACalculator = () => {
         </div>
       </div>
 
-      {/* Input Sliders */}
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -105,7 +102,6 @@ const HRACalculator = () => {
         </div>
       </div>
 
-      {/* Exemption Output Card */}
       <div className="p-8 rounded-[2.5rem] bg-indigo-600 text-white shadow-2xl space-y-6 relative overflow-hidden">
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
@@ -119,7 +115,6 @@ const HRACalculator = () => {
           </div>
         </div>
 
-        {/* Rule Breakdown Grid */}
         <div className="pt-6 border-t border-indigo-400/30 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
           <div className={`p-4 rounded-2xl bg-white/10 ${exemptAmount === rule1 ? 'ring-2 ring-emerald-400' : ''}`}>
             <span className="text-indigo-200 font-bold block">1. Actual HRA Received</span>

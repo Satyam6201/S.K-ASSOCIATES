@@ -17,7 +17,6 @@ const CorporateServices = () => {
 
   return (
     <div className="relative">
-      {/* 1. Core Service Layout */}
       <ServiceLayout 
         title="Corporate Legal"
         colorClass="indigo"
@@ -31,8 +30,6 @@ const CorporateServices = () => {
           "Secretarial Audit & Compliance Certificates"
         ]}
       />
-
-      {/* 2. Formation Journey Timeline */}
       
       <section className="py-24 bg-slate-50 dark:bg-slate-950 px-6">
         <div className="max-w-7xl mx-auto">
@@ -46,7 +43,6 @@ const CorporateServices = () => {
           </motion.div>
 
           <div className="relative flex flex-col md:flex-row justify-between items-center gap-8">
-            {/* Connecting Line (Desktop) */}
             <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-indigo-200 dark:bg-indigo-900/50 -z-10"></div>
             
             {formationSteps.map((step, i) => (
@@ -70,12 +66,10 @@ const CorporateServices = () => {
         </div>
       </section>
 
-      {/* 3. Compliance Bento & Table */}
       <section className="py-24 bg-white dark:bg-slate-900/30 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8 mb-12">
             
-            {/* ROC Compliance Card */}
             <motion.div 
               whileHover={{ y: -10 }}
               className="lg:col-span-2 p-10 bg-indigo-900 rounded-[3rem] text-white relative overflow-hidden"
@@ -108,7 +102,6 @@ const CorporateServices = () => {
               </div>
             </motion.div>
 
-            {/* Entity Comparison Card */}
             <motion.div 
               whileHover={{ y: -10 }}
               className="p-10 bg-white dark:bg-slate-800 rounded-[3rem] shadow-2xl border border-slate-100 dark:border-slate-700 flex flex-col justify-between"
@@ -124,7 +117,6 @@ const CorporateServices = () => {
             </motion.div>
           </div>
           
-          {/* Quick Contact Link */}
           <div className="text-center">
             <p className="text-slate-400 text-sm flex items-center justify-center gap-2">
               Looking for foreign subsidiary setup? 

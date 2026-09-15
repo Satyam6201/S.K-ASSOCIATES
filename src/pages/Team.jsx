@@ -71,13 +71,11 @@ const Team = () => {
   return (
     <div className="pt-32 pb-24 bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-hidden relative selection:bg-[#007bb6]/30">
       
-      {/* Scroll Progress Indicator */}
       <motion.div 
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#007bb6] via-sky-400 to-amber-500 z-[100] origin-left"
         style={{ scaleX: scaleProgress }}
       />
 
-      {/* Ambient Glow Orbs */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <motion.div 
           animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
@@ -93,7 +91,6 @@ const Team = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* Page Header */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,7 +109,6 @@ const Team = () => {
           </p>
         </motion.div>
 
-        {/* Managing Partners Card Grid */}
         <div className="grid lg:grid-cols-2 gap-10 mb-24">
           {partners.map((member, i) => (
             <motion.div 
@@ -179,7 +175,6 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
           {stats.map((stat, i) => (
             <motion.div
@@ -197,7 +192,6 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Core Values Bento Grid */}
         <div className="grid md:grid-cols-3 gap-6 mb-24">
           <PhilosophyCard 
             icon={<Target className="text-[#007bb6] dark:text-sky-400" size={28} />} 
@@ -216,7 +210,6 @@ const Team = () => {
           />
         </div>
 
-        {/* Call to Action Consultation Banner */}
         <motion.div 
           whileHover={{ scale: 1.01 }}
           className="p-12 md:p-16 rounded-[3.5rem] bg-gradient-to-br from-[#00325b] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] text-center text-white relative overflow-hidden shadow-2xl border border-white/10"
@@ -232,7 +225,6 @@ const Team = () => {
 
       </div>
 
-      {/* Leader Bio Modal */}
       <AnimatePresence>
         {selectedLeader && (
           <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-10">

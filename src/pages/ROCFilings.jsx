@@ -13,7 +13,6 @@ import {
 import { Link } from 'react-router-dom';
 
 const ROCFilings = () => {
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,7 +24,6 @@ const ROCFilings = () => {
   return (
     <div className="bg-slate-50 dark:bg-slate-950 pt-20">
       
-      {/* --- HERO SECTION --- */}
       <section className="relative py-24 bg-gradient-to-br from-[#00325b] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] transition-colors duration-500 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-600 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
@@ -55,7 +53,6 @@ const ROCFilings = () => {
         </div>
       </section>
 
-      {/* --- COMPLIANCE TRACKER (STICKY DEADBINES) --- */}
       <section className="py-12 -mt-10 relative z-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -67,7 +64,6 @@ const ROCFilings = () => {
         </div>
       </section>
 
-      {/* --- CORE SERVICES GRID --- */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -116,7 +112,6 @@ const ROCFilings = () => {
         </div>
       </section>
 
-      {/* --- WHY CHOOSE US FOR ROC? --- */}
       <section className="py-24 bg-slate-900 text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -150,7 +145,6 @@ const ROCFilings = () => {
         </div>
       </section>
 
-      {/* --- CTA SECTION --- */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto bg-[#007bb6] rounded-[3rem] p-12 text-center text-white shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16" />
@@ -171,8 +165,6 @@ const ROCFilings = () => {
     </div>
   );
 };
-
-/* --- SUB-COMPONENTS --- */
 
 const DeadlineCard = ({ form, date, status }) => (
   <motion.div 

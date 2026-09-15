@@ -6,13 +6,12 @@ const FixedDeposit = () => {
   const [principal, setPrincipal] = useState(500000);
   const [rate, setRate] = useState(7.25);
   const [years, setYears] = useState(5);
-  const [compoundingFreq, setCompoundingFreq] = useState(4); // 4 = Quarterly, 1 = Annual, 2 = Half-Yearly, 12 = Monthly
+  const [compoundingFreq, setCompoundingFreq] = useState(4);
 
   const numPrincipal = Math.max(0, Number(principal) || 0);
   const numRate = Math.max(0, Number(rate) || 0);
   const numYears = Math.max(0, Number(years) || 0);
 
-  // Direct calculation during render (A = P * (1 + r / (n * 100))^(n * t))
   const n = compoundingFreq;
   const maturity = Math.round(numPrincipal * Math.pow((1 + (numRate / (n * 100))), (n * numYears)));
 
@@ -22,7 +21,6 @@ const FixedDeposit = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       
-      {/* Compounding Frequency Chips */}
       <div className="space-y-2">
         <label className="text-xs font-black uppercase tracking-wider text-slate-400">Compounding Frequency</label>
         <div className="grid grid-cols-4 gap-3">
@@ -47,7 +45,6 @@ const FixedDeposit = () => {
         </div>
       </div>
 
-      {/* Input Sliders */}
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
@@ -78,7 +75,7 @@ const FixedDeposit = () => {
               <span className="text-lg font-black text-sky-600 dark:text-sky-400">{numRate}%</span>
             </div>
             <input 
-              type="number"
+              type="number" 
               step="0.1"
               value={rate}
               onChange={(e) => setRate(e.target.value)}
@@ -92,7 +89,7 @@ const FixedDeposit = () => {
               <span className="text-lg font-black text-sky-600 dark:text-sky-400">{numYears} Years</span>
             </div>
             <input 
-              type="number"
+              type="number" 
               value={years}
               onChange={(e) => setYears(e.target.value)}
               className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-sky-500"
@@ -101,7 +98,6 @@ const FixedDeposit = () => {
         </div>
       </div>
 
-      {/* Result Card */}
       <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-sky-600 via-blue-700 to-slate-900 text-white shadow-2xl space-y-6 relative overflow-hidden">
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
@@ -128,7 +124,6 @@ const FixedDeposit = () => {
           </div>
         </div>
 
-        {/* Visual Progress Bar */}
         <div className="space-y-1 pt-2">
           <div className="flex justify-between text-xs font-bold text-sky-200">
             <span>Principal: {Math.round((numPrincipal / maturity) * 100 || 0)}%</span>

@@ -2,13 +2,11 @@ import React, { useState, useEffect, useLayoutEffect, lazy, Suspense } from 'rea
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 
-// Layout Components
 import TopBar from './components/layout/TopBar';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import WhatsAppWidget from './components/ui/WhatsAppWidget';
 
-// Code-Splitting with React.lazy for Performance & Fast Loading
 const Home = lazy(() => import('./pages/Home'));
 const Team = lazy(() => import('./pages/Team'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -31,7 +29,6 @@ const Rules = lazy(() => import('./pages/Rules'));
 const Login = lazy(() => import('./pages/Admin/Login'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// --- OPTIMIZED SCROLL MANAGER ---
 const ScrollManager = () => {
   const { pathname } = useLocation();
 
@@ -42,9 +39,8 @@ const ScrollManager = () => {
   return null;
 };
 
-// --- SUSPENSE FALLBACK LOADING SPINNER ---
 const PageLoader = () => (
-  <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4 bg-slate-50 dark:bg-slate-950">
+  <div className="min-h-[70vh] flex flex-col items-center justify-center gap-4 bg-[#f4f7fb] dark:bg-[#070d1e]">
     <div className="w-12 h-12 border-4 border-[#007bb6] border-t-transparent rounded-full animate-spin" />
     <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Loading S.K Associates...</p>
   </div>
@@ -75,14 +71,12 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
         <Route path="/query" element={<PageWrapper><Query /></PageWrapper>} />
         
-        {/* Services */}
         <Route path="/income-tax" element={<PageWrapper><IncomeTax /></PageWrapper>} />
         <Route path="/service-tax" element={<PageWrapper><ServiceTax /></PageWrapper>} />
         <Route path="/audit" element={<PageWrapper><Audit /></PageWrapper>} />
         <Route path="/corporate-services" element={<PageWrapper><CorporateServices /></PageWrapper>} />
         <Route path="/accounting-services" element={<PageWrapper><Accounting /></PageWrapper>} />
         
-        {/* Knowledge Bank */}
         <Route path="/acts" element={<PageWrapper><ActsRules /></PageWrapper>} />
         <Route path="/bulletins" element={<PageWrapper><Bulletins /></PageWrapper>} />
         <Route path="/forms" element={<PageWrapper><Forms /></PageWrapper>} />
@@ -132,15 +126,12 @@ const App = () => {
     <Router>
       <ScrollManager />
       
-      <div className="relative min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-500">
-        
-        {/* Top Reading Progress Bar */}
+      <div className="relative min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#ebf3fc] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-slate-100 transition-colors duration-500">
         <motion.div
           className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-orange-500 z-[1000] origin-left shadow-md"
           style={{ scaleX }}
         />
 
-        {/* Global Adaptive Background Layer */}
         <div className="fixed inset-0 pointer-events-none z-0 bg-mesh-light dark:bg-mesh-dark transition-colors duration-500" />
 
         <header className="relative z-[150]">

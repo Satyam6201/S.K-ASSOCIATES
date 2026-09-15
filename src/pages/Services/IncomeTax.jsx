@@ -37,7 +37,6 @@ const IncomeTax = () => {
 
   return (
     <div className="relative">
-      {/* 1. Base Service Layout Wrapper */}
       <ServiceLayout 
         title="Income Tax"
         colorClass="blue"
@@ -52,7 +51,6 @@ const IncomeTax = () => {
         ]}
       />
 
-      {/* 2. The Interactive Filing Timeline */}
       <section className="py-24 bg-white dark:bg-slate-950 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div 
@@ -64,8 +62,6 @@ const IncomeTax = () => {
             <h2 className="text-4xl font-black dark:text-white">Seamless Filing Cycle</h2>
             <p className="text-slate-500 mt-2">How we handle your taxes from document to refund.</p>
           </motion.div>
-
-          
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {['Data Collation', 'Tax Computation', 'Quality Check', 'E-Verification'].map((step, i) => (
@@ -87,12 +83,10 @@ const IncomeTax = () => {
         </div>
       </section>
 
-      {/* 3. Deep Dive Bento Grid */}
       <section className="pb-24 px-6 bg-slate-50 dark:bg-slate-950">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8">
             
-            {/* Main Spotlight Card */}
             <motion.div 
               whileHover={{ y: -5 }}
               className="lg:col-span-2 bg-gradient-to-br from-blue-700 to-blue-900 rounded-[3rem] p-12 text-white relative overflow-hidden"
@@ -113,7 +107,6 @@ const IncomeTax = () => {
               <Search className="absolute -bottom-10 -right-10 text-white/5" size={280} />
             </motion.div>
 
-            {/* Side Solution Grid */}
             <div className="grid gap-6">
               {taxSolutions.map((item, idx) => (
                 <motion.div
@@ -134,7 +127,6 @@ const IncomeTax = () => {
 
           </div>
           
-          {/* Bottom CTA Section */}
           <motion.div 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
