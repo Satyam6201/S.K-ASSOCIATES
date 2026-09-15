@@ -59,7 +59,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-[#020617] text-white pt-24 pb-12 overflow-hidden border-t border-slate-800">
+    <footer className="relative bg-[#070d1e] text-white pt-16 sm:pt-24 pb-12 overflow-hidden border-t border-[#1a2c56]">
       
       {/* 1. Animated Ambient Glowing Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -84,18 +84,18 @@ const Footer = () => {
         <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#007bb6] to-transparent" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* 2. Avant-Garde Newsletter Card */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative mb-20 p-1 group"
+          className="relative mb-14 sm:mb-20 p-1 group"
         >
           <div className="absolute -inset-1 bg-gradient-to-r from-[#007bb6] via-sky-400 to-amber-500 rounded-[3rem] blur-md opacity-30 group-hover:opacity-60 transition duration-1000"></div>
           
-          <div className="relative grid lg:grid-cols-12 gap-8 p-8 md:p-14 rounded-[2.8rem] bg-slate-900/90 backdrop-blur-2xl border border-white/10 items-center overflow-hidden shadow-2xl">
+          <div className="relative grid lg:grid-cols-12 gap-8 p-6 sm:p-8 md:p-14 rounded-3xl sm:rounded-[2.8rem] bg-[#0d1730]/90 backdrop-blur-2xl border border-white/10 items-center overflow-hidden shadow-2xl">
             
             <div className="lg:col-span-7 space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-sky-400 text-xs font-black uppercase tracking-widest">

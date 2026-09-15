@@ -31,23 +31,23 @@ const TestimonialsSection = () => {
   ];
 
   return (
-    <section className="py-32 bg-slate-50 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+    <section className="py-20 sm:py-28 md:py-32 bg-gradient-to-b from-[#f4f7fb] via-[#eef4fc] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] border-b border-slate-200/70 dark:border-[#1a2c56] transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-20">
           <span className="text-[#007bb6] dark:text-sky-400 font-black uppercase tracking-widest text-xs">Client Success Stories</span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mt-2">What Enterprise Leaders Say</h2>
-          <p className="text-slate-500 dark:text-slate-400 mt-4 font-medium">Read how S.K Associates empowers business growth across India.</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mt-2">What Enterprise Leaders Say</h2>
+          <p className="text-slate-500 dark:text-slate-400 mt-3 sm:mt-4 font-medium text-sm sm:text-base">Read how S.K Associates empowers business growth across India.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((item, idx) => (
             <motion.div 
               key={idx} 
               whileHover={{ y: -12, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all relative overflow-hidden group"
+              className="p-6 sm:p-8 rounded-3xl sm:rounded-[2.5rem] bg-white/90 dark:bg-[#0d1730] border border-slate-200/80 dark:border-[#1a2c56] flex flex-col justify-between shadow-xl hover:shadow-2xl transition-all relative overflow-hidden group"
             >
-              <Quote size={80} className="absolute -top-4 -right-4 text-slate-100 dark:text-slate-800/40 group-hover:text-blue-500/10 transition-colors pointer-events-none" />
+              <Quote size={80} className="absolute -top-4 -right-4 text-slate-100 dark:text-[#15244a]/40 group-hover:text-blue-500/10 transition-colors pointer-events-none" />
 
               <div className="space-y-4 relative z-10">
                 <div className="flex justify-between items-center">
@@ -65,7 +65,7 @@ const TestimonialsSection = () => {
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 relative z-10 flex items-center justify-between">
+              <div className="pt-6 mt-6 border-t border-slate-100 dark:border-[#1a2c56] relative z-10 flex items-center justify-between">
                 <div>
                   <h4 className="font-black text-slate-900 dark:text-white text-base">{item.name}</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">{item.role}</p>

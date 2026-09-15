@@ -95,7 +95,7 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-white transition-colors duration-500 selection:bg-[#007bb6]/30 overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-white transition-colors duration-500 selection:bg-[#007bb6]/30 overflow-hidden">
       
       {/* Background Decor Layer */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -104,14 +104,14 @@ const Contact = () => {
       </div>
 
       {/* Hero Header */}
-      <section className="relative pt-36 pb-16 px-6 z-10 text-center">
+      <section className="relative pt-28 sm:pt-36 pb-12 sm:pb-16 px-4 sm:px-6 z-10 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="max-w-4xl mx-auto"
         >
           {/* Live Status Badge */}
-          <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-xs font-black uppercase tracking-wider mb-8 shadow-lg">
+          <div className="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/90 dark:bg-[#0d1730] border border-slate-200/80 dark:border-[#1a2c56] text-xs font-black uppercase tracking-wider mb-6 sm:mb-8 shadow-lg">
             <span className="relative flex h-3 w-3">
               <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isOpenNow ? 'bg-emerald-400' : 'bg-amber-400'} opacity-75`}></span>
               <span className={`relative inline-flex rounded-full h-3 w-3 ${isOpenNow ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
@@ -123,20 +123,20 @@ const Contact = () => {
             <span className="text-[#007bb6] dark:text-sky-400 font-bold">IST {currentTime}</span>
           </div>
 
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter mb-6 leading-none text-slate-900 dark:text-white">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tighter mb-4 sm:mb-6 leading-none text-slate-900 dark:text-white">
             LET'S <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-400 to-orange-500">CONNECT.</span>
           </h1>
 
-          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-base sm:text-lg md:text-xl font-medium leading-relaxed">
             Strategic corporate tax planning and legal advisory is just one click away. Connect with senior Chartered Accountants today.
           </p>
         </motion.div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 pb-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 pb-24 sm:pb-32">
         
         {/* Quick Action Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
           {contactCards.map((info, idx) => (
             <motion.a 
               href={info.action}
@@ -147,7 +147,7 @@ const Contact = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
               whileHover={{ y: -10, scale: 1.02 }}
-              className="group relative bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 p-8 rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
+              className="group relative bg-white/90 dark:bg-[#0d1730] border border-slate-200/80 dark:border-[#1a2c56] p-6 sm:p-8 rounded-3xl sm:rounded-[2.5rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${info.color} flex items-center justify-center mb-6 shadow-lg group-hover:rotate-[12deg] transition-transform duration-300`}>
@@ -158,7 +158,7 @@ const Contact = () => {
                 <p className="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-6 font-medium">{info.details}</p>
               </div>
 
-              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#007bb6] dark:text-sky-400 group-hover:gap-3 transition-all pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-[#007bb6] dark:text-sky-400 group-hover:gap-3 transition-all pt-4 border-t border-slate-100 dark:border-[#1a2c56]">
                 {info.label} <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
               </div>
             </motion.a>
@@ -166,11 +166,11 @@ const Contact = () => {
         </div>
 
         {/* Tab Switcher for Consultation Modes */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-lg">
+        <div className="flex justify-center mb-8 sm:mb-10 px-2">
+          <div className="w-full sm:w-auto flex overflow-x-auto no-scrollbar sm:inline-flex p-1.5 bg-white/90 dark:bg-[#0d1730] rounded-2xl border border-slate-200 dark:border-[#1a2c56] shadow-lg gap-1.5">
             <button
               onClick={() => setActiveTab('form')}
-              className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
+              className={`whitespace-nowrap px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
                 activeTab === 'form' ? 'bg-[#007bb6] text-white shadow-md' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -178,7 +178,7 @@ const Contact = () => {
             </button>
             <button
               onClick={() => setActiveTab('direct')}
-              className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
+              className={`whitespace-nowrap px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
                 activeTab === 'direct' ? 'bg-[#007bb6] text-white shadow-md' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -186,7 +186,7 @@ const Contact = () => {
             </button>
             <button
               onClick={() => setActiveTab('location')}
-              className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
+              className={`whitespace-nowrap px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 ${
                 activeTab === 'location' ? 'bg-[#007bb6] text-white shadow-md' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
@@ -200,7 +200,7 @@ const Contact = () => {
           
           {/* Dynamic Main Panel based on activeTab */}
           <motion.div 
-            className="lg:col-span-8 bg-white dark:bg-slate-900 p-8 md:p-14 rounded-[3rem] border border-slate-200/80 dark:border-slate-800 shadow-2xl relative overflow-hidden"
+            className="lg:col-span-8 bg-white/95 dark:bg-[#0d1730] p-6 sm:p-8 md:p-14 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-2xl relative overflow-hidden"
           >
             <div className="relative z-10">
               {activeTab === 'form' && (
@@ -520,7 +520,7 @@ const Contact = () => {
             </motion.div>
 
             {/* Interactive Map Card */}
-            <div className="bg-white dark:bg-slate-900 p-6 rounded-[3rem] border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-4">
+            <div className="bg-white/90 dark:bg-[#0d1730] p-5 sm:p-6 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-xl space-y-4">
               <div className="flex justify-between items-center px-2">
                 <h4 className="text-lg font-black dark:text-white">Headquarters Map</h4>
                 <a 
@@ -533,7 +533,7 @@ const Contact = () => {
                 </a>
               </div>
 
-              <div className="h-[220px] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-slate-800 relative group/map">
+              <div className="h-[220px] rounded-2xl sm:rounded-[2rem] overflow-hidden border border-slate-200 dark:border-[#1a2c56] relative group/map">
                 <iframe 
                   title="Gaur City Mall Location"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5619175783515!2d77.42211997549463!3d28.61293217567439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee447f52f36d%3A0x6b485d4615217466!2sGaur%20City%20Mall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
@@ -543,14 +543,14 @@ const Contact = () => {
                 />
               </div>
 
-              <div className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl text-xs font-medium text-slate-500 dark:text-slate-400 space-y-1">
+              <div className="p-3 bg-slate-50 dark:bg-[#15244a]/40 rounded-2xl text-xs font-medium text-slate-500 dark:text-slate-400 space-y-1">
                 <p className="font-bold text-slate-800 dark:text-slate-200">📍 Office 1063, 10th Floor, Gaur City Mall</p>
                 <p>Noida Extension, Greater Noida West, UP 201306</p>
               </div>
             </div>
 
             {/* Social Channels */}
-            <div className="bg-white dark:bg-slate-900 p-8 rounded-[3rem] border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-4">
+            <div className="bg-white/90 dark:bg-[#0d1730] p-6 sm:p-8 rounded-3xl sm:rounded-[3rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-xl space-y-4">
               <h4 className="text-xl font-black dark:text-white">Knowledge Updates</h4>
               <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed font-medium">Follow us for real-time circulars on Income Tax, Budget 2026, and GST notifications.</p>
               <div className="flex gap-3 pt-2">

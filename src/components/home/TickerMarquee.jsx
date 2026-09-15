@@ -18,11 +18,11 @@ const TickerMarquee = () => {
     <div 
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative bg-[#007bb6] dark:bg-[#09152b] py-5 overflow-hidden flex whitespace-nowrap border-y border-white/10 shadow-inner group"
+      className="relative bg-gradient-to-r from-[#003c6c] via-[#007bb6] to-[#004e8c] dark:from-[#070d1e] dark:via-[#0f1d3d] dark:to-[#070d1e] py-4 sm:py-5 overflow-hidden flex whitespace-nowrap border-y border-white/10 shadow-inner group"
     >
       {/* Edge gradient fade masks */}
-      <div className="absolute left-0 inset-y-0 w-16 bg-gradient-to-r from-[#007bb6] dark:from-[#09152b] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 inset-y-0 w-16 bg-gradient-to-l from-[#007bb6] dark:from-[#09152b] to-transparent z-10 pointer-events-none" />
+      <div className="absolute left-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-r from-[#003c6c] dark:from-[#070d1e] to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 inset-y-0 w-12 sm:w-20 bg-gradient-to-l from-[#004e8c] dark:from-[#070d1e] to-transparent z-10 pointer-events-none" />
 
       <motion.div 
         animate={{ x: isPaused ? undefined : ["0%", "-50%"] }} 

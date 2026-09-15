@@ -35,22 +35,22 @@ const FaqSection = () => {
   );
 
   return (
-    <section className="py-24 bg-white dark:bg-[#020617] transition-colors duration-500">
-      <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-12">
+    <section className="py-16 sm:py-24 bg-white/75 dark:bg-[#070d1e]/80 backdrop-blur-sm border-b border-slate-200/70 dark:border-[#1a2c56] transition-colors duration-500">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-8 sm:mb-12">
           <span className="text-[#007bb6] dark:text-sky-400 font-black uppercase tracking-widest text-xs">Got Questions?</span>
-          <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mt-2">Frequently Asked Questions</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white mt-2">Frequently Asked Questions</h2>
         </div>
 
         {/* FAQ Search Input */}
-        <div className="relative mb-10 max-w-xl mx-auto">
+        <div className="relative mb-8 sm:mb-10 max-w-xl mx-auto">
           <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input 
             type="text" 
             placeholder="Search tax, GST, or ROC queries..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold text-sm shadow-sm transition-all"
+            className="w-full pl-14 pr-6 py-3.5 sm:py-4 rounded-2xl bg-slate-50 dark:bg-[#0d1730] border border-slate-200 dark:border-[#1a2c56] text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold text-sm shadow-sm transition-all"
           />
         </div>
 
@@ -60,7 +60,7 @@ const FaqSection = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="text-center py-12 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800"
+                className="text-center py-12 bg-slate-50 dark:bg-[#0d1730] rounded-2xl border border-slate-200 dark:border-[#1a2c56]"
               >
                 <HelpCircle size={40} className="mx-auto text-slate-400 mb-3" />
                 <p className="font-bold text-slate-700 dark:text-slate-300">No matching FAQs found</p>
@@ -81,11 +81,11 @@ const FaqSection = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden transition-all shadow-sm hover:border-[#007bb6]/40"
+                    className="bg-slate-50/90 dark:bg-[#0d1730] border border-slate-200/80 dark:border-[#1a2c56] rounded-2xl overflow-hidden transition-all shadow-sm hover:border-[#007bb6]/40"
                   >
                     <button 
                       onClick={() => setOpenFaq(isOpen ? null : faq.q)}
-                      className="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 dark:text-white text-base md:text-lg"
+                      className="w-full flex justify-between items-center p-5 sm:p-6 text-left font-bold text-slate-900 dark:text-white text-base md:text-lg"
                     >
                       <span className="flex items-center gap-3">
                         <HelpCircle size={20} className="text-[#007bb6] dark:text-sky-400 shrink-0" />
@@ -98,7 +98,7 @@ const FaqSection = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="px-6 pb-6 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200/60 dark:border-slate-800 pt-4 font-medium"
+                        className="px-5 sm:px-6 pb-5 sm:pb-6 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200/60 dark:border-[#1a2c56] pt-4 font-medium"
                       >
                         {faq.a}
                       </motion.div>

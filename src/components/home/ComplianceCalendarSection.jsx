@@ -22,19 +22,19 @@ const ComplianceCalendarSection = () => {
   };
 
   return (
-    <section className="py-24 bg-white dark:bg-[#020617] border-b border-slate-200 dark:border-slate-800 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+    <section className="py-16 sm:py-24 bg-white/75 dark:bg-[#070d1e]/80 backdrop-blur-sm border-b border-slate-200/70 dark:border-[#1a2c56] transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-4 sm:space-y-6">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-black uppercase tracking-widest border border-amber-500/20">
               <Clock size={14} /> Live Deadline Tracker
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               Statutory Compliance <br />
               <span className="text-[#007bb6] dark:text-sky-400 italic">Due Dates Calendar</span>
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed text-sm sm:text-base">
               Stay ahead of mandatory filing deadlines. Non-compliance results in heavy late fees (₹100/day for AOC-4/MGT-7, ₹50/day for GSTR-3B, & Sec 234E for TDS).
             </p>
             <Link 
@@ -45,13 +45,13 @@ const ComplianceCalendarSection = () => {
             </Link>
           </div>
 
-          <div className="lg:col-span-8 grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {dueDates.map((item, idx) => (
               <motion.div
                 key={idx}
                 whileHover={{ y: -8, scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className={`p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-900 border-2 ${item.color.split(' ')[0]} shadow-lg flex flex-col justify-between space-y-4 relative group`}
+                className={`p-5 sm:p-6 rounded-3xl sm:rounded-[2rem] bg-slate-50/90 dark:bg-[#0d1730] border-2 ${item.color.split(' ')[0]} shadow-lg flex flex-col justify-between space-y-4 relative group`}
               >
                 <div>
                   <div className="flex justify-between items-center mb-3">
@@ -63,7 +63,7 @@ const ComplianceCalendarSection = () => {
                   <h4 className="font-black text-slate-900 dark:text-white text-base leading-snug">{item.title}</h4>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200/60 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300">
+                <div className="pt-3 border-t border-slate-200/60 dark:border-[#1a2c56] flex items-center justify-between text-xs font-bold text-slate-600 dark:text-slate-300">
                   <div className="flex items-center gap-2">
                     <Calendar size={14} className="text-[#007bb6] dark:text-sky-400 shrink-0" />
                     <span>Due: {item.date}</span>

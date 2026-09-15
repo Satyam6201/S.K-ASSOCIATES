@@ -11,7 +11,7 @@ import CtaBannerSection from "../components/home/CtaBannerSection";
 
 const Home = () => {
   return (
-    <div className="bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-500 min-h-screen">
+    <div className="bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0d1730] dark:to-[#070d1e] text-slate-900 dark:text-slate-100 transition-colors duration-500 min-h-screen">
       <HeroSection />
       <TickerMarquee />
       <TaxEstimatorWidget />

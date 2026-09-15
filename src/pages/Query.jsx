@@ -65,7 +65,7 @@ const Query = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#020617] py-32 px-6 relative overflow-hidden transition-colors duration-500 selection:bg-[#007bb6]/30">
+    <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] py-28 sm:py-36 px-4 sm:px-6 relative overflow-hidden transition-colors duration-500 selection:bg-[#007bb6]/30">
       
       {/* --- Beautiful Animated Ambient Glow Orbs --- */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -92,20 +92,20 @@ const Query = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16 max-w-3xl mx-auto"
+          className="text-center mb-12 sm:mb-16 max-w-3xl mx-auto"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-[#007bb6] dark:text-sky-400 text-xs font-black uppercase tracking-widest mb-4 backdrop-blur-md shadow-lg">
             <Sparkles size={14} className="animate-spin-slow text-amber-500" /> Fast-Track Advisory Portal
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Submit Your Legal & Tax <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500">Query</span>
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 mt-4 text-lg font-medium">
+          <p className="text-slate-600 dark:text-slate-400 mt-3 sm:mt-4 text-base sm:text-lg font-medium">
             Get confidential case analysis and actionable statutory advice directly from senior Advocates & CAs.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-10 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* --- Left Column: Value Cards --- */}
           <motion.div 
@@ -114,7 +114,7 @@ const Query = () => {
             transition={{ duration: 0.5 }}
             className="lg:col-span-4 space-y-6"
           >
-            <div className="p-8 bg-white/80 dark:bg-slate-900/90 backdrop-blur-xl rounded-[2.5rem] border border-slate-200/80 dark:border-slate-800 shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 bg-white/90 dark:bg-[#0d1730] backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-xl space-y-6">
               <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
                 <ShieldCheck className="text-[#007bb6] dark:text-sky-400" /> Guarantee Protocol
               </h3>
@@ -129,7 +129,7 @@ const Query = () => {
             {/* Helpline Box */}
             <motion.div 
               whileHover={{ y: -4 }}
-              className="p-6 bg-gradient-to-br from-[#00325b] to-[#007bb6] text-white rounded-[2rem] shadow-xl border border-white/20 relative overflow-hidden"
+              className="p-6 bg-gradient-to-br from-[#00325b] to-[#007bb6] text-white rounded-3xl sm:rounded-[2rem] shadow-xl border border-white/20 relative overflow-hidden"
             >
               <div className="absolute -right-4 -bottom-4 text-white/10">
                 <Phone size={100} />
@@ -138,7 +138,6 @@ const Query = () => {
                 <HelpCircle size={14} /> Urgent Assistance Hotline
               </p>
               <h4 className="text-2xl font-black text-white">+91 80102 57124</h4>
-              <p className="text-[11px] text-slate-200 mt-2 font-medium">Mon - Sat: 10:00 AM to 7:00 PM IST</p>
             </motion.div>
           </motion.div>
 
@@ -147,7 +146,7 @@ const Query = () => {
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-8 bg-white/90 dark:bg-slate-900/90 backdrop-blur-2xl rounded-[3rem] shadow-2xl border border-slate-200/80 dark:border-slate-800 p-8 md:p-12 relative overflow-hidden"
+            className="lg:col-span-8 bg-white/95 dark:bg-[#0d1730] backdrop-blur-2xl rounded-3xl sm:rounded-[3rem] shadow-2xl border border-slate-200/80 dark:border-[#1a2c56] p-6 sm:p-8 md:p-12 relative overflow-hidden"
           >
             {/* Step Progress Bar Header */}
             <div className="flex items-center justify-between mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
@@ -207,7 +206,7 @@ const Query = () => {
 
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Priority / SLA Window</label>
-                      <div className="grid grid-cols-3 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
                         {['Standard (24h SLA)', 'Urgent (12h SLA)', 'Emergency (Notice Due)'].map((opt) => (
                           <button
                             type="button"
@@ -216,7 +215,7 @@ const Query = () => {
                             className={`p-3 rounded-2xl text-xs font-bold transition-all border text-center ${
                               formData.urgency === opt 
                               ? 'bg-[#007bb6] text-white border-[#007bb6] shadow-md' 
-                              : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-[#007bb6]'
+                              : 'bg-slate-50 dark:bg-[#15244a]/50 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#1a2c56] hover:border-[#007bb6]'
                             }`}
                           >
                             {opt}
@@ -350,7 +349,7 @@ const FormInput = ({ label, icon, placeholder, type = "text", value, onChange, r
         type={type} 
         value={value}
         onChange={onChange}
-        className="w-full pl-14 pr-6 py-4.5 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 focus:border-[#007bb6] outline-none font-bold text-sm transition-all" 
+        className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-[#15244a]/50 text-slate-900 dark:text-white border border-slate-200 dark:border-[#1a2c56] focus:border-[#007bb6] outline-none font-bold text-sm transition-all" 
         placeholder={placeholder} 
       />
     </div>
@@ -378,26 +377,26 @@ const FeatureCard = ({ icon, title, desc, color = 'blue' }) => {
 };
 
 const SuccessState = ({ formData, ticketId, copied, handleCopyTicket, resetForm }) => (
-  <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#020617] px-6 py-20 transition-colors duration-500">
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] px-4 sm:px-6 py-20 transition-colors duration-500">
     <motion.div 
       initial={{ scale: 0.85, opacity: 0, y: 20 }}
       animate={{ scale: 1, opacity: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="max-w-xl w-full bg-white dark:bg-slate-900 p-10 md:p-14 rounded-[3.5rem] border border-slate-200/80 dark:border-slate-800 shadow-2xl text-center space-y-6 relative overflow-hidden"
+      className="max-w-xl w-full bg-white dark:bg-[#0d1730] p-6 sm:p-10 md:p-14 rounded-3xl sm:rounded-[3.5rem] border border-slate-200/80 dark:border-[#1a2c56] shadow-2xl text-center space-y-6 relative overflow-hidden"
     >
-      <div className="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
-        <CheckCircle2 size={52} />
+      <div className="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
+        <CheckCircle2 size={48} />
       </div>
 
       <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-xs font-mono font-bold border border-slate-200 dark:border-slate-700">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 dark:bg-[#15244a]/60 text-slate-700 dark:text-slate-200 text-xs font-mono font-bold border border-slate-200 dark:border-[#1a2c56]">
           <span>Query Ticket: <strong>{ticketId}</strong></span>
           <button onClick={handleCopyTicket} className="ml-1 text-[#007bb6] dark:text-sky-400 hover:scale-110 transition-transform">
             {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
           </button>
         </div>
 
-        <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
           Query Assigned to Senior Partner!
         </h2>
         <p className="text-slate-600 dark:text-slate-300 text-sm max-w-md mx-auto font-medium leading-relaxed">
@@ -416,7 +415,7 @@ const SuccessState = ({ formData, ticketId, copied, handleCopyTicket, resetForm 
         </a>
         <button 
           onClick={resetForm}
-          className="px-6 py-4 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-2xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+          className="px-6 py-4 bg-slate-100 dark:bg-[#15244a] text-slate-700 dark:text-slate-200 rounded-2xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-[#1c3060] transition"
         >
           Submit New Query
         </button>
