@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  MapPin, Phone, Mail, Clock, 
-  Send, MessageSquare, Linkedin, 
+  MapPin, Phone, Mail, 
+  Send, Linkedin, 
   Twitter, Facebook, ChevronRight,
-  ExternalLink, CheckCircle2, Sparkles,
-  Zap, Headphones, Calendar, MessageCircle,
-  Building2, ShieldCheck, ArrowRight, Video, Navigation
+  ExternalLink, CheckCircle2,
+  Zap, Headphones, MessageCircle,
+  ShieldCheck, Video, Navigation
 } from 'lucide-react';
 
 const Contact = () => {
@@ -31,11 +31,13 @@ const Contact = () => {
     const updateIST = () => {
       const now = new Date();
       const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-      const istString = now.toLocaleTimeString('en-US', options);
-      setCurrentTime(istString);
+      const istTimeString = now.toLocaleTimeString('en-US', options);
+      setCurrentTime(istTimeString);
 
-      const hour = now.getHours();
-      const day = now.getDay();
+      // Extract real IST hour and day
+      const istDate = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+      const hour = istDate.getHours();
+      const day = istDate.getDay();
       // Sunday closed (0), Mon-Sat 10AM to 7PM (10 to 19)
       if (day === 0 || hour < 10 || hour >= 19) {
         setIsOpenNow(false);
