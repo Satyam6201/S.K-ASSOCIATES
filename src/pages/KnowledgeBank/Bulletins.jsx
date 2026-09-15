@@ -51,7 +51,6 @@ const Bulletins = () => {
   return (
     <div className="pt-32 pb-40 px-6 bg-[#f8fafc] dark:bg-[#020617] min-h-screen">
       
-      {/* --- FLOATING BACKGROUND ELEMENT --- */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
         <div className="absolute top-[10%] left-[10%] w-[30vw] h-[30vw] bg-orange-500/5 blur-[120px] rounded-full animate-pulse" />
         <div className="absolute bottom-[10%] right-[10%] w-[30vw] h-[30vw] bg-blue-500/5 blur-[120px] rounded-full" />
@@ -59,7 +58,6 @@ const Bulletins = () => {
 
       <div className="max-w-6xl mx-auto">
         
-        {/* --- HEADER SECTION --- */}
         <div className="grid lg:grid-cols-2 gap-12 items-end mb-16">
           <motion.div 
             initial={{ opacity: 0, x: -30 }} 
@@ -87,7 +85,6 @@ const Bulletins = () => {
           </div>
         </div>
 
-        {/* --- CATEGORY FILTER --- */}
         <div className="flex overflow-x-auto no-scrollbar gap-2 mb-12 p-2 bg-white dark:bg-slate-900/50 backdrop-blur-xl border border-slate-200 dark:border-white/10 rounded-[2.5rem] w-fit mx-auto lg:mx-0">
           {categories.map((cat) => (
             <button
@@ -104,7 +101,6 @@ const Bulletins = () => {
           ))}
         </div>
 
-        {/* --- NEWS FEED --- */}
         <div className="grid gap-6">
           <AnimatePresence mode="popLayout">
             {filteredUpdates.map((news, i) => (
@@ -119,14 +115,12 @@ const Bulletins = () => {
               >
                 <div className="flex flex-col md:flex-row gap-8 items-start">
                   
-                  {/* Date Badge */}
                   <div className="flex-shrink-0 flex md:flex-col items-center justify-center w-full md:w-24 h-16 md:h-24 bg-slate-50 dark:bg-white/5 rounded-3xl border border-slate-100 dark:border-white/5">
                     <Calendar className="md:hidden text-orange-500 mr-2" size={20} />
                     <span className="text-xl md:text-3xl font-black dark:text-white leading-none">{news.date.split(' ')[1].replace(',', '')}</span>
                     <span className="text-[10px] md:text-xs font-black text-slate-400 uppercase tracking-widest md:mt-1">{news.date.split(' ')[0]}</span>
                   </div>
 
-                  {/* Content */}
                   <div className="flex-grow">
                     <div className="flex flex-wrap items-center gap-3 mb-4">
                       <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] ${
@@ -158,7 +152,6 @@ const Bulletins = () => {
                     </div>
                   </div>
 
-                  {/* External Icon (Desktop Only) */}
                   <div className="hidden lg:block">
                      <div className="w-12 h-12 rounded-2xl border border-slate-100 dark:border-white/10 flex items-center justify-center text-slate-300 group-hover:text-orange-500 transition-colors">
                         <ExternalLink size={20} />
@@ -170,7 +163,6 @@ const Bulletins = () => {
           </AnimatePresence>
         </div>
 
-        {/* --- PAGINATION/LOAD MORE --- */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

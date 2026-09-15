@@ -6,7 +6,6 @@ import {
   Zap, DownloadCloud, AlertCircle
 } from 'lucide-react';
 
-// AUTHENTIC STATUTORY DATA (Module scope to avoid recreation)
 const formData = {
   "Taxation": [
     { id: 1, name: "Form 16", desc: "Certificate under section 203 of the IT Act, 1961 for tax deducted at source on salary.", size: "1.2 MB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2016.pdf" },
@@ -47,7 +46,6 @@ const Forms = () => {
   return (
     <div className="pt-32 pb-40 px-6 bg-slate-50 dark:bg-[#020617] min-h-screen selection:bg-blue-500/30">
       
-      {/* BACKGROUND DECOR */}
       <div className="fixed inset-0 pointer-events-none -z-10">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 blur-[120px] rounded-full" />
@@ -55,7 +53,6 @@ const Forms = () => {
 
       <div className="max-w-7xl mx-auto">
         
-        {/* HEADER SECTION */}
         <div className="flex flex-col lg:flex-row justify-between items-end gap-8 mb-16">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
             <div className="flex items-center gap-3 text-blue-600 mb-4">
@@ -78,7 +75,6 @@ const Forms = () => {
           </div>
         </div>
 
-        {/* TABS ENGINE */}
         <div className="flex overflow-x-auto no-scrollbar gap-3 mb-12 pb-4">
           {Object.keys(formData).map((tab) => (
             <button
@@ -99,7 +95,6 @@ const Forms = () => {
           ))}
         </div>
 
-        {/* ALERT BOX */}
         <div className="mb-12 p-6 bg-blue-50 dark:bg-blue-500/5 border border-blue-200 dark:border-blue-500/20 rounded-[2rem] flex items-start gap-4">
           <AlertCircle className="text-blue-600 mt-1 flex-shrink-0" size={20} />
           <p className="text-sm text-blue-800 dark:text-blue-300 font-medium">
@@ -107,7 +102,6 @@ const Forms = () => {
           </p>
         </div>
 
-        {/* FORMS GRID */}
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
             {filteredForms.map((item, i) => (
@@ -148,7 +142,6 @@ const Forms = () => {
                   </div>
                 </div>
 
-                {/* DECORATIVE TAG */}
                 <div className="absolute -top-3 -right-3 opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="bg-emerald-500 text-white p-2 rounded-full shadow-lg">
                     <CheckCircle2 size={16} />
@@ -159,7 +152,6 @@ const Forms = () => {
           </AnimatePresence>
         </motion.div>
 
-        {/* EMPTY STATE */}
         {filteredForms.length === 0 && (
           <motion.div 
             initial={{ opacity: 0 }} 
