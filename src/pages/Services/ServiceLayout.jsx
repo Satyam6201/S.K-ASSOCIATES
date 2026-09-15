@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const colorThemes = {
   blue: {
     text: 'text-blue-600 dark:text-sky-400',
+    hoverText: 'group-hover:text-blue-600 dark:group-hover:text-sky-400',
     bg: 'bg-blue-600',
     shadow: 'shadow-blue-600/30',
     lightBg: 'bg-blue-500/10',
@@ -13,6 +14,7 @@ const colorThemes = {
   },
   orange: {
     text: 'text-orange-600 dark:text-orange-400',
+    hoverText: 'group-hover:text-orange-600 dark:group-hover:text-orange-400',
     bg: 'bg-orange-600',
     shadow: 'shadow-orange-600/30',
     lightBg: 'bg-orange-500/10',
@@ -20,6 +22,7 @@ const colorThemes = {
   },
   emerald: {
     text: 'text-emerald-600 dark:text-emerald-400',
+    hoverText: 'group-hover:text-emerald-600 dark:group-hover:text-emerald-400',
     bg: 'bg-emerald-600',
     shadow: 'shadow-emerald-600/30',
     lightBg: 'bg-emerald-500/10',
@@ -27,6 +30,7 @@ const colorThemes = {
   },
   indigo: {
     text: 'text-indigo-600 dark:text-indigo-400',
+    hoverText: 'group-hover:text-indigo-600 dark:group-hover:text-indigo-400',
     bg: 'bg-indigo-600',
     shadow: 'shadow-indigo-600/30',
     lightBg: 'bg-indigo-500/10',
@@ -34,6 +38,7 @@ const colorThemes = {
   },
   sky: {
     text: 'text-sky-600 dark:text-sky-400',
+    hoverText: 'group-hover:text-sky-600 dark:group-hover:text-sky-400',
     bg: 'bg-sky-600',
     shadow: 'shadow-sky-600/30',
     lightBg: 'bg-sky-500/10',
@@ -177,7 +182,7 @@ const MetricCard = ({ number, title, desc, theme }) => (
     whileHover={{ y: -6 }}
     className="group space-y-3 p-8 rounded-[2.5rem] bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300"
   >
-    <h4 className={`text-5xl font-black text-slate-200 dark:text-slate-800 group-hover:${theme.text} transition-colors`}>
+    <h4 className={`text-5xl font-black text-slate-200 dark:text-slate-800 ${theme.hoverText} transition-colors`}>
       {number}
     </h4>
     <p className="text-lg font-black dark:text-white">{title}</p>

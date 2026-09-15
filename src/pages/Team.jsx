@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
 import { 
-  Linkedin, Mail, Award, ShieldCheck, Briefcase, 
-  ExternalLink, Quote, Sparkles, Target, Zap, 
-  Globe, Scale, Users, GraduationCap, HeartHandshake,
-  CheckCircle2, X, Phone, Calendar, ArrowRight, Building2, BookOpen
+  Briefcase, Sparkles, Target, Zap, 
+  Globe, Scale, Users, GraduationCap, 
+  CheckCircle2, X, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import sunilImg from '/src/assets/sunil.png'; 
-import anilImg from '/src/assets/anil.jpg';
+import sunilImg from '../assets/sunil.png'; 
+import anilImg from '../assets/anil.jpg';
 
 const Team = () => {
   const { scrollYProgress } = useScroll();
   const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
   const [selectedLeader, setSelectedLeader] = useState(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedLeader(null);
+    };
+    if (selectedLeader) window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedLeader]);
 
   const partners = [
     {

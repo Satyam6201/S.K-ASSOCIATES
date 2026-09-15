@@ -198,177 +198,299 @@ const Contact = () => {
         {/* Main Interactive Section */}
         <div className="grid lg:grid-cols-12 gap-8">
           
-          {/* Priority Contact Form */}
+          {/* Dynamic Main Panel based on activeTab */}
           <motion.div 
             className="lg:col-span-8 bg-white dark:bg-slate-900 p-8 md:p-14 rounded-[3rem] border border-slate-200/80 dark:border-slate-800 shadow-2xl relative overflow-hidden"
           >
             <div className="relative z-10">
-              <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#007bb6] rounded-2xl flex items-center justify-center text-white shadow-lg">
-                    <Headphones size={24} />
+              {activeTab === 'form' && (
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-[#007bb6] rounded-2xl flex items-center justify-center text-white shadow-lg">
+                        <Headphones size={24} />
+                      </div>
+                      <div>
+                        <h2 className="text-2xl md:text-3xl font-black tracking-tight dark:text-white">Priority Advisory Inquiry</h2>
+                        <p className="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">Guaranteed CA Callback within 2 Business Hours</p>
+                      </div>
+                    </div>
+
+                    <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-black border border-emerald-500/20">
+                      <ShieldCheck size={14} /> 100% Confidential
+                    </span>
                   </div>
-                  <div>
-                    <h2 className="text-2xl md:text-3xl font-black tracking-tight dark:text-white">Priority Advisory Inquiry</h2>
-                    <p className="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">Guaranteed CA Callback within 2 Business Hours</p>
+
+                  <form className="space-y-6" onSubmit={handleSubmit}>
+                    <AnimatePresence mode="wait">
+                      {formStep === 'success' ? (
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="py-12 text-center space-y-6"
+                        >
+                          <div className="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                            <CheckCircle2 size={48} />
+                          </div>
+                          
+                          <div>
+                            <span className="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-mono font-bold">Ref ID: {ticketId}</span>
+                            <h3 className="text-3xl md:text-4xl font-black dark:text-white mt-3">Consultation Request Dispatched!</h3>
+                            <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto mt-2 text-sm leading-relaxed font-medium">
+                              Thank you, <strong>{formData.name || 'Valued Client'}</strong>. Our senior partner has received your request for <strong>{formData.service}</strong> and will reach out via phone/email shortly.
+                            </p>
+                          </div>
+
+                          <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
+                            <a 
+                              href="https://wa.me/918010257124" 
+                              target="_blank" 
+                              rel="noreferrer"
+                              className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-lg"
+                            >
+                              <MessageCircle size={16} /> Fast-Track on WhatsApp
+                            </a>
+                            <button 
+                              type="button" 
+                              onClick={() => setFormStep('idle')} 
+                              className="px-6 py-3.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+                            >
+                              Submit Another Query
+                            </button>
+                          </div>
+                        </motion.div>
+                      ) : (
+                        <motion.div exit={{ opacity: 0 }} className="space-y-6">
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Full Name *</label>
+                              <input 
+                                required 
+                                type="text" 
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
+                                placeholder="e.g. Rajesh Sharma" 
+                              />
+                            </div>
+
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Email Address *</label>
+                              <input 
+                                required 
+                                type="email" 
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
+                                placeholder="rajesh@company.com" 
+                              />
+                            </div>
+                          </div>
+
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Phone Number (WhatsApp) *</label>
+                              <input 
+                                required 
+                                type="tel" 
+                                value={formData.phone}
+                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
+                                placeholder="+91 98765 43210" 
+                              />
+                            </div>
+
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Nature of Service *</label>
+                              <select 
+                                value={formData.service}
+                                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
+                              >
+                                <option>GST Registration & Filings</option>
+                                <option>Income Tax Scrutiny & Appeals</option>
+                                <option>Statutory Audit & Assurance</option>
+                                <option>Private Limited / Startup Incorporation</option>
+                                <option>ROC Annual Compliances</option>
+                                <option>Virtual CFO & Accounting Services</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Preferred Callback Window</label>
+                              <select 
+                                value={formData.preferredTime}
+                                onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
+                              >
+                                <option>Morning (10 AM - 1 PM)</option>
+                                <option>Afternoon (1 PM - 4 PM)</option>
+                                <option>Evening (4 PM - 7 PM)</option>
+                              </select>
+                            </div>
+
+                            <div className="space-y-2">
+                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Estimated Annual Turnover / Budget</label>
+                              <select 
+                                value={formData.budget}
+                                onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                                className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
+                              >
+                                <option>Under ₹20 Lakhs (Micro SME / Individual)</option>
+                                <option>₹20 Lakhs - ₹1 Crore (Growing SME)</option>
+                                <option>₹1 Crore - ₹10 Crore (Enterprise)</option>
+                                <option>Above ₹10 Crore (Corporate)</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Brief Inquiry Description</label>
+                            <textarea 
+                              rows="4" 
+                              value={formData.summary}
+                              onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+                              className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
+                              placeholder="Provide any specific details regarding your tax status, notice details, or business incorporation requirements..."
+                            />
+                          </div>
+
+                          <motion.button 
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            type="submit"
+                            disabled={formStep === 'sending'}
+                            className="w-full py-5 bg-[#007bb6] hover:bg-blue-700 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30 transition-all text-base tracking-wide"
+                          >
+                            {formStep === 'sending' ? "DISPATCHING INQUIRY..." : "DISPATCH CONSULTATION REQUEST"} 
+                            <Zap size={20} fill="currentColor" />
+                          </motion.button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </form>
+                </div>
+              )}
+
+              {activeTab === 'direct' && (
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+                    <div className="w-12 h-12 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                      <Video size={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-black tracking-tight dark:text-white">Video & Direct Connect Desk</h2>
+                      <p className="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">Live virtual consultations via Google Meet / Zoom or instant WhatsApp</p>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="p-6 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 space-y-4">
+                      <span className="px-3 py-1 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 rounded-full text-xs font-black uppercase tracking-wider">
+                        Instant WhatsApp Chat
+                      </span>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white">Direct CA Partner Helpline</h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                        Message directly for quick answers regarding Income Tax notices, GST return verification, or corporate registration timelines.
+                      </p>
+                      <a
+                        href="https://wa.me/918010257124?text=Hi%20SK%20Associates,%20I%20would%20like%20to%20consult%20with%20a%20CA%20regarding%20my%20taxation%20file."
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black text-xs uppercase tracking-wider shadow-lg transition"
+                      >
+                        <MessageCircle size={16} /> Open WhatsApp Now
+                      </a>
+                    </div>
+
+                    <div className="p-6 rounded-3xl bg-blue-500/10 border border-blue-500/20 space-y-4">
+                      <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-sky-400 rounded-full text-xs font-black uppercase tracking-wider">
+                        Scheduled Video Call
+                      </span>
+                      <h3 className="text-xl font-black text-slate-900 dark:text-white">Book 30-Min Video Meet</h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                        Schedule a screen-share session to review your balance sheets, tax audits, or MCA SPICe+ filing documents.
+                      </p>
+                      <a
+                        href="mailto:officeska2000@gmail.com?subject=Request%20for%2030-Min%20Video%20Consultation&body=Hello%20SK%20Associates%20Team,%0A%0AI%20would%20like%20to%20schedule%20a%20video%20call%20for%20tax/legal%20advisory.%0A%0AMy%20Phone:%0APreferred%20Time%20Slot:"
+                        className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#007bb6] hover:bg-blue-700 text-white rounded-xl font-black text-xs uppercase tracking-wider shadow-lg transition"
+                      >
+                        <Video size={16} /> Request Video Slot
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-slate-50 dark:bg-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div className="flex items-center gap-3">
+                      <Phone className="text-[#007bb6] shrink-0" size={24} />
+                      <div>
+                        <h4 className="font-black text-sm text-slate-900 dark:text-white">Prefer a Direct Phone Call?</h4>
+                        <p className="text-xs text-slate-500 dark:text-slate-400">Available Mon - Sat, 10:00 AM to 7:00 PM IST</p>
+                      </div>
+                    </div>
+                    <a
+                      href="tel:+918010257124"
+                      className="px-6 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-black text-xs uppercase tracking-wider rounded-xl hover:scale-105 transition"
+                    >
+                      Call +91 80102 57124
+                    </a>
                   </div>
                 </div>
+              )}
 
-                <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-black border border-emerald-500/20">
-                  <ShieldCheck size={14} /> 100% Confidential
-                </span>
-              </div>
+              {activeTab === 'location' && (
+                <div className="space-y-8">
+                  <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100 dark:border-slate-800">
+                    <div className="w-12 h-12 bg-amber-500 rounded-2xl flex items-center justify-center text-white shadow-lg">
+                      <Navigation size={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl md:text-3xl font-black tracking-tight dark:text-white">Headquarters & Directions</h2>
+                      <p className="text-xs font-bold text-slate-500 dark:text-slate-400 mt-0.5">Located at Gaur City Mall, Noida West with ample parking & metro access</p>
+                    </div>
+                  </div>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <AnimatePresence mode="wait">
-                  {formStep === 'success' ? (
-                    <motion.div 
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      className="py-12 text-center space-y-6"
+                  <div className="h-[320px] rounded-[2rem] overflow-hidden border border-slate-200 dark:border-slate-800 relative">
+                    <iframe 
+                      title="Gaur City Mall Headquarters Full View"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5619175783515!2d77.42211997549463!3d28.61293217567439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee447f52f36d%3A0x6b485d4615217466!2sGaur%20City%20Mall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                      className="w-full h-full border-0"
+                      allowFullScreen="" 
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-4 text-xs font-semibold">
+                    <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <span className="text-[#007bb6] dark:text-sky-400 font-bold uppercase block mb-1">🏢 Tower & Suite</span>
+                      <p className="text-slate-700 dark:text-slate-200">Office 1063, 10th Floor, Gaur City Mall, Noida Extension (UP 201306)</p>
+                    </div>
+
+                    <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold uppercase block mb-1">🚇 Nearest Metro</span>
+                      <p className="text-slate-700 dark:text-slate-200">Sector 52 (Blue Line) / Noida Electronic City. Direct auto/cab connection.</p>
+                    </div>
+
+                    <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+                      <span className="text-amber-500 font-bold uppercase block mb-1">🚗 Visitor Parking</span>
+                      <p className="text-slate-700 dark:text-slate-200">Dedicated multi-level mall parking available with elevator to 10th floor.</p>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center pt-2">
+                    <a
+                      href="https://www.google.com/maps/search/Gaur+City+Mall+Noida+West"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 px-8 py-4 bg-[#007bb6] hover:bg-blue-700 text-white rounded-2xl font-black text-xs uppercase tracking-wider shadow-lg transition"
                     >
-                      <div className="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
-                        <CheckCircle2 size={48} />
-                      </div>
-                      
-                      <div>
-                        <span className="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-mono font-bold">Ref ID: {ticketId}</span>
-                        <h3 className="text-3xl md:text-4xl font-black dark:text-white mt-3">Consultation Request Dispatched!</h3>
-                        <p className="text-slate-600 dark:text-slate-300 max-w-md mx-auto mt-2 text-sm leading-relaxed font-medium">
-                          Thank you, <strong>{formData.name || 'Valued Client'}</strong>. Our senior partner has received your request for <strong>{formData.service}</strong> and will reach out via phone/email shortly.
-                        </p>
-                      </div>
-
-                      <div className="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
-                        <a 
-                          href="https://wa.me/918010257124" 
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-black text-sm flex items-center justify-center gap-2 shadow-lg"
-                        >
-                          <MessageCircle size={16} /> Fast-Track on WhatsApp
-                        </a>
-                        <button 
-                          type="button" 
-                          onClick={() => setFormStep('idle')} 
-                          className="px-6 py-3.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition"
-                        >
-                          Submit Another Query
-                        </button>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div exit={{ opacity: 0 }} className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Full Name *</label>
-                          <input 
-                            required 
-                            type="text" 
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
-                            placeholder="e.g. Rajesh Sharma" 
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Email Address *</label>
-                          <input 
-                            required 
-                            type="email" 
-                            value={formData.email}
-                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
-                            placeholder="rajesh@company.com" 
-                          />
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Phone Number (WhatsApp) *</label>
-                          <input 
-                            required 
-                            type="tel" 
-                            value={formData.phone}
-                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
-                            placeholder="+91 98765 43210" 
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Nature of Service *</label>
-                          <select 
-                            value={formData.service}
-                            onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
-                          >
-                            <option>GST Registration & Filings</option>
-                            <option>Income Tax Scrutiny & Appeals</option>
-                            <option>Statutory Audit & Assurance</option>
-                            <option>Private Limited / Startup Incorporation</option>
-                            <option>ROC Annual Compliances</option>
-                            <option>Virtual CFO & Accounting Services</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Preferred Callback Window</label>
-                          <select 
-                            value={formData.preferredTime}
-                            onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
-                          >
-                            <option>Morning (10 AM - 1 PM)</option>
-                            <option>Afternoon (1 PM - 4 PM)</option>
-                            <option>Evening (4 PM - 7 PM)</option>
-                          </select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Estimated Annual Turnover / Budget</label>
-                          <select 
-                            value={formData.budget}
-                            onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                            className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
-                          >
-                            <option>Under ₹20 Lakhs (Micro SME / Individual)</option>
-                            <option>₹20 Lakhs - ₹1 Crore (Growing SME)</option>
-                            <option>₹1 Crore - ₹10 Crore (Enterprise)</option>
-                            <option>Above ₹10 Crore (Corporate)</option>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Brief Inquiry Description</label>
-                        <textarea 
-                          rows="4" 
-                          value={formData.summary}
-                          onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                          className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-medium transition-all" 
-                          placeholder="Provide any specific details regarding your tax status, notice details, or business incorporation requirements..."
-                        />
-                      </div>
-
-                      <motion.button 
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        type="submit"
-                        disabled={formStep === 'sending'}
-                        className="w-full py-5 bg-[#007bb6] hover:bg-blue-700 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30 transition-all text-base tracking-wide"
-                      >
-                        {formStep === 'sending' ? "DISPATCHING INQUIRY..." : "DISPATCH CONSULTATION REQUEST"} 
-                        <Zap size={20} fill="currentColor" />
-                      </motion.button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </form>
+                      <ExternalLink size={16} /> Open in Google Maps App
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.div>
 

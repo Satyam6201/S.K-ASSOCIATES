@@ -60,27 +60,27 @@ const TaxEstimatorWidget = () => {
   const bestRegime = newTax < oldTax ? 'New Tax Regime' : (oldTax < newTax ? 'Old Tax Regime' : 'Both Regimes Equal');
 
   return (
-    <section className="py-24 bg-slate-100/80 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-12 gap-12 items-center">
+    <section className="py-20 sm:py-24 bg-gradient-to-b from-[#f4f7fb] via-[#ebf3fc] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0b1632] dark:to-[#070d1e] border-b border-slate-200/80 dark:border-slate-800 relative overflow-hidden transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4 sm:space-y-6 text-center lg:text-left"
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 text-[#007bb6] dark:text-sky-400 text-xs font-black uppercase tracking-widest border border-blue-500/20">
               <Sparkles size={14} /> Instant Estimator Tool
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               Income Tax Savings <br />
               <span className="text-[#007bb6] dark:text-sky-400 italic">Calculator FY 2025-26</span>
             </h2>
-            <p className="text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base font-medium leading-relaxed max-w-lg mx-auto lg:mx-0">
               Drag the annual income slider to instantly compare tax liability under the New vs Old Tax Regime with standard deduction & 87A rebate rules applied.
             </p>
-            <Link to="/calculators" className="inline-flex items-center gap-2 text-[#007bb6] dark:text-sky-400 font-bold hover:gap-4 transition-all group text-sm">
+            <Link to="/calculators" className="inline-flex items-center gap-2 text-[#007bb6] dark:text-sky-400 font-bold hover:gap-3 transition-all group text-sm">
               Launch Detailed Statutory Calculator <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
@@ -89,12 +89,12 @@ const TaxEstimatorWidget = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="lg:col-span-7 bg-white dark:bg-slate-900 p-8 md:p-12 rounded-[3rem] shadow-2xl border border-slate-200 dark:border-slate-800 space-y-8"
+            className="lg:col-span-7 bg-white dark:bg-[#0c152d] p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[3rem] shadow-2xl border border-slate-200/80 dark:border-slate-800 space-y-6 sm:space-y-8"
           >
             <div>
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-4">
                 <label className="font-bold text-slate-700 dark:text-slate-200 text-sm md:text-base">Annual Gross Salary / Business Income:</label>
-                <span className="text-2xl md:text-3xl font-black text-[#007bb6] dark:text-sky-400">₹{income.toLocaleString()}</span>
+                <span className="text-2xl sm:text-3xl font-black text-[#007bb6] dark:text-sky-400">₹{income.toLocaleString()}</span>
               </div>
               <input 
                 type="range" 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Info } from 'lucide-react';
 
@@ -7,18 +7,14 @@ const FixedDeposit = () => {
   const [rate, setRate] = useState(7.25);
   const [years, setYears] = useState(5);
   const [compoundingFreq, setCompoundingFreq] = useState(4); // 4 = Quarterly, 1 = Annual, 2 = Half-Yearly, 12 = Monthly
-  const [maturity, setMaturity] = useState(0);
 
   const numPrincipal = Math.max(0, Number(principal) || 0);
   const numRate = Math.max(0, Number(rate) || 0);
   const numYears = Math.max(0, Number(years) || 0);
 
-  useEffect(() => {
-    // Formula: A = P * (1 + r / (n * 100))^(n * t)
-    const n = compoundingFreq;
-    const amount = numPrincipal * Math.pow((1 + (numRate / (n * 100))), (n * numYears));
-    setMaturity(Math.round(amount));
-  }, [numPrincipal, numRate, numYears, compoundingFreq]);
+  // Direct calculation during render (A = P * (1 + r / (n * 100))^(n * t))
+  const n = compoundingFreq;
+  const maturity = Math.round(numPrincipal * Math.pow((1 + (numRate / (n * 100))), (n * numYears)));
 
   const interestGained = Math.max(0, maturity - numPrincipal);
   const interestPercentage = Math.round((interestGained / numPrincipal) * 100 || 0);

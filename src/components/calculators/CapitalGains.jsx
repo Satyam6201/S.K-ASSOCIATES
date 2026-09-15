@@ -113,7 +113,7 @@ const CapitalGains = () => {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-3 gap-6">
         <div className="space-y-2">
           <label className="text-xs font-black uppercase tracking-wider text-slate-400">Holding Period (Months)</label>
           <input 
@@ -123,12 +123,23 @@ const CapitalGains = () => {
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-emerald-500"
           />
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block">
-            Status: <strong className={isLTCG ? 'text-emerald-500' : 'text-amber-500'}>{isLTCG ? 'Long Term Capital Gain (LTCG)' : 'Short Term Capital Gain (STCG)'}</strong>
+            Status: <strong className={isLTCG ? 'text-emerald-500' : 'text-amber-500'}>{isLTCG ? 'Long Term (LTCG)' : 'Short Term (STCG)'}</strong>
           </span>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Sec 54 / 54F Reinvested Amount (₹)</label>
+          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Transfer / Brokerage Expense (₹)</label>
+          <input 
+            type="number"
+            value={transferExpenses}
+            onChange={(e) => setTransferExpenses(e.target.value)}
+            className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-emerald-500"
+            placeholder="50000"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Sec 54 / 54F Reinvestment (₹)</label>
           <input 
             type="number"
             value={exemptionReinvested}

@@ -1,57 +1,48 @@
 import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FileDown, Search, FolderOpen, FileText, 
-  Landmark , ShieldCheck, Clock, CheckCircle2, 
-  Zap , DownloadCloud, AlertCircle
+  Landmark, ShieldCheck, CheckCircle2, 
+  Zap, DownloadCloud, AlertCircle
 } from 'lucide-react';
+
+// AUTHENTIC STATUTORY DATA (Module scope to avoid recreation)
+const formData = {
+  "Taxation": [
+    { id: 1, name: "Form 16", desc: "Certificate under section 203 of the IT Act, 1961 for tax deducted at source on salary.", size: "1.2 MB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2016.pdf" },
+    { id: 2, name: "Form 10E", desc: "Form for relief u/s 89(1) when profit in lieu of salary or arrears of salary is received.", size: "850 KB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2010E.pdf" },
+    { id: 3, name: "Form 15G", desc: "Declaration for non-deduction of tax from interest on securities/dividends (Non-Senior).", size: "450 KB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2015G.pdf" },
+    { id: 4, name: "Form 26AS", desc: "Annual Information Statement (AIS) containing tax credit details.", size: "2.1 MB", link: "https://www.incometax.gov.in/iec/foportal/" },
+    { id: 5, name: "Form 10BA", desc: "Declaration to be filed by an assessee claiming deduction u/s 80GG.", size: "320 KB", link: "https://www.incometax.gov.in/iec/foportal/" }
+  ],
+  "GST": [
+    { id: 6, name: "GST REG-01", desc: "Application for Registration under Goods and Services Tax Act.", size: "3.4 MB", link: "https://www.gst.gov.in/" },
+    { id: 7, name: "GST RFD-01", desc: "Application for Refund of tax, interest, penalty or any other amount.", size: "1.8 MB", link: "https://www.gst.gov.in/" },
+    { id: 8, name: "GST ARA-01", desc: "Application Form for Advance Ruling under the GST framework.", size: "900 KB", link: "https://www.gst.gov.in/" },
+    { id: 9, name: "GST DRC-03", desc: "Intimation of voluntary payment made before issuance of notice.", size: "560 KB", link: "https://www.gst.gov.in/" }
+  ],
+  "Corporate": [
+    { id: 10, name: "INC-32 (SPICe+)", desc: "Simplified Proforma for Incorporating Company Electronically Plus.", size: "5.2 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
+    { id: 11, name: "DIR-3", desc: "Application for allotment of Director Identification Number (DIN).", size: "1.1 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
+    { id: 12, name: "Form MGT-7", desc: "Annual Return of a company to be filed with ROC.", size: "2.8 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
+    { id: 13, name: "Form AOC-4", desc: "Form for filing financial statement and other documents with the Registrar.", size: "3.1 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" }
+  ],
+  "Legal": [
+    { id: 14, name: "MSME Udyam", desc: "Application for MSME/Udyam Registration certificate.", size: "700 KB", link: "https://udyamregistration.gov.in/" },
+    { id: 15, name: "Trademark TM-A", desc: "Application for registration of a trademark or collective mark.", size: "2.5 MB", link: "https://ipindiaonline.gov.in/" }
+  ]
+};
 
 const Forms = () => {
   const [activeTab, setActiveTab] = useState("Taxation");
   const [searchQuery, setSearchQuery] = useState("");
-  const [downloadingId, setDownloadingId] = useState(null);
-
-  // AUTHENTIC STATUTORY DATA
-  const formData = {
-    "Taxation": [
-      { id: 1, name: "Form 16", desc: "Certificate under section 203 of the IT Act, 1961 for tax deducted at source on salary.", size: "1.2 MB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2016.pdf" },
-      { id: 2, name: "Form 10E", desc: "Form for relief u/s 89(1) when profit in lieu of salary or arrears of salary is received.", size: "850 KB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2010E.pdf" },
-      { id: 3, name: "Form 15G", desc: "Declaration for non-deduction of tax from interest on securities/dividends (Non-Senior).", size: "450 KB", link: "https://www.incometax.gov.in/iec/foportal/sites/default/files/2021-03/Form%2015G.pdf" },
-      { id: 4, name: "Form 26AS", desc: "Annual Information Statement (AIS) containing tax credit details.", size: "2.1 MB", link: "https://www.incometax.gov.in/iec/foportal/" },
-      { id: 5, name: "Form 10BA", desc: "Declaration to be filed by an assessee claiming deduction u/s 80GG.", size: "320 KB", link: "https://www.incometax.gov.in/iec/foportal/" }
-    ],
-    "GST": [
-      { id: 6, name: "GST REG-01", desc: "Application for Registration under Goods and Services Tax Act.", size: "3.4 MB", link: "https://www.gst.gov.in/" },
-      { id: 7, name: "GST RFD-01", desc: "Application for Refund of tax, interest, penalty or any other amount.", size: "1.8 MB", link: "https://www.gst.gov.in/" },
-      { id: 8, name: "GST ARA-01", desc: "Application Form for Advance Ruling under the GST framework.", size: "900 KB", link: "https://www.gst.gov.in/" },
-      { id: 9, name: "GST DRC-03", desc: "Intimation of voluntary payment made before issuance of notice.", size: "560 KB", link: "https://www.gst.gov.in/" }
-    ],
-    "Corporate": [
-      { id: 10, name: "INC-32 (SPICe+)", desc: "Simplified Proforma for Incorporating Company Electronically Plus.", size: "5.2 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
-      { id: 11, name: "DIR-3", desc: "Application for allotment of Director Identification Number (DIN).", size: "1.1 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
-      { id: 12, name: "Form MGT-7", desc: "Annual Return of a company to be filed with ROC.", size: "2.8 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" },
-      { id: 13, name: "Form AOC-4", desc: "Form for filing financial statement and other documents with the Registrar.", size: "3.1 MB", link: "https://www.mca.gov.in/MinistryV2/companyformsdownload.html" }
-    ],
-    "Legal": [
-      { id: 14, name: "MSME Udyam", desc: "Application for MSME/Udyam Registration certificate.", size: "700 KB", link: "https://udyamregistration.gov.in/" },
-      { id: 15, name: "Trademark TM-A", desc: "Application for registration of a trademark or collective mark.", size: "2.5 MB", link: "https://ipindiaonline.gov.in/" }
-    ]
-  };
 
   const filteredForms = useMemo(() => {
-    return formData[activeTab].filter(form => 
+    return (formData[activeTab] || []).filter(form => 
       form.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       form.desc.toLowerCase().includes(searchQuery.toLowerCase())
     );
   }, [activeTab, searchQuery]);
-
-  const handleDownload = (id, link) => {
-    setDownloadingId(id);
-    setTimeout(() => {
-      window.open(link, '_blank');
-      setDownloadingId(null);
-    }, 1500);
-  };
 
   return (
     <div className="pt-32 pb-40 px-6 bg-slate-50 dark:bg-[#020617] min-h-screen selection:bg-blue-500/30">
@@ -146,32 +137,14 @@ const Forms = () => {
                   </p>
 
                   <div className="pt-6 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-                    <button 
-                      onClick={() => handleDownload(item.id, item.link)}
-                      disabled={downloadingId === item.id}
-                      className="relative overflow-hidden w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 active:scale-95 transition-all"
+                    <a 
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative overflow-hidden w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-md"
                     >
-                      {downloadingId === item.id ? (
-                        <>
-                          <Clock className="animate-spin" size={18} />
-                          Extracting...
-                        </>
-                      ) : (
-                        <>
-                          Download Form <DownloadCloud size={18} />
-                        </>
-                      )}
-                      
-                      {/* DOWNLOAD PROGRESS ANIMATION */}
-                      {downloadingId === item.id && (
-                        <motion.div 
-                          initial={{ x: "-100%" }}
-                          animate={{ x: "100%" }}
-                          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
-                          className="absolute inset-0 bg-blue-500/20"
-                        />
-                      )}
-                    </button>
+                      Download Official Form <DownloadCloud size={18} />
+                    </a>
                   </div>
                 </div>
 

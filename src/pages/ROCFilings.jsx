@@ -1,12 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FileText, 
   ShieldCheck, 
   Clock, 
   AlertCircle, 
   CheckCircle2, 
-  ArrowRight, 
   Scale, 
   Calendar,
   Building2,
@@ -22,11 +20,6 @@ const ROCFilings = () => {
       opacity: 1,
       transition: { staggerChildren: 0.1 }
     }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1 }
   };
 
   return (
@@ -51,12 +44,12 @@ const ROCFilings = () => {
               Stay ahead of statutory deadlines. We provide end-to-end secretarial support for Private Limited Companies, LLPs, and OPCs to ensure 100% compliance with the Companies Act, 2013.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <button className="bg-[#007bb6] text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg">
+              <Link to="/query" className="bg-[#007bb6] text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-lg">
                 File Your Annual Return
-              </button>
-              <button className="border border-white/20 text-white px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">
+              </Link>
+              <Link to="/calendar" className="border border-white/20 text-white px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition-all">
                 Download Deadline Calendar
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>

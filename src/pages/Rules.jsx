@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
-  ShieldAlert, Gavel, Scale, Fingerprint, 
-  FileWarning, Landmark, Info, CheckCircle2, 
-  ChevronRight, Lock, Eye, AlertTriangle,
-  BookOpen, Globe, Users
+  Gavel, Scale, Fingerprint, 
+  Landmark, CheckCircle2, 
+  Lock, Eye, AlertTriangle,
+  BookOpen, Globe
 } from 'lucide-react';
 
 const Rules = () => {
@@ -120,6 +121,25 @@ const Rules = () => {
               />
             </RuleSection>
 
+            {/* SECTION: CORPORATE LAW */}
+            <RuleSection id="corporate-law" title="Corporate Governance & MCA Rules">
+              <RuleCard 
+                title="Annual ROC Filings (AOC-4 & MGT-7)" 
+                desc="Every company must file audited financials in AOC-4 within 30 days of AGM and annual return in MGT-7 within 60 days. Default incurs ₹100/day ongoing penalty."
+                tag="Companies Act"
+              />
+              <RuleCard 
+                title="Mandatory Director KYC (DIR-3 KYC)" 
+                desc="All DIN holders must complete annual web-based or e-form KYC by 30th September every year. Non-compliance results in DIN deactivation and ₹5,000 penalty."
+                tag="Rule 12A"
+              />
+              <RuleCard 
+                title="Board Meeting & AGM Timelines" 
+                desc="Minimum 4 board meetings per year with no more than 120 days gap between two meetings. First AGM must be held within 9 months of first FY closure."
+                tag="Section 173"
+              />
+            </RuleSection>
+
             {/* SECTION: DATA PRIVACY */}
             <RuleSection id="data-privacy" title="Information Security & DPDP Act">
               <div className="grid md:grid-cols-2 gap-6">
@@ -175,9 +195,9 @@ const Rules = () => {
         <div className="max-w-7xl mx-auto bg-blue-600 rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden">
           <Globe className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-10 animate-spin-slow" />
           <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Need a Compliance Audit?</h2>
-          <button className="relative z-10 px-12 py-5 bg-white text-blue-600 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-all">
+          <Link to="/query" className="inline-block relative z-10 px-12 py-5 bg-white text-blue-600 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-all shadow-xl">
             Schedule Review
-          </button>
+          </Link>
         </div>
       </section>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   FileCheck, 
   RefreshCcw, 
@@ -18,11 +19,6 @@ const GSTPage = () => {
   const containerVars = {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVars = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 }
   };
 
   return (
@@ -46,12 +42,12 @@ const GSTPage = () => {
               Navigate the complexities of Indirect Taxation with S.K Associates. From registrations to high-stake litigations, we ensure your business remains compliant while optimizing your Input Tax Credit (ITC).
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="bg-[#007bb6] text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 hover:bg-blue-600 transition shadow-lg shadow-blue-900/40">
+              <Link to="/query" className="bg-[#007bb6] text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 hover:bg-blue-600 transition shadow-lg shadow-blue-900/40">
                 Get GST Consultation <ArrowRight size={20} />
-              </button>
-              <button className="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition backdrop-blur-md">
+              </Link>
+              <Link to="/calendar" className="bg-white/5 text-white border border-white/10 px-8 py-4 rounded-2xl font-bold hover:bg-white/10 transition backdrop-blur-md">
                 View Compliance Calendar
-              </button>
+              </Link>
             </div>
           </motion.div>
         </div>
@@ -153,9 +149,9 @@ const GSTPage = () => {
           <p className="text-blue-100 text-lg mb-10 max-w-2xl mx-auto relative z-10">
             Let our experts handle the compliance while you focus on scaling your business. Get a free GST health checkup today.
           </p>
-          <button className="bg-white text-[#007bb6] px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition relative z-10">
+          <Link to="/query" className="inline-block bg-white text-[#007bb6] px-12 py-5 rounded-2xl font-black text-lg hover:scale-105 transition relative z-10 shadow-xl">
             Connect with GST Expert
-          </button>
+          </Link>
         </div>
       </section>
     </div>

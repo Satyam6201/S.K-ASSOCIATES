@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Send, FileCheck, User, Phone, MessageSquare, 
-  ClipboardList, Upload, CheckCircle2, ShieldCheck, 
+  Send, User, Phone, 
+  Upload, CheckCircle2, ShieldCheck, 
   Zap, Clock, Sparkles, HelpCircle, ArrowRight,
-  AlertTriangle, FileText, Check, Copy, MessageCircle, RefreshCw
+  Check, Copy, MessageCircle, RefreshCw, AlertCircle
 } from 'lucide-react';
 
 const Query = () => {
@@ -14,6 +14,7 @@ const Query = () => {
   const [copied, setCopied] = useState(false);
   const [ticketId, setTicketId] = useState('');
   const [fileName, setFileName] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -224,13 +225,28 @@ const Query = () => {
                       </div>
                     </div>
 
+                    {validationError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl flex items-center gap-3 text-rose-600 dark:text-rose-400 text-xs font-bold"
+                      >
+                        <AlertCircle size={18} className="shrink-0" />
+                        <span>{validationError}</span>
+                      </motion.div>
+                    )}
+
                     <motion.button 
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="button"
                       onClick={() => {
-                        if (formData.name && formData.phone && formData.email) setStep(2);
-                        else alert("Please fill in your name, phone, and email.");
+                        if (formData.name.trim() && formData.phone.trim() && formData.email.trim()) {
+                          setValidationError('');
+                          setStep(2);
+                        } else {
+                          setValidationError("Please fill in your name, phone, and email before proceeding.");
+                        }
                       }}
                       className="w-full bg-[#007bb6] hover:bg-blue-700 text-white py-5 rounded-2xl font-black text-base flex items-center justify-center gap-3 shadow-xl shadow-blue-600/30 transition-all"
                     >

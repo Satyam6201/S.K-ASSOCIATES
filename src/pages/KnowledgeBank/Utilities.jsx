@@ -4,10 +4,10 @@ import { Monitor, Download, Cpu, ShieldCheck } from 'lucide-react';
 
 const Utilities = () => {
   const tools = [
-    { name: "GST Offline Tool", version: "v3.1.4", platform: "Windows", desc: "Prepare GSTR-1 and GSTR-2 returns without internet connection." },
-    { name: "DSC EmSigner", version: "v2.0", platform: "Win/Mac", desc: "Required for signing documents via Digital Signature (DSC)." },
-    { name: "ITR Java Utility", version: "2024-25", platform: "Java", desc: "Official utility for filing Income Tax Returns offline." },
-    { name: "Excel Depreciation Tool", version: "v1.2", platform: "Excel", desc: "Automatic Companies Act vs Income Tax depreciation calculator." }
+    { name: "GST Offline Tool", version: "v3.1.4", platform: "Windows", desc: "Official utility to prepare GSTR-1 and GSTR-2 returns without active internet connection.", url: "https://www.gst.gov.in/download/returns" },
+    { name: "DSC EmSigner", version: "v2.6", platform: "Win/Mac", desc: "Required for digital signature verification across MCA V3 and GST portals.", url: "https://www.mca.gov.in/content/mca/global/en/foportal/foportal-link/dms.html" },
+    { name: "ITR Offline Utility", version: "FY 2025-26", platform: "Win/Mac/Java", desc: "Official CBDT utility for pre-filling and generating JSON for Income Tax Returns.", url: "https://www.incometax.gov.in/iec/foportal/downloads" },
+    { name: "Companies Act Depreciation Tool", version: "v2.0", platform: "Excel (.xlsx)", desc: "Automated SLM & WDV calculation tool adhering to Schedule II of Companies Act 2013.", url: "https://www.incometax.gov.in/iec/foportal/" }
   ];
 
   return (
@@ -40,9 +40,14 @@ const Utilities = () => {
                 </div>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{tool.desc}</p>
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
-                  <button className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-2xl font-bold text-sm hover:scale-105 transition-transform">
-                    <Download size={16} /> Download
-                  </button>
+                  <a 
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-2xl font-bold text-sm hover:scale-105 transition-transform shadow-md"
+                  >
+                    <Download size={16} /> Official Download
+                  </a>
                   <span className="flex items-center gap-1 text-xs font-bold text-slate-400">
                     <Cpu size={14} /> {tool.platform}
                   </span>

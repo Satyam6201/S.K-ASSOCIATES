@@ -54,8 +54,8 @@ const Navbar = ({ darkMode, toggleTheme }) => {
   return (
     <nav className={`sticky top-0 w-full z-[100] transition-all duration-500 ease-in-out ${
       scrolled 
-      ? 'h-16 lg:h-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl shadow-lg border-b border-slate-100 dark:border-slate-800' 
-      : 'h-16 lg:h-20 bg-[#007bb6] dark:bg-slate-950 text-white border-b border-white/10 dark:border-slate-800'
+      ? 'h-16 lg:h-20 bg-white/95 dark:bg-[#0c152d]/95 backdrop-blur-xl shadow-xl border-b border-slate-200/80 dark:border-slate-800/80' 
+      : 'h-16 lg:h-20 bg-gradient-to-r from-[#00355e] via-[#005a96] to-[#007bb6] dark:from-[#081026] dark:via-[#0c183a] dark:to-[#080e1e] text-white border-b border-white/10 dark:border-slate-800/80'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
         
@@ -207,62 +207,65 @@ const Navbar = ({ darkMode, toggleTheme }) => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 h-screen w-full bg-white dark:bg-slate-950 z-[200] lg:hidden flex flex-col"
+            className="fixed inset-0 h-screen w-full bg-[#f4f7fb] dark:bg-[#070d1e] text-slate-900 dark:text-white z-[200] lg:hidden flex flex-col"
           >
-            <div className="p-5 flex justify-between items-center border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center gap-2">
-                <img src={logo} alt="S.K Associates Logo" className="h-8 w-8 rounded-md" />
-                <span className="font-black text-slate-900 dark:text-white text-sm">S.K ASSOCIATES</span>
+            <div className="p-4 sm:p-5 flex justify-between items-center border-b border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-[#0c152d]/80 backdrop-blur-md">
+              <div className="flex items-center gap-2.5">
+                <img src={logo} alt="S.K Associates Logo" className="h-8 w-8 rounded-lg object-contain bg-white p-0.5" />
+                <div>
+                  <span className="font-black text-slate-900 dark:text-white text-sm tracking-tight block">S.K ASSOCIATES</span>
+                  <span className="text-[9px] uppercase tracking-widest text-[#007bb6] dark:text-sky-400 font-bold block">Tax & Advisory</span>
+                </div>
               </div>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={toggleTheme} 
                   aria-label="Toggle Theme"
-                  className="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-amber-500 dark:text-sky-400"
+                  className="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-amber-500 dark:text-sky-400 border border-slate-200 dark:border-slate-700"
                 >
                   {darkMode ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                <button onClick={closeMenu} aria-label="Close menu" className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-900 dark:text-white">
-                  <X size={22} />
+                <button onClick={closeMenu} aria-label="Close menu" className="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700">
+                  <X size={20} />
                 </button>
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6">
-              <div className="flex flex-col gap-3">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+              <div className="flex flex-col gap-2.5">
                 {navLinks.map((link, idx) => (
                   <motion.div 
                     key={link.name}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
                     {link.type === 'dropdown' ? (
-                      <div className="rounded-2xl bg-slate-50 dark:bg-slate-900 overflow-hidden border border-slate-100 dark:border-slate-800">
+                      <div className="rounded-2xl bg-white dark:bg-[#0d1730] overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-sm">
                         <button 
                           onClick={() => setActiveDropdown(activeDropdown === link.name ? null : link.name)}
-                          className="w-full flex justify-between items-center p-4 text-lg font-bold text-slate-900 dark:text-white"
+                          className="w-full flex justify-between items-center p-4 text-base font-bold text-slate-900 dark:text-white"
                         >
-                          {link.name} 
-                          <ChevronDown size={18} className={`transition-transform ${activeDropdown === link.name ? 'rotate-180 text-orange-500' : ''}`} />
+                          <span>{link.name}</span>
+                          <ChevronDown size={18} className={`transition-transform duration-300 ${activeDropdown === link.name ? 'rotate-180 text-orange-500' : 'text-slate-400'}`} />
                         </button>
                         <AnimatePresence>
                           {activeDropdown === link.name && (
                             <motion.div 
-                              initial={{ height: 0 }}
-                              animate={{ height: 'auto' }}
-                              exit={{ height: 0 }}
-                              className="overflow-hidden bg-slate-100/50 dark:bg-slate-800/50"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="overflow-hidden bg-slate-50 dark:bg-[#111e3f]/60"
                             >
                               {link.items.map(item => (
                                 <Link 
                                   key={item.name} 
                                   to={item.path}
                                   onClick={closeMenu}
-                                  className="flex items-center gap-3 p-3.5 pl-6 text-slate-600 dark:text-slate-300 font-semibold border-t border-slate-200/50 dark:border-slate-700/50 text-sm"
+                                  className="flex items-center gap-3 p-3.5 pl-6 text-slate-700 dark:text-slate-200 font-semibold border-t border-slate-200/50 dark:border-slate-800/60 text-sm hover:text-[#007bb6] dark:hover:text-sky-400"
                                 >
-                                  <Zap size={14} className="text-orange-500" />
-                                  {item.name}
+                                  <Zap size={14} className="text-orange-500 shrink-0" />
+                                  <span>{item.name}</span>
                                 </Link>
                               ))}
                             </motion.div>
@@ -273,7 +276,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
                       <Link 
                         to={link.path}
                         onClick={closeMenu}
-                        className="block p-4 text-lg font-bold text-slate-900 dark:text-white hover:text-[#007bb6] dark:hover:text-sky-400 transition-colors"
+                        className="block p-4 rounded-2xl bg-white dark:bg-[#0d1730] text-base font-bold text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 hover:text-[#007bb6] dark:hover:text-sky-400 shadow-sm transition-colors"
                       >
                         {link.name}
                       </Link>
@@ -283,13 +286,30 @@ const Navbar = ({ darkMode, toggleTheme }) => {
               </div>
             </div>
 
-            <div className="p-6 border-t border-slate-100 dark:border-slate-800">
+            {/* Mobile Drawer Bottom Actions */}
+            <div className="p-4 sm:p-6 border-t border-slate-200/80 dark:border-slate-800 bg-white/90 dark:bg-[#0c152d]/90 backdrop-blur-md space-y-3">
+              <div className="grid grid-cols-2 gap-2 text-xs font-bold">
+                <a
+                  href="tel:+918010257124"
+                  className="py-3 px-2 bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-xl text-center flex items-center justify-center gap-1.5 border border-slate-200 dark:border-slate-700"
+                >
+                  Direct Call
+                </a>
+                <a
+                  href="https://wa.me/918010257124"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="py-3 px-2 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl text-center flex items-center justify-center gap-1.5 border border-emerald-500/30"
+                >
+                  WhatsApp
+                </a>
+              </div>
               <Link 
-                to="/contact" 
+                to="/query" 
                 onClick={closeMenu}
-                className="flex justify-center items-center gap-2 py-4 bg-[#007bb6] text-white rounded-2xl font-bold shadow-lg"
+                className="w-full flex justify-center items-center gap-2 py-4 bg-[#007bb6] hover:bg-blue-700 text-white rounded-2xl font-black text-sm shadow-xl shadow-blue-600/30 transition-all"
               >
-                Contact Us <ArrowRight size={18} />
+                Book Free Consultation <ArrowRight size={16} />
               </Link>
             </div>
           </motion.div>
