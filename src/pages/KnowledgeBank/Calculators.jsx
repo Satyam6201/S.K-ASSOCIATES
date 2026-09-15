@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Calculator, X, Percent, Wallet, Receipt, 
+  X, Percent, Wallet, Receipt, 
   TrendingUp, Home, Landmark, ChevronRight,
-  ShieldCheck, Info, Sparkles, Search, Check, Copy, ArrowRight
+  ShieldCheck, Sparkles, Search
 } from 'lucide-react';
 import IncomeTax from '../../components/calculators/IncomeTax';
 import GST from '../../components/calculators/GST';
@@ -49,6 +49,18 @@ const Calculators = () => {
   const [activeCalc, setActiveCalc] = useState(null);
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActiveCalc(null);
+      }
+    };
+    if (activeCalc) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeCalc]);
 
   const calcList = [
     { id: 'it', category: 'Tax', name: 'Income Tax Calculator', icon: <Wallet size={28} />, component: <IncomeTax />, color: 'blue', desc: 'Compute tax liability under New vs Old Regime with latest statutory slabs & ₹75,000 std deduction.' },

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X, ArrowRight, ShieldCheck, Zap, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '/src/assets/logo.jpeg';
+import logo from '../../assets/logo.jpeg';
 
 const Navbar = ({ darkMode, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +16,10 @@ const Navbar = ({ darkMode, toggleTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  const closeMenu = () => {
     setIsOpen(false);
     setActiveDropdown(null);
-  }, [location]);
+  };
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -28,12 +27,25 @@ const Navbar = ({ darkMode, toggleTheme }) => {
     { 
       name: 'Services', 
       type: 'dropdown', 
-      items: ['Income Tax', 'Service Tax', 'Audit', 'Corporate Services', 'Accounting Services'] 
+      items: [
+        { name: 'Income Tax Advisory', path: '/income-tax' },
+        { name: 'GST & Indirect Tax', path: '/gst' },
+        { name: 'Audit & Assurance', path: '/audit' },
+        { name: 'Corporate & ROC', path: '/corporate-services' },
+        { name: 'Accounting & CFO', path: '/accounting-services' },
+      ]
     },
     { 
       name: 'Knowledge Bank', 
       type: 'dropdown', 
-      items: ['Calculators', 'Bulletins', 'Utilities', 'Acts', 'Rules', 'Forms'] 
+      items: [
+        { name: 'Financial Calculators', path: '/calculators' },
+        { name: 'Compliance Bulletins', path: '/bulletins' },
+        { name: 'Software Utilities', path: '/utilities' },
+        { name: 'Acts & Statutes', path: '/acts' },
+        { name: 'Regulatory Rules', path: '/rules' },
+        { name: 'Downloadable Forms', path: '/forms' },
+      ]
     },
     { name: 'Query', path: '/query' },
     { name: 'Contact', path: '/contact' },
@@ -48,14 +60,14 @@ const Navbar = ({ darkMode, toggleTheme }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
         
         {/* --- Logo Section --- */}
-        <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2.5 sm:gap-3 group">
+        <Link to="/" onClick={closeMenu} className="flex items-center gap-2.5 sm:gap-3 group">
           <motion.div 
             whileHover={{ scale: 1.05 }}
             className={`relative p-1 rounded-xl bg-white shadow-md transition-all duration-500 ${
               scrolled ? 'h-9 w-9 lg:h-11 lg:w-11' : 'h-10 w-10 lg:h-12 lg:w-12'
             }`}
           >
-            <img src={logo} alt="Logo" className="h-full w-full object-contain rounded-lg" />
+            <img src={logo} alt="S.K Associates Logo" className="h-full w-full object-contain rounded-lg" />
           </motion.div>
 
           <div className="flex flex-col">
@@ -95,14 +107,15 @@ const Navbar = ({ darkMode, toggleTheme }) => {
                   </motion.button>
                   
                   <div className="absolute top-[80%] left-0 invisible group-hover:visible opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                    <div className="mt-2 bg-white dark:bg-slate-900 shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800 p-3 min-w-[240px]">
+                    <div className="mt-2 bg-white dark:bg-slate-900 shadow-2xl rounded-2xl border border-slate-100 dark:border-slate-800 p-3 min-w-[250px]">
                       {link.items.map((item) => (
-                        <motion.div key={item} whileHover={{ x: 4 }}>
+                        <motion.div key={item.name} whileHover={{ x: 4 }}>
                           <Link 
-                            to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                            to={item.path}
+                            onClick={closeMenu}
                             className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold transition-all group/item"
                           >
-                            <span>{item}</span>
+                            <span>{item.name}</span>
                             <ArrowRight size={14} className="opacity-0 group-hover/item:opacity-100 text-[#007bb6] dark:text-sky-400 transition-all" />
                           </Link>
                         </motion.div>
@@ -114,6 +127,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link 
                     to={link.path}
+                    onClick={closeMenu}
                     className={`relative px-4 py-2 rounded-xl font-bold text-[14px] transition-all block ${
                       scrolled 
                       ? 'text-slate-700 dark:text-slate-200 hover:text-[#007bb6] dark:hover:text-sky-400' 
@@ -158,7 +172,6 @@ const Navbar = ({ darkMode, toggleTheme }) => {
 
         {/* --- Mobile Actions (Theme Toggle & Menu Toggle) --- */}
         <div className="lg:hidden flex items-center gap-2">
-          {/* Day / Night Toggle Mobile */}
           <button
             onClick={toggleTheme}
             aria-label="Toggle Day and Night Mode"
@@ -174,6 +187,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
 
           <button 
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
             className={`p-2 rounded-lg transition-colors ${
               scrolled 
               ? 'text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800' 
@@ -197,17 +211,18 @@ const Navbar = ({ darkMode, toggleTheme }) => {
           >
             <div className="p-5 flex justify-between items-center border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2">
-                <img src={logo} alt="Logo" className="h-8 w-8 rounded-md" />
+                <img src={logo} alt="S.K Associates Logo" className="h-8 w-8 rounded-md" />
                 <span className="font-black text-slate-900 dark:text-white text-sm">S.K ASSOCIATES</span>
               </div>
               <div className="flex items-center gap-2">
                 <button 
                   onClick={toggleTheme} 
+                  aria-label="Toggle Theme"
                   className="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-full text-amber-500 dark:text-sky-400"
                 >
                   {darkMode ? <Sun size={18} /> : <Moon size={18} />}
                 </button>
-                <button onClick={() => setIsOpen(false)} className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-900 dark:text-white">
+                <button onClick={closeMenu} aria-label="Close menu" className="p-2 bg-slate-100 dark:bg-slate-800 rounded-full text-slate-900 dark:text-white">
                   <X size={22} />
                 </button>
               </div>
@@ -241,13 +256,13 @@ const Navbar = ({ darkMode, toggleTheme }) => {
                             >
                               {link.items.map(item => (
                                 <Link 
-                                  key={item} 
-                                  to={`/${item.toLowerCase().replace(/\s+/g, '-')}`}
-                                  onClick={() => setIsOpen(false)}
+                                  key={item.name} 
+                                  to={item.path}
+                                  onClick={closeMenu}
                                   className="flex items-center gap-3 p-3.5 pl-6 text-slate-600 dark:text-slate-300 font-semibold border-t border-slate-200/50 dark:border-slate-700/50 text-sm"
                                 >
                                   <Zap size={14} className="text-orange-500" />
-                                  {item}
+                                  {item.name}
                                 </Link>
                               ))}
                             </motion.div>
@@ -257,7 +272,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
                     ) : (
                       <Link 
                         to={link.path}
-                        onClick={() => setIsOpen(false)}
+                        onClick={closeMenu}
                         className="block p-4 text-lg font-bold text-slate-900 dark:text-white hover:text-[#007bb6] dark:hover:text-sky-400 transition-colors"
                       >
                         {link.name}
@@ -271,7 +286,7 @@ const Navbar = ({ darkMode, toggleTheme }) => {
             <div className="p-6 border-t border-slate-100 dark:border-slate-800">
               <Link 
                 to="/contact" 
-                onClick={() => setIsOpen(false)}
+                onClick={closeMenu}
                 className="flex justify-center items-center gap-2 py-4 bg-[#007bb6] text-white rounded-2xl font-bold shadow-lg"
               >
                 Contact Us <ArrowRight size={18} />

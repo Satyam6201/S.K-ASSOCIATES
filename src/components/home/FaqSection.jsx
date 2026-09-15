@@ -56,36 +56,57 @@ const FaqSection = () => {
 
         <div className="space-y-4">
           <AnimatePresence>
-            {filteredFaqs.map((faq, idx) => (
-              <motion.div 
-                key={faq.q}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                className="bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden transition-all shadow-sm hover:border-[#007bb6]/40"
+            {filteredFaqs.length === 0 ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-center py-12 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800"
               >
-                <button 
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 dark:text-white text-base md:text-lg"
+                <HelpCircle size={40} className="mx-auto text-slate-400 mb-3" />
+                <p className="font-bold text-slate-700 dark:text-slate-300">No matching FAQs found</p>
+                <p className="text-xs text-slate-500 mt-1">Try searching for 'tax', 'GST', or 'regime'</p>
+                <button
+                  onClick={() => setSearch("")}
+                  className="mt-4 px-4 py-2 bg-[#007bb6] text-white text-xs font-bold rounded-xl hover:bg-[#006097] transition-all"
                 >
-                  <span className="flex items-center gap-3">
-                    <HelpCircle size={20} className="text-[#007bb6] dark:text-sky-400 shrink-0" />
-                    {faq.q}
-                  </span>
-                  <ChevronDown size={20} className={`transition-transform duration-300 ${openFaq === idx ? 'rotate-180 text-amber-500' : ''}`} />
+                  Clear Search
                 </button>
-                {openFaq === idx && (
-                  <motion.div 
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="px-6 pb-6 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200/60 dark:border-slate-800 pt-4 font-medium"
-                  >
-                    {faq.a}
-                  </motion.div>
-                )}
               </motion.div>
-            ))}
+            ) : (
+              filteredFaqs.map((faq) => {
+                const isOpen = openFaq === faq.q;
+                return (
+                  <motion.div 
+                    key={faq.q}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden transition-all shadow-sm hover:border-[#007bb6]/40"
+                  >
+                    <button 
+                      onClick={() => setOpenFaq(isOpen ? null : faq.q)}
+                      className="w-full flex justify-between items-center p-6 text-left font-bold text-slate-900 dark:text-white text-base md:text-lg"
+                    >
+                      <span className="flex items-center gap-3">
+                        <HelpCircle size={20} className="text-[#007bb6] dark:text-sky-400 shrink-0" />
+                        {faq.q}
+                      </span>
+                      <ChevronDown size={20} className={`transition-transform duration-300 shrink-0 ml-4 ${isOpen ? 'rotate-180 text-amber-500' : ''}`} />
+                    </button>
+                    {isOpen && (
+                      <motion.div 
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="px-6 pb-6 text-slate-600 dark:text-slate-400 text-sm leading-relaxed border-t border-slate-200/60 dark:border-slate-800 pt-4 font-medium"
+                      >
+                        {faq.a}
+                      </motion.div>
+                    )}
+                  </motion.div>
+                );
+              })
+            )}
           </AnimatePresence>
         </div>
       </div>

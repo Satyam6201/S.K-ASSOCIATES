@@ -120,6 +120,40 @@ html:not(.dark) .light-card {
       radial-gradient(at 100% 100%, rgba(249, 115, 22, 0.15) 0px, transparent 50%),
       radial-gradient(at 50% 100%, rgba(14, 165, 233, 0.12) 0px, transparent 50%);
   }
+
+  /* Shimmer / Gloss animation */
+  .animate-shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+  }
+
+  /* Subtle floating badge */
+  .animate-float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+
+  /* Pulse glowing ring */
+  .pulse-ring {
+    box-shadow: 0 0 0 0 rgba(0, 123, 182, 0.7);
+    animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(0, 123, 182, 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(0, 123, 182, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 123, 182, 0); }
 }
 
 /* Custom Scrollbar */

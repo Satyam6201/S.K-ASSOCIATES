@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, Calculator, ShieldCheck, Sparkles, Award, Users, Scale, Landmark } from "lucide-react";
+import { ArrowRight, Calculator, ShieldCheck, Award, Users, Landmark } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const HeroSection = () => {
@@ -21,10 +21,10 @@ const HeroSection = () => {
   };
 
   const metrics = [
-    { label: "GST Returns Filed", value: "10k+", icon: <ShieldCheck size={20} className="text-sky-400" /> },
+    { label: "GST Returns Filed", value: "10,000+", icon: <ShieldCheck size={20} className="text-sky-400" /> },
     { label: "Corporate Clients", value: "500+", icon: <Users size={20} className="text-amber-400" /> },
-    { label: "Success Rate", value: "99.9%", icon: <Award size={20} className="text-emerald-400" /> },
-    { label: "Years of Excellence", value: "08+", icon: <Landmark size={20} className="text-indigo-400" /> }
+    { label: "Appeals Win Rate", value: "99.9%", icon: <Award size={20} className="text-emerald-400" /> },
+    { label: "Years of Excellence", value: "08+ Yrs", icon: <Landmark size={20} className="text-indigo-400" /> }
   ];
 
   return (
@@ -36,17 +36,22 @@ const HeroSection = () => {
       {/* Glow Effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-sky-400/20 dark:bg-blue-600/20 rounded-full blur-[120px]" 
+          animate={{ scale: [1, 1.25, 1], opacity: [0.25, 0.45, 0.25] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-sky-400/20 dark:bg-blue-600/20 rounded-full blur-[130px]" 
+        />
+        <motion.div 
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.15, 0.35, 0.15] }}
+          transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-10 -right-20 w-[550px] h-[550px] bg-amber-500/15 dark:bg-sky-500/15 rounded-full blur-[130px]" 
         />
         <div className="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#007bb6]/20 dark:from-[#020617] to-transparent" />
       </div>
 
       <motion.div
         style={{ 
-          rotateY: mousePos.x * 12, 
-          rotateX: -mousePos.y * 12,
+          rotateY: mousePos.x * 10, 
+          rotateX: -mousePos.y * 10,
           scale 
         }}
         className="relative z-10 text-center px-6 max-w-6xl mx-auto"
@@ -54,13 +59,13 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 text-sky-200 dark:text-sky-400 text-xs md:text-sm font-bold mb-8 backdrop-blur-md shadow-xl"
+          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/10 dark:bg-white/5 border border-white/20 text-sky-200 dark:text-sky-300 text-xs md:text-sm font-bold mb-8 backdrop-blur-md shadow-xl"
         >
           <span className="relative flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
           </span>
-          Trusted Tax & Legal Advisory for 500+ Enterprises Across India
+          <span>Trusted Tax & Legal Counsel for 500+ Enterprises Across India</span>
         </motion.div>
 
         <h1 className="text-5xl sm:text-7xl lg:text-9xl font-black text-white leading-none tracking-tighter drop-shadow-lg">
@@ -91,18 +96,20 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Floating Stats Bar */}
+        {/* Floating Interactive Stats Bar */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto pt-10 border-t border-white/20">
           {metrics.map((item, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -6, scale: 1.05 }}
+              whileHover={{ y: -8, scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="p-5 rounded-2xl bg-white/10 dark:bg-slate-900/60 backdrop-blur-xl border border-white/10 dark:border-slate-800 text-left shadow-lg"
+              className="p-5 rounded-2xl bg-white/10 dark:bg-slate-900/60 backdrop-blur-xl border border-white/10 dark:border-slate-800 text-left shadow-lg group cursor-default"
             >
               <div className="flex items-center gap-2 mb-2">
-                {item.icon}
-                <span className="text-3xl font-black text-white">{item.value}</span>
+                <div className="p-2 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
+                  {item.icon}
+                </div>
+                <span className="text-2xl sm:text-3xl font-black text-white">{item.value}</span>
               </div>
               <p className="text-xs font-bold text-slate-200 dark:text-slate-400 uppercase tracking-wider">{item.label}</p>
             </motion.div>

@@ -1,59 +1,136 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageCircle, X, Send, Sparkles, ShieldCheck } from 'lucide-react';
 
 const WhatsAppWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const phoneNumber = "918010257124"; 
-  const message = "Hello S.K Associates, I would like to inquire about your services.";
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+  const quickPrompts = [
+    { label: "Tax Scrutiny Help", query: "Hello SK Associates, I received an Income Tax scrutiny notice and need urgent advisory." },
+    { label: "GST Return & ITC", query: "Hello SK Associates, I need assistance with GST 2B reconciliation and return filing." },
+    { label: "Startup Pvt Ltd", query: "Hello SK Associates, I want to register a new Private Limited Company." },
+    { label: "Statutory Audit", query: "Hello SK Associates, I would like to inquire about Tax Audit u/s 44AB services." },
+  ];
+
+  const handleOpenWhatsApp = (customText) => {
+    const text = customText || "Hello S.K Associates, I would like to inquire about your tax and corporate advisory services.";
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
-    <div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[100] flex flex-col items-end gap-2">
+    <div className="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 z-[120] flex flex-col items-end gap-3">
       
-      {/* --- Interactive Tooltip --- */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8, x: 20 }}
-        animate={{ opacity: 1, scale: 1, x: 0 }}
-        transition={{ delay: 1.5, type: 'spring' }}
-        className="bg-white dark:bg-slate-800 px-5 py-3 rounded-2xl shadow-2xl border border-slate-100 dark:border-slate-700 mb-2 hidden md:flex items-center gap-3"
-      >
-        <div className="relative">
-          <div className="w-3 h-3 bg-green-500 rounded-full animate-ping absolute inset-0"></div>
-          <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
-        </div>
-        <div>
-          <p className="text-[10px] uppercase font-black tracking-widest text-slate-400">Online Now</p>
-          <p className="text-sm font-bold text-slate-700 dark:text-slate-200">Chat with S.K Associates</p>
-        </div>
-      </motion.div>
+      {/* Interactive Expandable Chat Teaser Dialog */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.85, y: 20 }}
+            transition={{ type: "spring", stiffness: 350, damping: 25 }}
+            className="w-80 sm:w-96 bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-2"
+          >
+            {/* Header */}
+            <div className="bg-[#007bb6] p-5 text-white flex justify-between items-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl pointer-events-none" />
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center font-black text-sm">
+                    SKA
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full"></span>
+                </div>
+                <div>
+                  <h4 className="font-black text-sm leading-tight">S.K Associates Helpdesk</h4>
+                  <p className="text-[11px] text-sky-200 flex items-center gap-1 font-medium">
+                    <ShieldCheck size={12} /> Senior CA Desk • Online
+                  </p>
+                </div>
+              </div>
+              <button 
+                onClick={() => setIsOpen(false)}
+                className="p-1.5 rounded-full hover:bg-white/20 transition relative z-10 text-white"
+                aria-label="Close Chat"
+              >
+                <X size={18} />
+              </button>
+            </div>
 
-      {/* --- Floating WhatsApp Button --- */}
-      <motion.a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ scale: 1.1, y: -5 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ scale: 0, rotate: -45 }}
-        animate={{ scale: 1, rotate: 0 }}
-        className="relative w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-[0_15px_40px_rgba(37,211,102,0.4)] group overflow-visible"
-      >
-        {/* Official WhatsApp SVG Logo */}
-        <svg 
-          viewBox="0 0 448 512" 
-          className="w-9 h-9 text-white drop-shadow-md" 
-          fill="currentColor"
+            {/* Chat Body & Quick Prompts */}
+            <div className="p-5 space-y-4 bg-slate-50/50 dark:bg-slate-950/50">
+              <div className="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm text-xs leading-relaxed text-slate-700 dark:text-slate-200">
+                👋 Welcome to S.K Associates! Connect directly with our Senior CA & Legal team on WhatsApp for instant guidance.
+              </div>
+
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2">Tap a topic to chat:</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {quickPrompts.map((p, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleOpenWhatsApp(p.query)}
+                      className="p-2.5 rounded-xl bg-white dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-left transition-all group"
+                    >
+                      <span className="text-[11px] font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 flex items-center justify-between">
+                        {p.label}
+                        <Send size={10} className="opacity-0 group-hover:opacity-100 transition-opacity text-emerald-500" />
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Footer Action */}
+            <div className="p-4 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+              <button
+                onClick={() => handleOpenWhatsApp()}
+                className="w-full py-3.5 px-4 bg-[#25D366] hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 transition"
+              >
+                <MessageCircle size={16} /> Start WhatsApp Chat
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating WhatsApp Trigger Button */}
+      <div className="flex items-center gap-2">
+        {/* Tooltip hint when collapsed */}
+        {!isOpen && (
+          <motion.div 
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 1 }}
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 rounded-full shadow-lg border border-slate-200 dark:border-slate-800 text-xs font-bold"
+          >
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>Priority WhatsApp Desk</span>
+          </motion.div>
+        )}
+
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.92 }}
+          aria-label="Open WhatsApp chat"
+          className="relative w-14 h-14 sm:w-16 sm:h-16 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-full flex items-center justify-center shadow-[0_12px_35px_rgba(37,211,102,0.45)] transition-all"
         >
-          <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.7-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.1-3.2-5.5-.3-8.4 2.4-11.2 2.5-2.5 5.5-6.4 8.3-9.7 2.8-3.2 3.7-5.5 5.5-9.2 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 34.9 2.2 10.6-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-        </svg>
-
-        {/* Pulse effect on hover */}
-        <span className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 group-hover:animate-ping"></span>
-        
-        {/* Unread Badge */}
-        <div className="absolute top-0 right-0 w-5 h-5 bg-rose-500 border-2 border-white dark:border-slate-800 rounded-full flex items-center justify-center shadow-lg">
-          <span className="text-[10px] font-bold text-white">1</span>
-        </div>
-      </motion.a>
+          {isOpen ? (
+            <X size={26} />
+          ) : (
+            <>
+              <MessageCircle size={30} />
+              {/* Pulse ripple */}
+              <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 pointer-events-none" />
+              {/* Unread dot */}
+              <span className="absolute top-1 right-1 w-3.5 h-3.5 bg-rose-500 border-2 border-white rounded-full"></span>
+            </>
+          )}
+        </motion.button>
+      </div>
 
     </div>
   );

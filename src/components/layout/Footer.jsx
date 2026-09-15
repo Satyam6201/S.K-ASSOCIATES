@@ -1,27 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { 
   MapPin, Phone, Mail, Clock, 
   Linkedin, Twitter, Facebook, 
-  ArrowRight, ShieldCheck, Send, 
-  Globe, Instagram, ChevronUp, Sparkles,
-  CheckCircle2, Building2, Zap, Award, Check
+  ShieldCheck, Send, 
+  Instagram, ChevronUp, Sparkles,
+  CheckCircle2, Check
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import logo from '/src/assets/logo.jpeg'; 
+import logo from '../../assets/logo.jpeg'; 
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [istTime, setIstTime] = useState('');
+  const [isOfficeOpen, setIsOfficeOpen] = useState(true);
 
-  // Live IST Clock Tracker
+  // Live IST Clock Tracker & Dynamic Office Open/Close calculation
   useEffect(() => {
     const updateTime = () => {
+      const now = new Date();
       const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-      setIstTime(new Date().toLocaleTimeString('en-US', options));
+      setIstTime(now.toLocaleTimeString('en-US', options));
+
+      // Calculate IST Day and Hour accurately
+      const istFormatter = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Kolkata',
+        hour: 'numeric',
+        hour12: false,
+        weekday: 'short'
+      });
+      const parts = istFormatter.formatToParts(now);
+      const istHour = parseInt(parts.find(p => p.type === 'hour')?.value || '0', 10);
+      const istDay = parts.find(p => p.type === 'weekday')?.value;
+      const open = istDay !== 'Sun' && istHour >= 10 && istHour < 19;
+      setIsOfficeOpen(open);
     };
+
     updateTime();
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
@@ -147,16 +163,18 @@ const Footer = () => {
               Pioneering financial clarity, statutory assurance, and tax litigation defense since 2017. Serving 500+ corporate clients across India.
             </p>
 
-            {/* Live IST Clock Card */}
-            <div className="p-4 bg-slate-900/60 rounded-2xl border border-white/10 flex items-center justify-between">
+            {/* Live IST Clock Card with True Working Hours */}
+            <div className="p-4 bg-slate-900/60 rounded-2xl border border-white/10 flex items-center justify-between shadow-inner">
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                  <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isOfficeOpen ? 'bg-emerald-400' : 'bg-amber-400'} opacity-75`}></span>
+                  <span className={`relative inline-flex rounded-full h-3 w-3 ${isOfficeOpen ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
                 </span>
                 <div>
                   <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider block">Office Status (IST)</span>
-                  <span className="text-xs font-bold text-emerald-400">Open • {istTime}</span>
+                  <span className={`text-xs font-bold ${isOfficeOpen ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {isOfficeOpen ? 'Open Now' : 'Closed (Messages Active)'} • {istTime}
+                  </span>
                 </div>
               </div>
               <Clock size={16} className="text-slate-400" />
@@ -176,7 +194,7 @@ const Footer = () => {
             <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#007bb6] dark:text-sky-400">Services</h4>
             <ul className="space-y-3">
               <FooterLink to="/income-tax">Income Tax</FooterLink>
-              <FooterLink to="/service-tax">GST & Indirect Tax</FooterLink>
+              <FooterLink to="/gst">GST & Indirect Tax</FooterLink>
               <FooterLink to="/audit">Audit & Assurance</FooterLink>
               <FooterLink to="/corporate-services">Corporate Advisory</FooterLink>
               <FooterLink to="/accounting-services">Cloud Accounting</FooterLink>
@@ -202,28 +220,40 @@ const Footer = () => {
             <h4 className="text-xs font-black uppercase tracking-[0.25em] text-[#007bb6] dark:text-sky-400">Headquarters</h4>
             
             <div className="bg-slate-900/60 border border-white/10 rounded-3xl p-6 backdrop-blur-md space-y-5">
-              <ContactItem 
-                icon={<MapPin />} 
-                text="Gaur City Mall, Noida West, UP" 
-                sub="10th Floor, Office Suite 1063" 
-              />
-              <ContactItem 
-                icon={<Phone />} 
-                text="0120-4194983 | +91 8010257124" 
-                sub="Mon-Sat, 10:00 AM - 07:00 PM" 
-              />
-              <ContactItem 
-                icon={<Mail />} 
-                text="officeska2000@gmail.com" 
-                sub="Instant Priority Helpdesk" 
-              />
+              <a 
+                href="https://www.google.com/maps/search/Gaur+City+Mall+Noida+West" 
+                target="_blank" 
+                rel="noreferrer"
+                className="block group"
+              >
+                <ContactItem 
+                  icon={<MapPin />} 
+                  text="Gaur City Mall, Noida West, UP" 
+                  sub="10th Floor, Office Suite 1063" 
+                />
+              </a>
+
+              <a href="tel:+918010257124" className="block group">
+                <ContactItem 
+                  icon={<Phone />} 
+                  text="0120-4194983 | +91 8010257124" 
+                  sub="Mon-Sat, 10:00 AM - 07:00 PM" 
+                />
+              </a>
+
+              <a href="mailto:officeska2000@gmail.com" className="block group">
+                <ContactItem 
+                  icon={<Mail />} 
+                  text="officeska2000@gmail.com" 
+                  sub="Instant Priority Helpdesk" 
+                />
+              </a>
 
               {/* Embedded Google Map Preview */}
               <div className="h-32 rounded-2xl overflow-hidden relative border border-white/10 shadow-lg group/map">
-                <div className="absolute inset-0 bg-[#007bb6]/10 z-10 pointer-events-none group-hover/map:opacity-0 transition-opacity duration-500" />
                 <iframe 
                   title="S.K Associates Office Location"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.57124!2d77.424!3d28.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDM2JzAwLjAiTiA3N8KwMjUnMjYuNCJF!5e0!3m2!1sen!2sin!4v1620000000000"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.5619175783515!2d77.42211997549463!3d28.61293217567439!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cee447f52f36d%3A0x6b485d4615217466!2sGaur%20City%20Mall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
                   className="w-full h-full grayscale-[0.8] invert-[0.9] contrast-[1.2] group-hover/map:grayscale-0 group-hover/map:invert-0 transition-all duration-700 scale-105 group-hover/map:scale-100"
                   loading="lazy"
                 />

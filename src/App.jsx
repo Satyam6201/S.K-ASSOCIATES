@@ -28,6 +28,8 @@ const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const GSTPage = lazy(() => import('./pages/GSTPage'));
 const ROCFilings = lazy(() => import('./pages/ROCFilings'));
 const Rules = lazy(() => import('./pages/Rules'));
+const Login = lazy(() => import('./pages/Admin/Login'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // --- OPTIMIZED SCROLL MANAGER ---
 const ScrollManager = () => {
@@ -91,7 +93,10 @@ const AnimatedRoutes = () => {
         <Route path="/gst" element={<PageWrapper><GSTPage /></PageWrapper>} />
         <Route path="/roc" element={<PageWrapper><ROCFilings /></PageWrapper>} />
         <Route path="/rules" element={<PageWrapper><Rules /></PageWrapper>} />
-        <Route path="*" element={<PageWrapper><Home /></PageWrapper>} />
+        <Route path="/tds" element={<PageWrapper><Calculators /></PageWrapper>} />
+        <Route path="/login" element={<PageWrapper><Login /></PageWrapper>} />
+        <Route path="/admin" element={<PageWrapper><Login /></PageWrapper>} />
+        <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
       </Routes>
     </AnimatePresence>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Send } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CtaBannerSection = () => {
@@ -12,6 +12,9 @@ const CtaBannerSection = () => {
           transition={{ duration: 0.3 }}
           className="bg-gradient-to-br from-[#002f56] via-[#005f9e] to-[#007bb6] dark:from-[#020617] dark:via-[#091124] dark:to-[#001524] rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl border border-white/10"
         >
+          {/* Animated subtle background circles */}
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-sky-400/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
           <div className="relative z-10">
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-sky-200 text-xs font-black uppercase tracking-widest mb-6 border border-white/20">
               Get Expert Advisory

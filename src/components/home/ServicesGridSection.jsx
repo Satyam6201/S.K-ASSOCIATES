@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scale, FileText, Landmark, Zap, ShieldCheck, TrendingUp, ArrowRight, ChevronRight, Briefcase } from "lucide-react";
+import { Scale, FileText, Landmark, Zap, ShieldCheck, TrendingUp, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ icon, title, desc, color, link, category }) => (
@@ -72,7 +72,7 @@ const ServicesGridSection = () => {
       title: "Startup & Entity Incorporation",
       desc: "Fast-track Private Limited, LLP registration, Section 8 NGO, and Startup India recognition.",
       color: "border-amber-500",
-      link: "/contact"
+      link: "/corporate-services"
     },
     {
       category: "Corporate",
@@ -99,8 +99,8 @@ const ServicesGridSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-[#007bb6] dark:text-sky-400 font-black tracking-widest uppercase mb-4">Our Expertise</h2>
-            <h3 className="text-4xl md:text-5xl font-black dark:text-white">Comprehensive Financial & Legal Verticals</h3>
+            <h2 className="text-[#007bb6] dark:text-sky-400 font-black tracking-widest uppercase mb-4 text-xs">Our Expertise</h2>
+            <h3 className="text-4xl md:text-5xl font-black dark:text-white tracking-tight">Comprehensive Financial & Legal Verticals</h3>
           </div>
 
           <div className="flex overflow-x-auto no-scrollbar gap-2 p-1.5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-md">
@@ -122,7 +122,7 @@ const ServicesGridSection = () => {
 
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence mode="popLayout">
-            {filteredServices.map((service, idx) => (
+            {filteredServices.map((service) => (
               <ServiceCard key={service.title} {...service} />
             ))}
           </AnimatePresence>

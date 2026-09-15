@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Award, Users, BarChart3, Globe, Landmark, TrendingUp, ShieldCheck } from "lucide-react";
+import { Award, Users, BarChart3, Globe, Landmark, TrendingUp } from "lucide-react";
 
 const FeaturePoint = ({ icon, title, desc }) => (
   <motion.div 
@@ -28,7 +28,7 @@ const WhyChooseUsSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-[#007bb6] dark:text-sky-400 font-black tracking-widest uppercase mb-4">The Advantage</h2>
+            <h2 className="text-[#007bb6] dark:text-sky-400 font-black tracking-widest uppercase mb-4 text-xs">The Advantage</h2>
             <h3 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-8 leading-tight">
               Why Industry Leaders Trust S.K Associates?
             </h3>
@@ -37,10 +37,10 @@ const WhyChooseUsSection = () => {
             </p>
             
             <div className="grid sm:grid-cols-2 gap-8">
-              <FeaturePoint icon={<Award />} title="Expert Panel" desc="Qualified CA, CS, and Legal advocates under one roof." />
-              <FeaturePoint icon={<Users />} title="Dedicated Relationship" desc="Dedicated account manager for every corporate SME." />
-              <FeaturePoint icon={<BarChart3 />} title="Live Compliance Tech" desc="Real-time tracking of your GST & Income Tax status." />
-              <FeaturePoint icon={<Globe />} title="Pan India Delivery" desc="Serving clients across 20+ Indian states." />
+              <FeaturePoint icon={<Award size={22} />} title="Expert Panel" desc="Qualified CA, CS, and Legal advocates under one roof." />
+              <FeaturePoint icon={<Users size={22} />} title="Dedicated Relationship" desc="Dedicated account manager for every corporate SME." />
+              <FeaturePoint icon={<BarChart3 size={22} />} title="Live Compliance Tech" desc="Real-time tracking of your GST & Income Tax status." />
+              <FeaturePoint icon={<Globe size={22} />} title="Pan India Delivery" desc="Serving clients across 20+ Indian states." />
             </div>
           </motion.div>
 
@@ -49,15 +49,15 @@ const WhyChooseUsSection = () => {
               <div className="space-y-4 pt-12">
                  <motion.div 
                    whileHover={{ y: -8, scale: 1.02 }}
-                   className="h-64 bg-slate-100 dark:bg-slate-900 rounded-[2.5rem] p-8 flex flex-col justify-end border border-slate-200 dark:border-slate-800 shadow-xl"
+                   className="h-64 bg-slate-100 dark:bg-slate-900 rounded-[2.5rem] p-8 flex flex-col justify-end border border-slate-200 dark:border-slate-800 shadow-xl group hover:border-[#007bb6]/40 transition-colors"
                  >
-                    <h4 className="text-5xl font-black text-[#007bb6] dark:text-sky-400">98%</h4>
-                    <p className="text-slate-500 font-bold uppercase text-xs tracking-wider mt-2">Client Retention Rate</p>
+                    <h4 className="text-5xl font-black text-[#007bb6] dark:text-sky-400 group-hover:scale-105 transition-transform origin-left">98%</h4>
+                    <p className="text-slate-500 dark:text-slate-400 font-bold uppercase text-xs tracking-wider mt-2">Client Retention Rate</p>
                  </motion.div>
 
                  <motion.div 
                    whileHover={{ y: -8, scale: 1.02 }}
-                   className="h-48 bg-[#007bb6] rounded-[2.5rem] p-8 text-white shadow-xl flex flex-col justify-center"
+                   className="h-48 bg-[#007bb6] rounded-[2.5rem] p-8 text-white shadow-xl flex flex-col justify-center relative overflow-hidden"
                  >
                     <Landmark size={36} className="mb-3 text-sky-200" />
                     <h4 className="text-xl font-bold leading-tight">Banking Grade Data Security</h4>
@@ -67,7 +67,7 @@ const WhyChooseUsSection = () => {
               <div className="space-y-4">
                  <motion.div 
                    whileHover={{ y: -8, scale: 1.02 }}
-                   className="h-48 bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-xl flex flex-col justify-center border border-white/10"
+                   className="h-48 bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-xl flex flex-col justify-center border border-white/10 relative overflow-hidden"
                  >
                     <TrendingUp size={36} className="mb-3 text-sky-400" />
                     <h4 className="text-xl font-bold leading-tight">Proactive Tax Optimization</h4>
@@ -75,10 +75,10 @@ const WhyChooseUsSection = () => {
 
                  <motion.div 
                    whileHover={{ y: -8, scale: 1.02 }}
-                   className="h-64 bg-slate-100 dark:bg-slate-900 rounded-[2.5rem] p-8 flex flex-col justify-end border border-slate-200 dark:border-slate-800 shadow-xl"
+                   className="h-64 bg-slate-100 dark:bg-slate-900 rounded-[2.5rem] p-8 flex flex-col justify-end border border-slate-200 dark:border-slate-800 shadow-xl group hover:border-[#007bb6]/40 transition-colors"
                  >
-                    <h4 className="text-5xl font-black text-[#007bb6] dark:text-sky-400">24/7</h4>
-                    <p className="text-slate-500 font-bold uppercase text-xs tracking-wider mt-2">Priority Query Support</p>
+                    <h4 className="text-5xl font-black text-[#007bb6] dark:text-sky-400 group-hover:scale-105 transition-transform origin-left">24/7</h4>
+                    <p className="text-slate-500 dark:text-slate-400 font-bold uppercase text-xs tracking-wider mt-2">Priority Query Support</p>
                  </motion.div>
               </div>
             </div>
