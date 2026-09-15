@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Home, Building, CheckCircle2, Info, ArrowRight } from 'lucide-react';
+import { Building, Info } from 'lucide-react';
 
 const HRACalculator = () => {
   const [basic, setBasic] = useState(600000);

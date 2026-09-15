@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, ShieldAlert } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 
 const IncomeTax = () => {
   const [grossIncome, setGrossIncome] = useState('');
@@ -33,8 +33,15 @@ const IncomeTax = () => {
       tax += (taxable - 300000) * 0.05;
     }
 
-    // Sec 87A rebate under New Regime (Rebate up to taxable income ₹7,00,000)
-    if (taxable <= 700000) tax = 0;
+    // Sec 87A rebate & marginal relief under New Regime
+    if (taxable <= 700000) {
+      tax = 0;
+    } else {
+      const excess = taxable - 700000;
+      if (tax > excess) {
+        tax = excess;
+      }
+    }
 
     const cess = tax * 0.04;
     return { tax, cess, total: tax + cess, taxable };

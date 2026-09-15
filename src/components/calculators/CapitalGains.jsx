@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { TrendingUp, Info, Building2, Landmark, Coins, ShieldCheck, Check } from 'lucide-react';
+import { TrendingUp, Info, Building2, Coins } from 'lucide-react';
 
 const CapitalGains = () => {
   const [assetType, setAssetType] = useState('property'); // property, equity, gold
@@ -23,13 +23,17 @@ const CapitalGains = () => {
   if (assetType === 'equity') {
     taxRate = isLTCG ? 12.5 : 20; // 12.5% LTCG above ₹1.25L, 20% STCG
   } else if (assetType === 'property') {
-    taxRate = isLTCG ? 12.5 : 30; // New 12.5% rate without indexation / 20% option
+    taxRate = isLTCG ? 12.5 : 30; // 12.5% rate without indexation
   } else {
     taxRate = isLTCG ? 12.5 : 30;
   }
 
   const taxableGainBeforeExemption = Math.max(0, rawGain);
-  const netTaxableGain = Math.max(0, taxableGainBeforeExemption - numReinvest);
+  const gainAfterReinvestment = Math.max(0, taxableGainBeforeExemption - numReinvest);
+  // Sec 112A statutory exemption for Equity LTCG up to ₹1,25,000
+  const equityExemption = (assetType === 'equity' && isLTCG) ? Math.min(gainAfterReinvestment, 125000) : 0;
+  const netTaxableGain = Math.max(0, gainAfterReinvestment - equityExemption);
+
   const taxAmount = (netTaxableGain * taxRate) / 100;
   const cess = taxAmount * 0.04;
   const totalTax = taxAmount + cess;
@@ -168,6 +172,13 @@ const CapitalGains = () => {
             <span className="text-xl font-black">₹{totalTax.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>
           </div>
         </div>
+
+        {equityExemption > 0 && (
+          <div className="flex items-center gap-2 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+            <Info size={16} className="shrink-0" />
+            <span>Section 112A ₹1,25,000 annual exemption deducted from equity long term gains.</span>
+          </div>
+        )}
 
         <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium pt-2">
           <Info size={14} className="text-emerald-500 shrink-0" />

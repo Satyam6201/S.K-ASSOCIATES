@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Landmark, PieChart, Info, ShieldCheck, TrendingUp } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 const FixedDeposit = () => {
   const [principal, setPrincipal] = useState(500000);

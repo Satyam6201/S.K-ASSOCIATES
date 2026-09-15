@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Percent, Copy, Check, Info, ArrowRight, DollarSign } from 'lucide-react';
+import { Copy, Check, Info } from 'lucide-react';
 
 const GST = () => {
   const [amount, setAmount] = useState(100000);

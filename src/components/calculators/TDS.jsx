@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Info } from 'lucide-react';
+import { Info, AlertCircle, CheckCircle } from 'lucide-react';
 
 const TDS = () => {
   const [section, setSection] = useState('194C_IND');
@@ -18,8 +18,17 @@ const TDS = () => {
 
   const selectedSec = sectionsData[section];
   const numAmount = Number(amount) || 0;
-  const isApplicable = numAmount > 0;
-  const tdsDeducted = isApplicable ? (numAmount * selectedSec.rate) / 100 : 0;
+  const isThresholdMet = numAmount >= selectedSec.threshold;
+
+  let tdsDeducted = 0;
+  if (numAmount > 0 && isThresholdMet) {
+    if (section === '194Q') {
+      tdsDeducted = ((numAmount - selectedSec.threshold) * selectedSec.rate) / 100;
+    } else {
+      tdsDeducted = (numAmount * selectedSec.rate) / 100;
+    }
+  }
+
   const netPayable = numAmount - tdsDeducted;
 
   return (
@@ -49,6 +58,20 @@ const TDS = () => {
           />
         </div>
       </div>
+
+      {numAmount > 0 && !isThresholdMet && (
+        <div className="flex items-center gap-3 p-4 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-700 dark:text-amber-400 text-xs font-bold">
+          <AlertCircle size={18} className="shrink-0 text-amber-500" />
+          <span>Amount is below the statutory threshold of ₹{selectedSec.threshold.toLocaleString()}. TDS is ₹0 (Not Deductible).</span>
+        </div>
+      )}
+
+      {numAmount > 0 && isThresholdMet && (
+        <div className="flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-700 dark:text-emerald-400 text-xs font-bold">
+          <CheckCircle size={18} className="shrink-0 text-emerald-500" />
+          <span>Statutory threshold exceeded. TDS is mandatory at {selectedSec.rate}%.</span>
+        </div>
+      )}
 
       <div className="p-6 bg-rose-50 dark:bg-slate-800/80 rounded-2xl border-l-4 border-rose-500 space-y-4">
         <div className="flex justify-between items-center pb-3 border-b border-rose-200 dark:border-slate-700">
