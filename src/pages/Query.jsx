@@ -6,6 +6,7 @@ import {
   Zap, Clock, Sparkles, HelpCircle, ArrowRight,
   Check, Copy, MessageCircle, RefreshCw, AlertCircle
 } from 'lucide-react';
+import SEO from '../components/common/SEO';
 
 const Query = () => {
   const [step, setStep] = useState(1);
@@ -66,6 +67,13 @@ const Query = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] py-28 sm:py-36 px-4 sm:px-6 relative overflow-hidden transition-colors duration-500 selection:bg-[#007bb6]/30">
+      <SEO 
+        title="Submit Legal & Tax Query | Confidential CA Advisory"
+        description="Submit your direct tax, GST, statutory audit, or corporate law query. Receive an expert case assessment and quote from senior CA practitioners within 24 hours."
+        keywords="Tax Consultation Online, Submit CA Query, GST Advisory Helpdesk, Income Tax Scrutiny Case Review"
+        canonicalPath="/query"
+        breadcrumbs={[{ name: "Advisory Query", url: "/query" }]}
+      />
       
       <div className="absolute inset-0 pointer-events-none z-0">
         <motion.div 

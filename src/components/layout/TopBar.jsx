@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, Clock } from 'lucide-react';
 
+const istFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Kolkata',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: true,
+});
+
 const TopBar = () => {
-  const [istTime, setIstTime] = useState('');
+  const [istTime, setIstTime] = useState(() => istFormatter.format(new Date()));
 
   useEffect(() => {
-    const updateTime = () => {
-      const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-      setIstTime(new Date().toLocaleTimeString('en-US', options));
-    };
-    updateTime();
+    const updateTime = () => setIstTime(istFormatter.format(new Date()));
     const interval = setInterval(updateTime, 1000);
     return () => clearInterval(interval);
   }, []);

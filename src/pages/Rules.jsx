@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
   Gavel, Scale, Fingerprint, 
@@ -7,11 +7,10 @@ import {
   Lock, Eye, AlertTriangle,
   BookOpen, Globe
 } from 'lucide-react';
+import SEO from '../components/common/SEO';
 
 const Rules = () => {
   const [activeSection, setActiveSection] = useState("gst-compliance");
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   const sections = [
     { id: "gst-compliance", title: "GST Compliance", icon: <Scale size={18}/> },
@@ -23,9 +22,15 @@ const Rules = () => {
 
   return (
     <div className="bg-slate-50 dark:bg-[#020617] min-h-screen">
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1.5 bg-blue-600 z-[110] origin-left"
-        style={{ scaleX }}
+      <SEO 
+        title="Statutory Regulatory Rules & Compliance Protocols"
+        description="Comprehensive guide to Indian statutory rules: GST ITC Rule 16/48, Income Tax Section 44AB limits, MCA annual filing protocols, and DPDP Act 2023 compliance."
+        keywords="GST Rules Section 16, Income Tax Audit Limits 44AB, MCA Annual Filing Rules, DPDP Act Compliance India"
+        canonicalPath="/rules"
+        breadcrumbs={[
+          { name: "Knowledge Bank", url: "/rules" },
+          { name: "Regulatory Rules", url: "/rules" }
+        ]}
       />
 
       <div className="pt-32 pb-40 px-6 max-w-7xl mx-auto">

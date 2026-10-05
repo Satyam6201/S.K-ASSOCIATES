@@ -1,0 +1,19 @@
+# S.K Associates - Robots.txt
+# Domain: https://skassociates.in
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /email-login
+Disallow: /time-sheet
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://skassociates.in/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Host
+Host: https://skassociates.in

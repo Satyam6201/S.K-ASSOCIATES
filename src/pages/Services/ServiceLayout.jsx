@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { CheckCircle2, Shield, Zap, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -47,18 +47,13 @@ const colorThemes = {
 };
 
 const ServiceLayout = ({ title, description, features, icon, colorClass = 'blue' }) => {
-  const { scrollYProgress } = useScroll();
-  const yRange = useTransform(scrollYProgress, [0, 1], [0, -50]);
   const theme = colorThemes[colorClass] || colorThemes.blue;
 
   return (
     <div className="relative pt-32 pb-20 bg-slate-50 dark:bg-slate-950 min-h-screen overflow-hidden">
       
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] ${theme.lightBg} blur-[100px] pointer-events-none`} />
-      <motion.div 
-        style={{ y: yRange }}
-        className={`absolute -top-24 -right-24 w-96 h-96 ${theme.lightBg} rounded-full blur-[100px]`} 
-      />
+      <div className={`absolute -top-24 -right-24 w-96 h-96 ${theme.lightBg} rounded-full blur-[100px] pointer-events-none`} />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         

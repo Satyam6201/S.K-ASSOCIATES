@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   X, Percent, Wallet, Receipt, 
@@ -11,6 +11,7 @@ import CapitalGains from '../../components/calculators/CapitalGains';
 import HRACalculator from '../../components/calculators/HRACalculator';
 import FixedDeposit from '../../components/calculators/FixedDeposit';
 import TDS from '../../components/calculators/TDS';
+import SEO from '../../components/common/SEO';
 
 const colorStyles = {
   blue: {
@@ -45,40 +46,57 @@ const colorStyles = {
   },
 };
 
+const calcList = [
+  { id: 'it', category: 'Tax', name: 'Income Tax Calculator', icon: <Wallet size={28} />, Component: IncomeTax, color: 'blue', desc: 'Compute tax liability under New vs Old Regime with latest statutory slabs & ₹75,000 std deduction.' },
+  { id: 'gst', category: 'Tax', name: 'GST Calculator', icon: <Receipt size={28} />, Component: GST, color: 'orange', desc: 'Compute IGST, CGST, & SGST breakdown for Goods and Services in Exclusive & Inclusive modes.' },
+  { id: 'tds', category: 'Tax', name: 'TDS Calculator', icon: <Percent size={28} />, Component: TDS, color: 'rose', desc: 'Determine Tax Deduction at Source for Sec 194C, 194J, 194IA, 194IB, & 194Q.' },
+  { id: 'cap', category: 'Investment', name: 'Capital Gains Calculator', icon: <TrendingUp size={28} />, Component: CapitalGains, color: 'emerald', desc: 'Estimate LTCG & STCG tax liability on Property, Stocks, Mutual Funds, & Sec 54 reinvestments.' },
+  { id: 'hra', category: 'Tax', name: 'HRA Exemption Calculator', icon: <Home size={28} />, Component: HRACalculator, color: 'indigo', desc: 'Calculate House Rent Allowance tax exemption u/s 10(13A) under Rule 2A.' },
+  { id: 'fd', category: 'Investment', name: 'FD & Deposit Calculator', icon: <Landmark size={28} />, Component: FixedDeposit, color: 'sky', desc: 'Predict maturity value, quarterly compounding interest, & Sec 194A TDS threshold.' },
+];
+
 const Calculators = () => {
-  const [activeCalc, setActiveCalc] = useState(null);
+  const [activeCalcId, setActiveCalcId] = useState(null);
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setActiveCalc(null);
-      }
+      if (e.key === 'Escape') setActiveCalcId(null);
     };
-    if (activeCalc) {
+    if (activeCalcId) {
       window.addEventListener('keydown', handleKeyDown);
     }
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeCalc]);
+  }, [activeCalcId]);
 
-  const calcList = [
-    { id: 'it', category: 'Tax', name: 'Income Tax Calculator', icon: <Wallet size={28} />, component: <IncomeTax />, color: 'blue', desc: 'Compute tax liability under New vs Old Regime with latest statutory slabs & ₹75,000 std deduction.' },
-    { id: 'gst', category: 'Tax', name: 'GST Calculator', icon: <Receipt size={28} />, component: <GST />, color: 'orange', desc: 'Compute IGST, CGST, & SGST breakdown for Goods and Services in Exclusive & Inclusive modes.' },
-    { id: 'tds', category: 'Tax', name: 'TDS Calculator', icon: <Percent size={28} />, component: <TDS />, color: 'rose', desc: 'Determine Tax Deduction at Source for Sec 194C, 194J, 194IA, 194IB, & 194Q.' },
-    { id: 'cap', category: 'Investment', name: 'Capital Gains Calculator', icon: <TrendingUp size={28} />, component: <CapitalGains />, color: 'emerald', desc: 'Estimate LTCG & STCG tax liability on Property, Stocks, Mutual Funds, & Sec 54 reinvestments.' },
-    { id: 'hra', category: 'Tax', name: 'HRA Exemption Calculator', icon: <Home size={28} />, component: <HRACalculator />, color: 'indigo', desc: 'Calculate House Rent Allowance tax exemption u/s 10(13A) under Rule 2A.' },
-    { id: 'fd', category: 'Investment', name: 'FD & Deposit Calculator', icon: <Landmark size={28} />, component: <FixedDeposit />, color: 'sky', desc: 'Predict maturity value, quarterly compounding interest, & Sec 194A TDS threshold.' },
-  ];
+  const activeCalc = useMemo(() => {
+    return calcList.find(c => c.id === activeCalcId) || null;
+  }, [activeCalcId]);
 
-  const filteredCalcs = calcList.filter(calc => {
-    const matchesFilter = filter === 'All' || calc.category === filter;
-    const matchesSearch = calc.name.toLowerCase().includes(search.toLowerCase()) || calc.desc.toLowerCase().includes(search.toLowerCase());
-    return matchesFilter && matchesSearch;
-  });
+  const filteredCalcs = useMemo(() => {
+    const s = search.toLowerCase();
+    return calcList.filter(calc => {
+      const matchesFilter = filter === 'All' || calc.category === filter;
+      const matchesSearch = !s || calc.name.toLowerCase().includes(s) || calc.desc.toLowerCase().includes(s);
+      return matchesFilter && matchesSearch;
+    });
+  }, [filter, search]);
+
+  const closeCalc = useCallback(() => setActiveCalcId(null), []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-slate-100 transition-colors duration-500 pb-20 selection:bg-[#007bb6]/30">
+      <SEO 
+        title="Income Tax, GST, TDS & Capital Gains Calculators FY 2025-26"
+        description="Free statutory tax tools: New vs Old Regime comparison, GST inclusive/exclusive splits, TDS thresholds u/s 194C/J/Q, LTCG capital gains, and HRA exemption calculators."
+        keywords="Income Tax Calculator FY 2025-26, GST Calculator Online, TDS Calculator, Capital Gains Tax Calculator, HRA Exemption Calculator"
+        canonicalPath="/calculators"
+        breadcrumbs={[
+          { name: "Knowledge Bank", url: "/calculators" },
+          { name: "Tax Calculators", url: "/calculators" }
+        ]}
+      />
       
       <div className="relative overflow-hidden bg-gradient-to-br from-[#002f56] via-[#005f9e] to-[#007bb6] dark:from-[#070d1e] dark:via-[#0d1730] dark:to-[#070d1e] transition-colors duration-500 pt-28 sm:pt-36 pb-32 sm:pb-40 px-4 sm:px-6 border-b border-white/10">
         <div className="absolute inset-0 z-0 pointer-events-none">
@@ -167,9 +185,9 @@ const Calculators = () => {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      whileHover={{ y: -10, scale: 1.02 }}
+                      whileHover={{ y: -8, scale: 1.01 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      onClick={() => setActiveCalc(calc)}
+                      onClick={() => setActiveCalcId(calc.id)}
                       className={`group relative bg-white/90 dark:bg-[#0d1730] p-6 sm:p-8 rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-slate-200/80 dark:border-[#1a2c56] cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-2xl flex flex-col justify-between ${style.border}`}
                     >
                       <div>
@@ -211,7 +229,7 @@ const Calculators = () => {
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }}
-              onClick={() => setActiveCalc(null)}
+              onClick={closeCalc}
               className="absolute inset-0 bg-[#070d1e]/80 backdrop-blur-md"
             />
             
@@ -236,7 +254,7 @@ const Calculators = () => {
                 <motion.button 
                   whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => setActiveCalc(null)}
+                  onClick={closeCalc}
                   className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-[#15244a] hover:bg-rose-500 hover:text-white transition-all text-slate-600 dark:text-slate-300 shadow-md shrink-0"
                 >
                   <X size={18} />
@@ -244,7 +262,7 @@ const Calculators = () => {
               </div>
 
               <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-10">
-                {activeCalc.component}
+                {activeCalc.Component && <activeCalc.Component />}
               </div>
 
               <div className="p-4 sm:p-6 bg-[#070d1e] text-white flex items-center justify-between border-t border-[#1a2c56]">
@@ -254,7 +272,7 @@ const Calculators = () => {
                 </div>
 
                 <button 
-                  onClick={() => setActiveCalc(null)}
+                  onClick={closeCalc}
                   className="hidden md:flex items-center gap-2 text-xs font-bold text-sky-400 hover:underline"
                 >
                   Close Tool <X size={14} />

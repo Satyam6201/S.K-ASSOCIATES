@@ -8,6 +8,7 @@ import {
   Zap, Headphones, MessageCircle,
   ShieldCheck, Video, Navigation
 } from 'lucide-react';
+import SEO from '../components/common/SEO';
 
 const Contact = () => {
   const [formStep, setFormStep] = useState('idle');
@@ -93,6 +94,13 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#f4f7fb] via-[#eaf2fb] to-[#f4f7fb] dark:from-[#070d1e] dark:via-[#0c1630] dark:to-[#070d1e] text-slate-900 dark:text-white transition-colors duration-500 selection:bg-[#007bb6]/30 overflow-hidden">
+      <SEO 
+        title="Contact Us & Book Free CA Consultation | Noida Office"
+        description="Get in touch with S.K Associates. Visit our Noida NCR office or call +91-8010257124 / 0120-4194983 for Income Tax, GST, Audit, and Company Registration consultation."
+        keywords="Contact CA Noida, CA Firm Phone Number Noida, Chartered Accountant Sector 9 Noida, Tax Consultant Contact"
+        canonicalPath="/contact"
+        breadcrumbs={[{ name: "Contact Us", url: "/contact" }]}
+      />
       
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/15 dark:bg-blue-600/10 rounded-full blur-[120px]" />

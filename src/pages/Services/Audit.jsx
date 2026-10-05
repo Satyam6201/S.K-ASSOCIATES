@@ -7,6 +7,7 @@ import {
   PieChart, RefreshCw, AlertTriangle, Layers, Download, Check
 } from 'lucide-react';
 import ServiceLayout from './ServiceLayout';
+import SEO from '../../components/common/SEO';
 
 const Audit = () => {
   const [turnover, setTurnover] = useState(150000000);
@@ -48,7 +49,16 @@ const Audit = () => {
 
   return (
     <div className="relative overflow-hidden bg-slate-50 dark:bg-[#020617] transition-colors duration-500 selection:bg-emerald-500/30">
-      
+      <SEO 
+        title="Statutory Audit & Tax Audit u/s 44AB | CARO 2020 Compliance"
+        description="Statutory audits under Companies Act 2013, Tax Audits u/s 44AB (₹10 Cr limit verification), CARO 2020 reporting, and Internal Control Over Financial Reporting (ICFR)."
+        keywords="Statutory Audit Noida, Tax Audit 44AB CA, CARO 2020 Compliance, Company Auditor Noida, ICFR Internal Controls"
+        canonicalPath="/audit"
+        breadcrumbs={[
+          { name: "Services", url: "/" },
+          { name: "Audit & Assurance", url: "/audit" }
+        ]}
+      />
       <ServiceLayout 
         title="Audit & Assurance Services"
         colorClass="emerald"

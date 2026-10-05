@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Briefcase, Sparkles, Target, Zap, 
   Globe, Scale, Users, GraduationCap, 
   CheckCircle2, X, ArrowRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import sunilImg from '../assets/sunil.png'; 
+import SEO from '../components/common/SEO';
+import sunilImg from '../assets/sunil.jpg'; 
 import anilImg from '../assets/anil.jpg';
 
 const Team = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
   const [selectedLeader, setSelectedLeader] = useState(null);
 
   useEffect(() => {
@@ -70,10 +69,12 @@ const Team = () => {
 
   return (
     <div className="pt-32 pb-24 bg-slate-50 dark:bg-[#020617] text-slate-900 dark:text-slate-100 transition-colors duration-500 overflow-hidden relative selection:bg-[#007bb6]/30">
-      
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#007bb6] via-sky-400 to-amber-500 z-[100] origin-left"
-        style={{ scaleX: scaleProgress }}
+      <SEO 
+        title="Our Leadership & Senior Partners"
+        description="Meet Senior Managing Partners Sunil Choudhary (FCA) and Anil Choudhary (FCA, DISA) with 15+ years of statutory tax litigation and corporate audit leadership."
+        keywords="Sunil Choudhary CA, Anil Choudhary CA, Chartered Accountants Leadership, FCA Noida, Tax Litigators India"
+        canonicalPath="/team"
+        breadcrumbs={[{ name: "Leadership Team", url: "/team" }]}
       />
 
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -127,7 +128,7 @@ const Team = () => {
                 <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start mb-6">
                   <div className="relative shrink-0">
                     <div className="w-40 h-48 sm:w-48 sm:h-56 rounded-3xl overflow-hidden shadow-xl border border-slate-100 dark:border-slate-800">
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <img src={member.image} alt={member.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     </div>
                     <div className="absolute -bottom-3 -right-3 w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center shadow-lg text-[#007bb6] border border-slate-100 dark:border-slate-700">
                       <GraduationCap size={20} />
