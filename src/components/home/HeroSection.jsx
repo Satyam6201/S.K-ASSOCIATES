@@ -40,8 +40,8 @@ const HeroSection = () => {
       className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#00284d] via-[#00558f] to-[#007bb6] dark:from-[#050b18] dark:via-[#09132d] dark:to-[#070e24] pt-20 sm:pt-28 pb-16 transition-colors duration-500 will-change-transform"
     >
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-sky-400/20 dark:bg-blue-600/15 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-10 -right-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-amber-500/15 dark:bg-sky-500/15 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/4 -left-20 w-[240px] sm:w-[500px] h-[240px] sm:h-[500px] bg-sky-400/20 dark:bg-blue-600/15 rounded-full blur-[30px] sm:blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-10 -right-20 w-[240px] sm:w-[500px] h-[240px] sm:h-[500px] bg-amber-500/15 dark:bg-sky-500/15 rounded-full blur-[30px] sm:blur-[100px] pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-[#007bb6]/20 dark:from-[#060b18] to-transparent" />
       </div>
 

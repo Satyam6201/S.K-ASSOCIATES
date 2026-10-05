@@ -67,8 +67,8 @@ const Forms = () => {
       />
       
       <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-0 right-0 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-blue-500/5 blur-[35px] sm:blur-[100px] rounded-full" />
+        <div className="absolute bottom-0 left-0 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-indigo-500/5 blur-[35px] sm:blur-[100px] rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto space-y-12">
@@ -90,6 +90,8 @@ const Forms = () => {
           <div className="w-full lg:w-96 relative group">
             <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
             <input 
+              id="forms-search-input"
+              aria-label="Search statutory forms"
               type="text" 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -97,7 +99,11 @@ const Forms = () => {
               className="w-full bg-white dark:bg-[#0d1730] border border-slate-200/80 dark:border-white/10 rounded-2xl py-4 pl-12 pr-10 text-xs font-bold dark:text-white focus:border-blue-500 outline-none transition-all shadow-md"
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+              <button 
+                onClick={() => setSearchQuery("")} 
+                aria-label="Clear search input"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+              >
                 <X size={16} />
               </button>
             )}

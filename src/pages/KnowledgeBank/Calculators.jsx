@@ -128,10 +128,12 @@ const Calculators = () => {
             <div className="bg-white/90 dark:bg-[#0d1730] backdrop-blur-xl p-5 sm:p-6 rounded-3xl sm:rounded-[2.5rem] shadow-xl border border-slate-200/80 dark:border-[#1a2c56] sticky top-24 space-y-5">
               
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase text-slate-400 tracking-wider">Search Tool</label>
+                <label htmlFor="calc-search-input" className="text-xs font-black uppercase text-slate-400 tracking-wider">Search Tool</label>
                 <div className="relative">
                   <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
                   <input 
+                    id="calc-search-input"
+                    aria-label="Search financial calculators"
                     type="text" 
                     placeholder="Search GST, TDS, HRA..." 
                     value={search}

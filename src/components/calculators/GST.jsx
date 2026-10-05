@@ -88,12 +88,14 @@ const GST = () => {
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold dark:text-slate-200">
+            <label htmlFor="gst-calc-amount" className="text-sm font-bold dark:text-slate-200">
               {calcMode === 'add' ? 'Net Taxable Amount (₹)' : 'Total Invoice Amount (₹)'}
             </label>
             <span className="text-2xl font-black text-[#007bb6] dark:text-sky-400">₹{numAmount.toLocaleString()}</span>
           </div>
           <input 
+            id="gst-calc-amount"
+            aria-label={calcMode === 'add' ? 'Net Taxable Amount in Rupees' : 'Total Invoice Amount in Rupees'}
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -101,6 +103,9 @@ const GST = () => {
             placeholder="100000"
           />
           <input 
+            id="gst-calc-amount-slider"
+            aria-label="GST Amount Slider"
+            aria-valuenow={numAmount}
             type="range"
             min="1000"
             max="1000000"

@@ -133,12 +133,14 @@ const Login = () => {
               className="space-y-4"
             >
               <div className="space-y-1">
-                <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 ml-1">
+                <label htmlFor="login-identity-input" className="text-[11px] font-bold uppercase tracking-wider text-slate-400 ml-1">
                   {activeTab === 'partner' ? 'Partner Email / Membership ID' : (activeTab === 'webmail' ? 'Staff Webmail Address' : 'Employee / Article ID')}
                 </label>
                 <div className="relative">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                   <input 
+                    id="login-identity-input"
+                    aria-label={activeTab === 'partner' ? 'Partner Email or Membership ID' : (activeTab === 'webmail' ? 'Staff Webmail Address' : 'Employee or Article ID')}
                     required
                     type={activeTab === 'webmail' ? 'email' : 'text'}
                     value={email}
@@ -151,10 +153,12 @@ const Login = () => {
 
               {activeTab === 'timesheet' ? (
                 <div className="space-y-1">
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 ml-1">Access PIN / Passcode</label>
+                  <label htmlFor="login-pin-input" className="text-[11px] font-bold uppercase tracking-wider text-slate-400 ml-1">Access PIN / Passcode</label>
                   <div className="relative">
                     <Key className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input 
+                      id="login-pin-input"
+                      aria-label="6-Digit Secure PIN"
                       required
                       type="password"
                       maxLength={6}
@@ -168,12 +172,14 @@ const Login = () => {
               ) : (
                 <div className="space-y-1">
                   <div className="flex justify-between items-center px-1">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Password</label>
+                    <label htmlFor="login-password-input" className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Password</label>
                     <a href="mailto:officeska2000@gmail.com?subject=Password%20Reset%20Request" className="text-[10px] text-sky-400 hover:underline">Forgot?</a>
                   </div>
                   <div className="relative">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                     <input 
+                      id="login-password-input"
+                      aria-label="Account Password"
                       required
                       type={showPassword ? 'text' : 'password'}
                       value={password}
@@ -184,6 +190,7 @@ const Login = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
+                      aria-label={showPassword ? "Hide password" : "Show password"}
                       className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

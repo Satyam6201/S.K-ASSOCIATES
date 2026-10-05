@@ -66,16 +66,21 @@ const CapitalGains = () => {
       <div className="grid md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold dark:text-slate-200">Full Sale Consideration (₹)</label>
+            <label htmlFor="cap-gains-sale-price" className="text-sm font-bold dark:text-slate-200">Full Sale Consideration (₹)</label>
             <span className="text-lg font-black text-emerald-600 dark:text-emerald-400">₹{numSale.toLocaleString()}</span>
           </div>
           <input 
+            id="cap-gains-sale-price"
+            aria-label="Full Sale Consideration in Rupees"
             type="number" 
             value={salePrice}
             onChange={(e) => setSalePrice(e.target.value)}
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-emerald-500"
           />
           <input 
+            id="cap-gains-sale-slider"
+            aria-label="Sale Consideration Slider"
+            aria-valuenow={numSale}
             type="range"
             min="100000"
             max="20000000"
@@ -88,16 +93,21 @@ const CapitalGains = () => {
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold dark:text-slate-200">Purchase / Acquisition Cost (₹)</label>
+            <label htmlFor="cap-gains-purchase-price" className="text-sm font-bold dark:text-slate-200">Purchase / Acquisition Cost (₹)</label>
             <span className="text-lg font-black text-[#007bb6] dark:text-sky-400">₹{numPur.toLocaleString()}</span>
           </div>
           <input 
+            id="cap-gains-purchase-price"
+            aria-label="Purchase or Acquisition Cost in Rupees"
             type="number" 
             value={purchasePrice}
             onChange={(e) => setPurchasePrice(e.target.value)}
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-emerald-500"
           />
           <input 
+            id="cap-gains-purchase-slider"
+            aria-label="Purchase Cost Slider"
+            aria-valuenow={numPur}
             type="range"
             min="50000"
             max="15000000"
@@ -111,8 +121,10 @@ const CapitalGains = () => {
 
       <div className="grid md:grid-cols-3 gap-6">
         <div className="space-y-2">
-          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Holding Period (Months)</label>
+          <label htmlFor="cap-gains-holding-months" className="text-xs font-black uppercase tracking-wider text-slate-400">Holding Period (Months)</label>
           <input 
+            id="cap-gains-holding-months"
+            aria-label="Holding Period in Months"
             type="number"
             value={holdingMonths}
             onChange={(e) => setHoldingMonths(Number(e.target.value))}
@@ -124,8 +136,10 @@ const CapitalGains = () => {
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Transfer / Brokerage Expense (₹)</label>
+          <label htmlFor="cap-gains-transfer-expenses" className="text-xs font-black uppercase tracking-wider text-slate-400">Transfer / Brokerage Expense (₹)</label>
           <input 
+            id="cap-gains-transfer-expenses"
+            aria-label="Transfer or Brokerage Expense in Rupees"
             type="number"
             value={transferExpenses}
             onChange={(e) => setTransferExpenses(e.target.value)}
@@ -135,8 +149,10 @@ const CapitalGains = () => {
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-black uppercase tracking-wider text-slate-400">Sec 54 / 54F Reinvestment (₹)</label>
+          <label htmlFor="cap-gains-exemption" className="text-xs font-black uppercase tracking-wider text-slate-400">Sec 54 / 54F Reinvestment (₹)</label>
           <input 
+            id="cap-gains-exemption"
+            aria-label="Section 54 or 54F Reinvestment in Rupees"
             type="number"
             value={exemptionReinvested}
             onChange={(e) => setExemptionReinvested(e.target.value)}

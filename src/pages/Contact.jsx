@@ -261,8 +261,10 @@ const Contact = () => {
                         <motion.div exit={{ opacity: 0 }} className="space-y-6">
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Full Name *</label>
+                              <label htmlFor="contact-full-name" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Full Name *</label>
                               <input 
+                                id="contact-full-name"
+                                aria-label="Full Name"
                                 required 
                                 type="text" 
                                 value={formData.name}
@@ -273,8 +275,10 @@ const Contact = () => {
                             </div>
 
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Email Address *</label>
+                              <label htmlFor="contact-email-address" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Email Address *</label>
                               <input 
+                                id="contact-email-address"
+                                aria-label="Email Address"
                                 required 
                                 type="email" 
                                 value={formData.email}
@@ -287,8 +291,10 @@ const Contact = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Phone Number (WhatsApp) *</label>
+                              <label htmlFor="contact-phone-number" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Phone Number (WhatsApp) *</label>
                               <input 
+                                id="contact-phone-number"
+                                aria-label="WhatsApp Phone Number"
                                 required 
                                 type="tel" 
                                 value={formData.phone}
@@ -299,8 +305,10 @@ const Contact = () => {
                             </div>
 
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Nature of Service *</label>
+                              <label htmlFor="contact-nature-of-service" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Nature of Service *</label>
                               <select 
+                                id="contact-nature-of-service"
+                                aria-label="Nature of Service"
                                 value={formData.service}
                                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
@@ -317,8 +325,10 @@ const Contact = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Preferred Callback Window</label>
+                              <label htmlFor="contact-callback-window" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Preferred Callback Window</label>
                               <select 
+                                id="contact-callback-window"
+                                aria-label="Preferred Callback Window"
                                 value={formData.preferredTime}
                                 onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
@@ -330,8 +340,10 @@ const Contact = () => {
                             </div>
 
                             <div className="space-y-2">
-                              <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Estimated Annual Turnover / Budget</label>
+                              <label htmlFor="contact-estimated-budget" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Estimated Annual Turnover / Budget</label>
                               <select 
+                                id="contact-estimated-budget"
+                                aria-label="Estimated Annual Turnover or Budget"
                                 value={formData.budget}
                                 onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:border-[#007bb6] outline-none font-bold appearance-none cursor-pointer"
@@ -345,8 +357,10 @@ const Contact = () => {
                           </div>
 
                           <div className="space-y-2">
-                            <label className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Brief Inquiry Description</label>
+                            <label htmlFor="contact-inquiry-description" className="text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1">Brief Inquiry Description</label>
                             <textarea 
+                              id="contact-inquiry-description"
+                              aria-label="Brief Inquiry Description"
                               rows="4" 
                               value={formData.summary}
                               onChange={(e) => setFormData({ ...formData, summary: e.target.value })}

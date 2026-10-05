@@ -79,17 +79,17 @@ const Query = () => {
         <motion.div 
           animate={{ scale: [1, 1.25, 1], opacity: [0.15, 0.35, 0.15], x: [0, 50, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-10 right-10 w-[550px] h-[550px] bg-blue-600/20 dark:bg-sky-500/15 rounded-full blur-[130px]" 
+          className="absolute top-10 right-10 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-blue-600/20 dark:bg-sky-500/15 rounded-full blur-[40px] sm:blur-[100px]" 
         />
         <motion.div 
           animate={{ scale: [1, 1.3, 1], opacity: [0.15, 0.3, 0.15], y: [0, -40, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-10 left-10 w-[550px] h-[550px] bg-emerald-500/15 dark:bg-indigo-600/15 rounded-full blur-[130px]" 
+          className="absolute bottom-10 left-10 w-[300px] sm:w-[550px] h-[300px] sm:h-[550px] bg-emerald-500/15 dark:bg-indigo-600/15 rounded-full blur-[40px] sm:blur-[100px]" 
         />
         <motion.div 
           animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }}
           transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-          className="absolute top-1/2 left-1/3 w-[400px] h-[400px] bg-amber-500/10 rounded-full blur-[100px]" 
+          className="absolute top-1/2 left-1/3 w-[250px] sm:w-[400px] h-[250px] sm:h-[400px] bg-amber-500/10 rounded-full blur-[30px] sm:blur-[80px]" 
         />
       </div>
 
@@ -264,8 +264,10 @@ const Query = () => {
                     className="space-y-6"
                   >
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Statutory Advisory Category *</label>
+                      <label htmlFor="query-service-category" className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Statutory Advisory Category *</label>
                       <select 
+                        id="query-service-category"
+                        aria-label="Statutory Advisory Category"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         className="w-full p-5 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 focus:border-[#007bb6] outline-none appearance-none cursor-pointer font-bold"
@@ -280,20 +282,22 @@ const Query = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Upload Notice / Supporting Document (Optional)</label>
-                      <label className="w-full p-6 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-3xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-blue-500/5 hover:border-[#007bb6] transition-all group">
+                      <label htmlFor="query-file-upload" className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Upload Notice / Supporting Document (Optional)</label>
+                      <label htmlFor="query-file-upload" className="w-full p-6 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-3xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-blue-500/5 hover:border-[#007bb6] transition-all group">
                         <Upload className="text-[#007bb6] dark:text-sky-400 group-hover:scale-110 transition-transform" size={28} />
                         <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
                           {fileName ? `Attached: ${fileName}` : 'Click to select Tax Notice PDF or Image'}
                         </span>
                         <span className="text-[10px] text-slate-400 font-medium">Supported: PDF, PNG, JPG (Max 15MB)</span>
-                        <input type="file" className="hidden" onChange={handleFileChange} />
+                        <input id="query-file-upload" aria-label="Upload notice or supporting document" type="file" className="hidden" onChange={handleFileChange} />
                       </label>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Case Summary / Background</label>
+                      <label htmlFor="query-case-summary" className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">Case Summary / Background</label>
                       <textarea 
+                        id="query-case-summary"
+                        aria-label="Case Summary or Background details"
                         rows="4" 
                         value={formData.details}
                         onChange={(e) => setFormData({ ...formData, details: e.target.value })}
@@ -341,22 +345,27 @@ const Query = () => {
   );
 };
 
-const FormInput = ({ label, icon, placeholder, type = "text", value, onChange, required }) => (
-  <div className="space-y-2">
-    <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">{label}</label>
-    <div className="relative group">
-      <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#007bb6] transition-colors">{icon}</div>
-      <input 
-        required={required}
-        type={type} 
-        value={value}
-        onChange={onChange}
-        className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-[#15244a]/50 text-slate-900 dark:text-white border border-slate-200 dark:border-[#1a2c56] focus:border-[#007bb6] outline-none font-bold text-sm transition-all" 
-        placeholder={placeholder} 
-      />
+const FormInput = ({ label, icon, placeholder, type = "text", value, onChange, required, id }) => {
+  const inputId = id || (label ? label.toLowerCase().replace(/[^a-z0-9]/g, '-') : undefined);
+  return (
+    <div className="space-y-2">
+      <label htmlFor={inputId} className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-widest ml-1">{label}</label>
+      <div className="relative group">
+        <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#007bb6] transition-colors">{icon}</div>
+        <input 
+          id={inputId}
+          aria-label={label}
+          required={required}
+          type={type} 
+          value={value}
+          onChange={onChange}
+          className="w-full pl-14 pr-6 py-4 rounded-2xl bg-slate-50 dark:bg-[#15244a]/50 text-slate-900 dark:text-white border border-slate-200 dark:border-[#1a2c56] focus:border-[#007bb6] outline-none font-bold text-sm transition-all" 
+          placeholder={placeholder} 
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 const FeatureCard = ({ icon, title, desc, color = 'blue' }) => {
   const colorMap = {

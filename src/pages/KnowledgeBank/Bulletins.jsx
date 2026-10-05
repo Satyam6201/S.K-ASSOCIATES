@@ -135,8 +135,8 @@ const Bulletins = () => {
       />
       
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none">
-        <div className="absolute top-[10%] left-[10%] w-[30vw] h-[30vw] bg-orange-500/5 blur-[120px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[10%] right-[10%] w-[30vw] h-[30vw] bg-blue-500/5 blur-[120px] rounded-full" />
+        <div className="absolute top-[10%] left-[10%] w-[280px] sm:w-[30vw] h-[280px] sm:h-[30vw] bg-orange-500/5 blur-[35px] sm:blur-[100px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[10%] right-[10%] w-[280px] sm:w-[30vw] h-[280px] sm:h-[30vw] bg-blue-500/5 blur-[35px] sm:blur-[100px] rounded-full" />
       </div>
 
       <div className="max-w-6xl mx-auto space-y-12">
@@ -163,6 +163,8 @@ const Bulletins = () => {
             <div className="relative flex-1 sm:w-72">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input
+                id="bulletins-search-input"
+                aria-label="Search compliance circulars and rules"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}

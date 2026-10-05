@@ -107,17 +107,20 @@ const Footer = () => {
               <form onSubmit={handleSubscribe} className="space-y-3">
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input 
+                    id="footer-newsletter-email"
                     type="email" 
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your work email address..." 
-                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 outline-none focus:ring-2 focus:ring-[#007bb6] transition-all font-medium text-sm"
+                    aria-label="Enter your work email address for compliance bulletin updates"
+                    className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder:text-slate-400 outline-none focus:ring-2 focus:ring-[#007bb6] transition-all font-medium text-sm"
                   />
                   <motion.button 
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
+                    aria-label="Subscribe to monthly compliance digest"
                     className="px-8 py-4 bg-[#007bb6] hover:bg-blue-500 text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg shrink-0 text-sm transition"
                   >
                     {subscribed ? <Check size={18} className="text-emerald-300" /> : <Send size={16} />}
@@ -171,10 +174,10 @@ const Footer = () => {
             </div>
 
             <div className="flex gap-3 pt-2">
-              <SocialIcon icon={<Linkedin />} href="https://linkedin.com" />
-              <SocialIcon icon={<Instagram />} href="https://instagram.com" />
-              <SocialIcon icon={<Twitter />} href="https://twitter.com" />
-              <SocialIcon icon={<Facebook />} href="https://facebook.com" />
+              <SocialIcon icon={<Linkedin />} href="https://linkedin.com" label="Visit S.K Associates on LinkedIn" />
+              <SocialIcon icon={<Instagram />} href="https://instagram.com" label="Follow S.K Associates on Instagram" />
+              <SocialIcon icon={<Twitter />} href="https://twitter.com" label="Follow S.K Associates on Twitter" />
+              <SocialIcon icon={<Facebook />} href="https://facebook.com" label="Visit S.K Associates on Facebook" />
             </div>
           </div>
 
@@ -300,11 +303,12 @@ const ContactItem = ({ icon, text, sub }) => (
   </motion.div>
 );
 
-const SocialIcon = ({ icon, href }) => (
+const SocialIcon = ({ icon, href, label }) => (
   <motion.a 
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={label || "Social link"}
     whileHover={{ y: -5, scale: 1.1 }}
     whileTap={{ scale: 0.9 }}
     className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:bg-[#007bb6] hover:text-white transition shadow-md"

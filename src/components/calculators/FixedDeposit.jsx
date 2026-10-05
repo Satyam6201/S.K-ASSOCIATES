@@ -48,16 +48,21 @@ const FixedDeposit = () => {
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold dark:text-slate-200">Total FD Deposit Amount (₹)</label>
+            <label htmlFor="fd-calc-principal" className="text-sm font-bold dark:text-slate-200">Total FD Deposit Amount (₹)</label>
             <span className="text-2xl font-black text-sky-600 dark:text-sky-400">₹{numPrincipal.toLocaleString()}</span>
           </div>
           <input 
+            id="fd-calc-principal"
+            aria-label="Total Fixed Deposit Principal Amount in Rupees"
             type="number" 
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-sky-500"
           />
           <input 
+            id="fd-calc-principal-slider"
+            aria-label="FD Principal Amount Slider"
+            aria-valuenow={numPrincipal}
             type="range"
             min="10000"
             max="10000000"
@@ -71,10 +76,12 @@ const FixedDeposit = () => {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold dark:text-slate-200">Annual Interest Rate (% p.a)</label>
+              <label htmlFor="fd-calc-interest-rate" className="text-sm font-bold dark:text-slate-200">Annual Interest Rate (% p.a)</label>
               <span className="text-lg font-black text-sky-600 dark:text-sky-400">{numRate}%</span>
             </div>
             <input 
+              id="fd-calc-interest-rate"
+              aria-label="Annual Interest Rate Percentage"
               type="number" 
               step="0.1"
               value={rate}
@@ -85,10 +92,12 @@ const FixedDeposit = () => {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold dark:text-slate-200">Tenure (Years)</label>
+              <label htmlFor="fd-calc-tenure-years" className="text-sm font-bold dark:text-slate-200">Tenure (Years)</label>
               <span className="text-lg font-black text-sky-600 dark:text-sky-400">{numYears} Years</span>
             </div>
             <input 
+              id="fd-calc-tenure-years"
+              aria-label="FD Tenure in Years"
               type="number" 
               value={years}
               onChange={(e) => setYears(e.target.value)}

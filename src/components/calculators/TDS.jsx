@@ -53,8 +53,10 @@ const TDS = () => {
       
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-xs font-black uppercase tracking-wider text-slate-400">TDS Section & Statutory Category</label>
+          <label htmlFor="tds-calc-section" className="text-xs font-black uppercase tracking-wider text-slate-400">TDS Section & Statutory Category</label>
           <select 
+            id="tds-calc-section"
+            aria-label="TDS Section and Statutory Category"
             value={section} 
             onChange={(e) => setSection(e.target.value)} 
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-rose-500 cursor-pointer"
@@ -67,10 +69,12 @@ const TDS = () => {
 
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-xs font-black uppercase tracking-wider text-slate-400">Total Transaction Value (₹)</label>
+            <label htmlFor="tds-calc-amount" className="text-xs font-black uppercase tracking-wider text-slate-400">Total Transaction Value (₹)</label>
             <span className="text-sm font-black text-rose-600 dark:text-rose-400">₹{numAmount.toLocaleString()}</span>
           </div>
           <input 
+            id="tds-calc-amount"
+            aria-label="Total Transaction Value in Rupees"
             type="number" 
             value={amount}
             onChange={(e) => setAmount(e.target.value)}

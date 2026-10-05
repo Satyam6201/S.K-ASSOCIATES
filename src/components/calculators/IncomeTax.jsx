@@ -98,8 +98,10 @@ const IncomeTax = () => {
 
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-bold dark:text-slate-300">Gross Annual Salary / Business Income (₹)</label>
+          <label htmlFor="it-calc-gross-income" className="text-sm font-bold dark:text-slate-300">Gross Annual Salary / Business Income (₹)</label>
           <input 
+            id="it-calc-gross-income"
+            aria-label="Gross Annual Salary or Business Income in Rupees"
             type="number" 
             value={grossIncome}
             onChange={(e) => setGrossIncome(e.target.value)}
@@ -108,8 +110,10 @@ const IncomeTax = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-bold dark:text-slate-300">Deduction 80C (PPF, ELSS, EPF) (Max ₹1.5L)</label>
+          <label htmlFor="it-calc-80c" className="text-sm font-bold dark:text-slate-300">Deduction 80C (PPF, ELSS, EPF) (Max ₹1.5L)</label>
           <input 
+            id="it-calc-80c"
+            aria-label="Section 80C Deductions in Rupees"
             type="number" 
             value={sec80C}
             onChange={(e) => setSec80C(e.target.value)}
@@ -121,8 +125,10 @@ const IncomeTax = () => {
 
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <label className="text-sm font-bold dark:text-slate-300">Health Insurance 80D (Self & Parents) (₹)</label>
+          <label htmlFor="it-calc-80d" className="text-sm font-bold dark:text-slate-300">Health Insurance 80D (Self & Parents) (₹)</label>
           <input 
+            id="it-calc-80d"
+            aria-label="Section 80D Health Insurance in Rupees"
             type="number" 
             value={sec80D}
             onChange={(e) => setSec80D(e.target.value)}
@@ -131,8 +137,10 @@ const IncomeTax = () => {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-sm font-bold dark:text-slate-300">Other Deductions (NPS 80CCD, HRA, etc.) (₹)</label>
+          <label htmlFor="it-calc-other-deductions" className="text-sm font-bold dark:text-slate-300">Other Deductions (NPS 80CCD, HRA, etc.) (₹)</label>
           <input 
+            id="it-calc-other-deductions"
+            aria-label="Other Eligible Deductions in Rupees"
             type="number" 
             value={otherDeductions}
             onChange={(e) => setOtherDeductions(e.target.value)}

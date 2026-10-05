@@ -53,16 +53,21 @@ const HRACalculator = () => {
       <div className="space-y-6">
         <div className="space-y-2">
           <div className="flex justify-between items-center">
-            <label className="text-sm font-bold dark:text-slate-200">Basic Annual Salary + DA (₹)</label>
+            <label htmlFor="hra-basic-salary" className="text-sm font-bold dark:text-slate-200">Basic Annual Salary + DA (₹)</label>
             <span className="text-xl font-black text-indigo-600 dark:text-indigo-400">₹{numBasic.toLocaleString()}</span>
           </div>
           <input 
+            id="hra-basic-salary"
+            aria-label="Basic Annual Salary plus Dearness Allowance in Rupees"
             type="number" 
             value={basic}
             onChange={(e) => setBasic(e.target.value)}
             className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-bold outline-none border border-slate-200 dark:border-slate-700 focus:border-indigo-500"
           />
           <input 
+            id="hra-basic-slider"
+            aria-label="Basic Salary Slider"
+            aria-valuenow={numBasic}
             type="range"
             min="100000"
             max="3000000"
@@ -76,10 +81,12 @@ const HRACalculator = () => {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold dark:text-slate-200">Annual HRA Component Received (₹)</label>
+              <label htmlFor="hra-received-amount" className="text-sm font-bold dark:text-slate-200">Annual HRA Component Received (₹)</label>
               <span className="text-lg font-black text-indigo-600 dark:text-indigo-400">₹{numHra.toLocaleString()}</span>
             </div>
             <input 
+              id="hra-received-amount"
+              aria-label="Annual HRA Component Received in Rupees"
               type="number" 
               value={hraReceived}
               onChange={(e) => setHraReceived(e.target.value)}
@@ -89,10 +96,12 @@ const HRACalculator = () => {
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <label className="text-sm font-bold dark:text-slate-200">Actual Rent Paid Annually (₹)</label>
+              <label htmlFor="hra-rent-paid" className="text-sm font-bold dark:text-slate-200">Actual Rent Paid Annually (₹)</label>
               <span className="text-lg font-black text-indigo-600 dark:text-indigo-400">₹{numRent.toLocaleString()}</span>
             </div>
             <input 
+              id="hra-rent-paid"
+              aria-label="Actual Rent Paid Annually in Rupees"
               type="number" 
               value={rentPaid}
               onChange={(e) => setRentPaid(e.target.value)}

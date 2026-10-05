@@ -57,6 +57,8 @@ const ActsRules = () => {
             <div className="relative w-full sm:max-w-md">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
               <input 
+                id="acts-search-input"
+                aria-label="Search Acts, Rules, or Statutes"
                 type="text" 
                 value={searchTerm}
                 placeholder="Search Acts, Rules, or Statutes..."
@@ -64,7 +66,11 @@ const ActsRules = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchTerm && (
-                <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                <button 
+                  onClick={() => setSearchTerm("")} 
+                  aria-label="Clear search input"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+                >
                   <X size={16} />
                 </button>
               )}

@@ -89,10 +89,15 @@ const TaxEstimatorWidget = () => {
           >
             <div>
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 mb-4">
-                <label className="font-bold text-slate-700 dark:text-slate-200 text-sm md:text-base">Annual Gross Salary / Business Income:</label>
+                <label htmlFor="annual-income-slider" className="font-bold text-slate-700 dark:text-slate-200 text-sm md:text-base">Annual Gross Salary / Business Income:</label>
                 <span className="text-2xl sm:text-3xl font-black text-[#007bb6] dark:text-sky-400">₹{income.toLocaleString()}</span>
               </div>
               <input 
+                id="annual-income-slider"
+                aria-label="Annual gross salary or business income slider"
+                aria-valuenow={income}
+                aria-valuemin={400000}
+                aria-valuemax={5000000}
                 type="range" 
                 min="400000" 
                 max="5000000" 

@@ -23,7 +23,8 @@ const TopBar = () => {
       <div className="flex gap-2 sm:gap-6 items-center">
         <a 
           href="tel:+918010257124" 
-          className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-300 hover:text-sky-400 transition-colors group"
+          aria-label="Call S.K Associates at +91 80102 57124"
+          className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-300 hover:text-sky-400 transition-colors group py-1"
         >
           <Phone size={12} className="text-sky-400 shrink-0 group-hover:scale-110 transition-transform" /> 
           <span className="hidden sm:inline text-slate-400">0120-4194983 | </span>
@@ -32,7 +33,8 @@ const TopBar = () => {
 
         <a 
           href="mailto:officeska2000@gmail.com" 
-          className="items-center gap-1.5 border-l border-slate-700/80 pl-4 hidden md:flex text-xs text-slate-300 hover:text-sky-400 transition-colors group"
+          aria-label="Email S.K Associates at officeska2000@gmail.com"
+          className="items-center gap-1.5 border-l border-slate-700/80 pl-4 hidden md:flex text-xs text-slate-300 hover:text-sky-400 transition-colors group py-1"
         >
           <Mail size={12} className="text-sky-400 shrink-0 group-hover:scale-110 transition-transform" /> 
           <span>officeska2000@gmail.com</span>

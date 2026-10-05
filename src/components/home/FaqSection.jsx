@@ -45,6 +45,8 @@ const FaqSection = () => {
         <div className="relative mb-8 sm:mb-10 max-w-xl mx-auto">
           <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input 
+            id="faq-search-input"
+            aria-label="Search tax, GST, or ROC queries"
             type="text" 
             placeholder="Search tax, GST, or ROC queries..." 
             value={search}
